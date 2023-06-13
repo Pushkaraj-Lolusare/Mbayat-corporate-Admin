@@ -1,0 +1,91 @@
+import React, {Component} from 'react'
+import {Button, Modal, Toast} from "react-bootstrap";
+import {addInterest, updateInterest} from "../../services/InterestServices/interestService";
+
+class EditInterest extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            interestName: this.props.interestValue || '',
+            isToastMessage: false,
+            errorMessage: ""
+        }
+    }
+
+    componentDidMount() {
+        this.setState({
+            interestName: this.props.interestValue
+        });
+    }
+
+    saveInterest = async () => {
+        const data = {
+            interestId: this.props.interestId,
+            name: this.state.interestName
+        }
+        const save = await updateInterest(data);
+        if (save.status === "success") {
+            this.props.onSave();
+        } else {
+            this.setState({
+                isToastMessage: true,
+                errorMessage: save.message
+            })
+        }
+    }
+
+    tostMessageLoad = () => {
+        this.setState({
+            isToastMessage: !this.state.isToastMessage
+        })
+    }
+
+    render() {
+        const {title, onClose, onSave, size, show} = this.props;
+        return (
+            <>
+                <Toast
+                    id="toast-container"
+                    show={this.state.isToastMessage}
+                    onClose={() => {
+                        this.tostMessageLoad();
+                    }}
+                    className="toast-error toast-top-right"
+                    autohide={true}
+                    delay={5000}
+                >
+                    <Toast.Header className="toast-error mb-0">
+                        {this.state.errorMessage}
+                    </Toast.Header>
+                </Toast>
+                <Modal size={size} show={show} onHide={onClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>{title}</Modal.Title>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        <input type="text" className="form-control" placeholder="Interest Name" value={this.state.interestName} onChange={(e) => {
+                            this.setState({
+                                interestName: e.target.value
+                            })
+                        }} maxLength={55}/>
+                    </Modal.Body>
+
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={onClose}>
+                            Close
+                        </Button>
+                        <Button variant="info" onClick={() => {
+                            this.saveInterest()
+                        }} disabled={!this.state.interestName}>
+                            Save
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            </>
+        )
+    }
+}
+
+export default EditInterest;
