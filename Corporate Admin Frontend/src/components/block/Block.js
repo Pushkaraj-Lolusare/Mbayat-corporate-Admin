@@ -39,7 +39,7 @@ export const BlockHead = ({ className, size, wide, ...props }) => {
     width: 'calc(100% + 70px)',
     marginLeft: "-35px",
     marginBottom:"20px",
-    zIndex:1
+    zIndex:2
   }} className={blockHeadClass} >{props.children}</div>;
 };
 export const BlockHeadContent = ({ className, ...props }) => {

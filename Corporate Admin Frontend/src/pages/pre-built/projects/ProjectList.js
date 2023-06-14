@@ -79,7 +79,7 @@ export const ProjectListPage = () => {
 
   const fetchSubscriptionData = async () => {
     try {
-      const response = await fetch('http://localhost:5500/subscriptions', {
+      const response = await fetch('http://localhost:5500/corporateSubscription', {
         method: 'GET',
         headers: {
           "Authorization": token
@@ -347,219 +347,216 @@ export const ProjectListPage = () => {
 
   
 
-  const handlePurchase = async () => {
-    try {
-      const response = await fetch(`http://localhost:5500/subscriptions`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          "Authorization": token
-        },
-        body: JSON.stringify({
-          subscriptionPlan,
-          quantity,
-          subscriptionDate,
-          totalAmount,
-          userId,
-        }),
-      });
+  // const handlePurchase = async () => {
+  //   try {
+  //     const response = await fetch(`http://localhost:5500/corporateSubscription`, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         "Authorization": token
+  //       },
+  //       body: JSON.stringify({
+  //         subscriptionPlan,
+  //         quantity,
+  //         subscriptionDate,
+  //         totalAmount,
+  //         userId,
+  //       }),
+  //     });
 
-      // console.log(response)
-      if (response.ok) {
-        const res = await response.json()        
-        console.log("res",res)
+  //     // console.log(response)
+  //     if (response.ok) {
+  //       const res = await response.json()        
+  //       console.log("res",res)
 
-        // const userID=localStorage.getItem("userId")  
-        // const paymentResponse = await fetch('http://localhost:5500/paymentgateway', {
-        //   method: 'POST',
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //     "Authorization":"Y2ZmNWM5OTIxYjhiOTY3OWI1OGNhNGE4OTY3MjE2ZTQyNTYyYjY2ZQ=="
-        //   },
-        //   body: JSON.stringify({
-        //     trackid: new Date().getTime(),
-        //     amount: quantity,
-        //     currency: totalAmount,
-        //     payment_type: 1,
-        //     success_url: `http://15.185.57.60:3000/v1/payment/paymentSuccess?userId=${userID}&amount=${totalAmount}`,
-        //     error_url: `http://15.185.57.60:3000/v1/payment/paymentError?userId=${userID}&amount=${totalAmount}`,
-        //     language: 'ENG',
-        //   }),
-        // });
+  //       // const userID=localStorage.getItem("userId")  
+  //       // const paymentResponse = await fetch('http://localhost:5500/paymentgateway', {
+  //       //   method: 'POST',
+  //       //   headers: {
+  //       //     'Content-Type': 'application/json',
+  //       //     "Authorization":"Y2ZmNWM5OTIxYjhiOTY3OWI1OGNhNGE4OTY3MjE2ZTQyNTYyYjY2ZQ=="
+  //       //   },
+  //       //   body: JSON.stringify({
+  //       //     trackid: new Date().getTime(),
+  //       //     amount: quantity,
+  //       //     currency: totalAmount,
+  //       //     payment_type: 1,
+  //       //     success_url: `http://15.185.57.60:3000/v1/payment/paymentSuccess?userId=${userID}&amount=${totalAmount}`,
+  //       //     error_url: `http://15.185.57.60:3000/v1/payment/paymentError?userId=${userID}&amount=${totalAmount}`,
+  //       //     language: 'ENG',
+  //       //   }),
+  //       // });
 
-        // const payres =  JSON.parse(paymentResponse)
-        // console.log("payres",payres)
+  //       // const payres =  JSON.parse(paymentResponse)
+  //       // console.log("payres",payres)
 
-        // if (payres.status) {
-        //   if (payres.status === true) {
-        //     const paymentData = payres.data;
-        //     const { PaymentUrl, PaymentID } = paymentData;
-        //     const paymentUrl = `${PaymentUrl}?PaymentID=${PaymentID}`;
+  //       // if (payres.status) {
+  //       //   if (payres.status === true) {
+  //       //     const paymentData = payres.data;
+  //       //     const { PaymentUrl, PaymentID } = paymentData;
+  //       //     const paymentUrl = `${PaymentUrl}?PaymentID=${PaymentID}`;
   
-        //     setPaymentUrl(paymentUrl);
-        //     const paymentWindow = window.open(paymentUrl, '_blank');
-        //     window.addEventListener('message', (event) => {
-        //       if (event.origin === 'https://development.payzah.net') {
-        //         const { status } = event.data;
-        //         if (status === true) {
-        //           paymentWindow.close();
-        //           // Make a post request for subscription only if payment is successful
-        //           fetch('http://localhost:5500/subscriptions', {
-        //             method: 'POST',
-        //             headers: {
-        //               'Content-Type': 'application/json',
-        //             },
-        //             body: JSON.stringify({
-        //               subscriptionPlan,
-        //               quantity,
-        //               totalAmount,
-        //             }),
-        //           })
-        //             .then((response) => {
-        //               if (response.ok) {
-        //                 return response.json();
-        //               } else {
-        //                 throw new Error('Subscription creation failed');
-        //               }
-        //             })
-        //             .then((data) => {
-        //               console.log('Subscription created:', data);
-        //               // Perform any necessary actions after successful subscription
-        //               // e.g., show success message, update UI, etc.
-        //             })
-        //             .catch((error) => {
-        //               console.error('Subscription creation failed:', error);
-        //               // Handle error condition
-        //             });
-        //         } else {
-        //           // Handle payment failure condition
-        //           console.error('Payment failed:', event.data);
-        //         }
-        //       }
-        //     });
-        //   } else {
-        //     console.error('Payment failed:', payres.message);
-        //   }
-        // } else {
-        //   console.error('Failed to fetch payment gateway URL');
-        // }
+  //       //     setPaymentUrl(paymentUrl);
+  //       //     const paymentWindow = window.open(paymentUrl, '_blank');
+  //       //     window.addEventListener('message', (event) => {
+  //       //       if (event.origin === 'https://development.payzah.net') {
+  //       //         const { status } = event.data;
+  //       //         if (status === true) {
+  //       //           paymentWindow.close();
+  //       //           // Make a post request for subscription only if payment is successful
+  //       //           fetch('http://localhost:5500/subscriptions', {
+  //       //             method: 'POST',
+  //       //             headers: {
+  //       //               'Content-Type': 'application/json',
+  //       //             },
+  //       //             body: JSON.stringify({
+  //       //               subscriptionPlan,
+  //       //               quantity,
+  //       //               totalAmount,
+  //       //             }),
+  //       //           })
+  //       //             .then((response) => {
+  //       //               if (response.ok) {
+  //       //                 return response.json();
+  //       //               } else {
+  //       //                 throw new Error('Subscription creation failed');
+  //       //               }
+  //       //             })
+  //       //             .then((data) => {
+  //       //               console.log('Subscription created:', data);
+  //       //               // Perform any necessary actions after successful subscription
+  //       //               // e.g., show success message, update UI, etc.
+  //       //             })
+  //       //             .catch((error) => {
+  //       //               console.error('Subscription creation failed:', error);
+  //       //               // Handle error condition
+  //       //             });
+  //       //         } else {
+  //       //           // Handle payment failure condition
+  //       //           console.error('Payment failed:', event.data);
+  //       //         }
+  //       //       }
+  //       //     });
+  //       //   } else {
+  //       //     console.error('Payment failed:', payres.message);
+  //       //   }
+  //       // } else {
+  //       //   console.error('Failed to fetch payment gateway URL');
+  //       // }
 
-        fetchSubscriptionData(); 
+  //       fetchSubscriptionData(); 
         
-        // Handle successful response, e.g., show a success message
-        toast.success('Subscription purchased successfully!');
-      } else {
-        console.error('Error:', response.status);
-        // Handle error response, e.g., show an error message
-        toast.error( 'Failed to purchase subscription. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      // Handle network or other errors
-      toast.error('An error occurred. Please try again later.');
+  //       // Handle successful response, e.g., show a success message
+  //       toast.success('Subscription purchased successfully!');
+  //     } else {
+  //       console.error('Error:', response.status);
+  //       // Handle error response, e.g., show an error message
+  //       toast.error( 'Failed to purchase subscription. Please try again.');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //     // Handle network or other errors
+  //     toast.error('An error occurred. Please try again later.');
+  //   }
+  // };
+
+  const handlePurchase = async () => {
+  try {
+    const userID = localStorage.getItem("userId");
+    const paymentResponse = await fetch('http://localhost:5500/paymentgateway', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": "Y2ZmNWM5OTIxYjhiOTY3OWI1OGNhNGE4OTY3MjE2ZTQyNTYyYjY2ZQ=="
+      },
+      body: JSON.stringify({
+        trackid: new Date().getTime(),
+        amount: quantity,
+        currency: totalAmount,
+        payment_type: 1,
+        success_url: `http://localhost:3000/v1/payment/paymentSuccess?userId=${userID}&amount=${totalAmount}`,
+        error_url: `http://localhost:3000/v1/payment/paymentError?userId=${userID}&amount=${totalAmount}`,
+        language: 'ENG',
+      }),
+    });
+
+    // const payres = await paymentResponse.json();
+    // console.log("payres", payres);
+
+    if (paymentResponse.ok) {
+      const payres = await paymentResponse.json();
+      console.log("payres22", payres);
+      const paymentData = payres.data;
+      const { PaymentUrl, PaymentID } = paymentData;
+      const paymentUrl = `${PaymentUrl}?PaymentID=${PaymentID}`;
+
+      setPaymentUrl(paymentUrl);
+      const paymentWindow = window.open(paymentUrl, '_blank');
+      window.addEventListener('message', (event) => {
+        if (event.origin === 'https://development.payzah.net') {
+          const { status } = event.data;
+          if (status === true) {
+            paymentWindow.close();
+            // Make a post request for subscription only if payment is successful
+            fetch('http://localhost:5500/subscriptions', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                subscriptionPlan,
+                quantity,
+                subscriptionDate,
+                totalAmount,
+              }),
+            })
+              .then((response) => {
+                if (response.ok) {
+                  return response.json();
+                } else {
+                  throw new Error('Subscription creation failed');
+                }
+              })
+              .then((data) => {
+                console.log('Subscription created:', data);
+                toast.success('Subscription purchased successfully!');
+              })
+              .catch((error) => {
+                console.error('Subscription creation failed:', error)
+                toast.error( 'Failed to purchase subscription. Please try again.');
+              });
+          } else {
+            console.error('Payment failed:', event.data);
+            toast.error('An error occurred. Please try again later.');
+          }
+        }
+      });
+    } else {
+      console.error('Payment failed:', payres.message);
+      toast.error('Failed to fetch payment gateway URL');
     }
-  };
-
-//   const handlePurchase = async () => {
-//   try {
-//     const userID = localStorage.getItem("userId");
-//     const paymentResponse = await fetch('http://localhost:5500/paymentgateway', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         "Authorization": "Y2ZmNWM5OTIxYjhiOTY3OWI1OGNhNGE4OTY3MjE2ZTQyNTYyYjY2ZQ=="
-//       },
-//       body: JSON.stringify({
-//         trackid: new Date().getTime(),
-//         amount: quantity,
-//         currency: totalAmount,
-//         payment_type: 1,
-//         success_url: `http://15.185.57.60:3000/v1/payment/paymentSuccess?userId=${userID}&amount=${totalAmount}`,
-//         error_url: `http://15.185.57.60:3000/v1/payment/paymentError?userId=${userID}&amount=${totalAmount}`,
-//         language: 'ENG',
-//       }),
-//     });
-
-//     const payres = await paymentResponse.json();
-//     console.log("payres", payres);
-
-//     if (payres.status && payres.status === true) {
-//       const paymentData = payres.data;
-//       const { PaymentUrl, PaymentID } = paymentData;
-//       const paymentUrl = `${PaymentUrl}?PaymentID=${PaymentID}`;
-
-//       setPaymentUrl(paymentUrl);
-//       const paymentWindow = window.open(paymentUrl, '_blank');
-//       window.addEventListener('message', (event) => {
-//         if (event.origin === 'https://development.payzah.net') {
-//           const { status } = event.data;
-//           if (status === true) {
-//             paymentWindow.close();
-//             // Make a post request for subscription only if payment is successful
-//             fetch('http://localhost:5500/subscriptions', {
-//               method: 'POST',
-//               headers: {
-//                 'Content-Type': 'application/json',
-//               },
-//               body: JSON.stringify({
-//                 subscriptionPlan,
-//                 quantity,
-//                 subscriptionDate,
-//                 totalAmount,
-//               }),
-//             })
-//               .then((response) => {
-//                 if (response.ok) {
-//                   return response.json();
-//                 } else {
-//                   throw new Error('Subscription creation failed');
-//                 }
-//               })
-//               .then((data) => {
-//                 console.log('Subscription created:', data);
-//                 // Perform any necessary actions after successful subscription
-//                 // e.g., show success message, update UI, etc.
-//                 showAlert('Success', 'Subscription purchased successfully!', 'success');
-//               })
-//               .catch((error) => {
-//                 console.error('Subscription creation failed:', error);
-//                 // Handle error condition
-//                 showAlert('Error', 'Failed to create subscription. Please try again.', 'danger');
-//               });
-//           } else {
-//             // Handle payment failure condition
-//             console.error('Payment failed:', event.data);
-//             showAlert('Error', 'Payment failed. Please try again.', 'danger');
-//           }
-//         }
-//       });
-//     } else {
-//       console.error('Payment failed:', payres.message);
-//       showAlert('Error', 'Failed to fetch payment gateway URL', 'danger');
-//     }
-//   } catch (error) {
-//     console.error('Error:', error);
-//     // Handle network or other errors
-//     showAlert('Error', 'An error occurred. Please try again later.', 'danger');
-//   }
-// };
+  } catch (error) {
+    console.error('Error:', error);
+    toast.error('An error occurred. Please try again later.');
+  }
+};
 
 
-  const showAlert = (title, message, type) => {
-    const alertContainer = document.getElementById('alertContainer');
-    const alertHTML = `
-      <div class="alert alert-${type} alert-dismissible fade show" role="alert">
-        <strong>${title}</strong> ${message}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    `;
-    alertContainer.innerHTML = alertHTML;
+  // const showAlert = (title, message, type) => {
+  //   const alertContainer = document.getElementById('alertContainer');
+  //   const alertHTML = `
+  //     <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+  //       <strong>${title}</strong> ${message}
+  //       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  //     </div>
+  //   `;
+  //   alertContainer.innerHTML = alertHTML;
 
-    setTimeout(() => {
-      const alertElement = alertContainer.querySelector('.alert');
-      alertElement.remove();
-    }, 3000);
-  };
+  //   setTimeout(() => {
+  //     const alertElement = alertContainer.querySelector('.alert');
+  //     alertElement.remove();
+  //   }, 3000);
+  // };
 
   return (
     <React.Fragment>

@@ -57,6 +57,7 @@ const Login = () => {
         localStorage.setItem("CompanyName", data.CompanyName);
         localStorage.setItem("Email", data.Email);
         localStorage.setItem("userId", data.userId);
+        localStorage.setItem("Address", data.Address);
         setTimeout(() => {
           window.history.pushState(
             `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`,

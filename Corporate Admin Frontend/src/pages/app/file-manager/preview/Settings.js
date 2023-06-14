@@ -18,15 +18,17 @@ import { Link } from "react-router-dom";
 const SettingsPreview = ({ toggleScreenLg }) => {
   const { planData } = useContext(FileManagerContext);
   const [plan] = planData;
+  const Email = localStorage.getItem("Email");
+  const CompanyName = localStorage.getItem("CompanyName")
 
   const [tabs, setTab] = useState("General");
   const [modal, setModal] = useState(false);
   const [formData, setFormData] = useState({
-    name: "Abu Bin Ishtiak",
-    displayName: "Ishtiak",
-    email: "info@softnio.com",
-    phone: "",
-    dob: "1980-08-10",
+    name: CompanyName,
+    displayName: CompanyName,
+    email: Email,
+   
+    
     language: selectLanguageOptions[0].value,
     dateFormat: selectDateFormat[0].value,
     timezone: selectTimezoneFormat[0].value,

@@ -25,7 +25,7 @@ const App = (props) => {
   useEffect(() => {
     const handleBeforeUnload = () => {
       // Remove the token from localStorage when the tab is closed or refreshed
-      localStorage.removeItem('token');
+      // localStorage.removeItem('accessToken');
     };
 
     window.addEventListener('beforeunload', handleBeforeUnload);

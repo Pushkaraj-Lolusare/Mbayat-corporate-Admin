@@ -12,8 +12,10 @@ import { Card, DropdownItem, UncontrolledDropdown, DropdownMenu, DropdownToggle 
 const UserProfileLayout = () => {
   const [sm, updateSm] = useState(false);
   const [mobileView, setMobileView] = useState(false);
-  const [profileName, setProfileName] = useState("Abu Bin Ishtiak");
-
+  const CompanyName = localStorage.getItem("CompanyName")
+  const Email = localStorage.getItem("Email")
+  const [profileName, setProfileName] = useState(CompanyName);
+  
   // function to change the design view under 990 px
   const viewChange = () => {
     if (window.innerWidth < 990) {
@@ -53,7 +55,7 @@ const UserProfileLayout = () => {
                     <UserAvatar text={findUpper(profileName)} theme="primary" />
                     <div className="user-info">
                       <span className="lead-text">{profileName}</span>
-                      <span className="sub-text">info@softnio.com</span>
+                      <span className="sub-text">{Email}</span>
                     </div>
                     <div className="user-action">
                       <UncontrolledDropdown>
@@ -92,7 +94,7 @@ const UserProfileLayout = () => {
                     </div>
                   </div>
                 </div>
-                <div className="card-inner">
+                {/* <div className="card-inner">
                   <div className="user-account-info py-0">
                     <h6 className="overline-title-alt">Nio Wallet Account</h6>
                     <div className="user-balance">
@@ -105,7 +107,7 @@ const UserProfileLayout = () => {
                       </span>
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <div className="card-inner p-0">
                   <ul className="link-list-menu">
                     <li onClick={() => updateSm(false)}>

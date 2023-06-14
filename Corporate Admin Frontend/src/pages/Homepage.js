@@ -70,7 +70,17 @@ const Homepage = () => {
     <React.Fragment>
       <Head title="Homepage"></Head>
       <Content>
-        <BlockHead size="sm">
+        <div size="sm" style={{
+          height: "70px",
+          borderRadius: "6px",
+          display: "flex",
+          justifyContent: "space-between",
+          marginBottom: "20px",
+          top: "64px",
+          backgroundColor: "white",
+          alignItems: "center",
+          paddingLeft: '30px'
+        }}>
           <BlockBetween>
             <BlockHeadContent>
               <BlockTitle page tag="h3">
@@ -143,11 +153,11 @@ const Homepage = () => {
               </div>
             </BlockHeadContent>
           </BlockBetween>
-        </BlockHead>
+        </div>
         <Block>
           <Row className="g-gs">
             <Col xxl="4" sm="8"  >
-              <DataCard 
+              <DataCard
                 title="Mystery Box Order"
                 // percentChange={"4.63"}
                 up={true}
@@ -156,8 +166,8 @@ const Homepage = () => {
               />
             </Col>
             <Col xxl="4" sm="8" >
-              <DataCard 
-              route="subscriptions"
+              <DataCard
+                route="subscriptions"
                 title="Subscriptions"
                 // percentChange={"2.63"}
                 up={false}
@@ -168,7 +178,7 @@ const Homepage = () => {
             <Col xxl="4" sm="8">
               <DataCard
                 title="Orders"
-                route = "order-list-default"
+                route="order-list-default"
                 // percentChange={"4.63"}
                 up={true}
                 // chart={<DefaultCustomerChart />}
@@ -221,7 +231,7 @@ const Homepage = () => {
               </Container>
             </div>
           </div>
-          <Container fluid className="mt-4">
+          <Container fluid='true' className="mt-4">
             <Row className="row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
               {data &&
                 data.map((item, index) => (
@@ -241,7 +251,7 @@ const Homepage = () => {
                     >
 
                       <div className="text-center">
-                        <img src="App_Icon.png" fluid className="mb-3" style={{ maxHeight: '100px' }} alt="App Icon" />
+                        <img src="App_Icon.png" fluid="true" className="mb-3" style={{ maxHeight: '100px' }} alt="App Icon" />
                         <p
                           style={{
                             fontWeight: 'bold',

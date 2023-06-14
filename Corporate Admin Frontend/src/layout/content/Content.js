@@ -3,7 +3,7 @@ import React from "react";
 const Content = ({ ...props }) => {
   return (
     <div className="nk-content">
-      <div className="container-fluid">
+      <div className="container-">
         <div className="nk-content-inner">
           <div className="nk-content-body" >
             {!props.page ? props.children : null}

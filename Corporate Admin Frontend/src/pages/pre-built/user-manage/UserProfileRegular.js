@@ -21,11 +21,16 @@ import { getDateStructured } from "../../../utils/Utils";
 const UserProfileRegularPage = ({ sm, updateSm, setProfileName }) => {
   const [modalTab, setModalTab] = useState("1");
   const [userInfo, setUserInfo] = useState(userData[0]);
+
+  const Email = localStorage.getItem("Email");
+  const CompanyName = localStorage.getItem("CompanyName");
+  const Address = localStorage.getItem("Address")
+
   const [formData, setFormData] = useState({
-    name: "Abu Bin Ishtiak",
-    displayName: "Ishtiak",
-    phone: "818474958",
-    dob: "1980-08-10",
+    name: CompanyName,
+    displayName: CompanyName,
+    // phone: "818474958",
+    // dob: "1980-08-10",
     address: "2337 Kildeer Drive",
     address2: "",
     state: "Kentucky",
@@ -78,38 +83,38 @@ const UserProfileRegularPage = ({ sm, updateSm, setProfileName }) => {
           </div>
           <div className="data-item" onClick={() => setModal(true)}>
             <div className="data-col">
-              <span className="data-label">Full Name</span>
-              <span className="data-value">{userInfo.name}</span>
+              <span className="data-label">Name</span>
+              <span className="data-value">{CompanyName}</span>
             </div>
-            <div className="data-col data-col-end">
+            {/* <div className="data-col data-col-end">
               <span className="data-more">
                 <Icon name="forward-ios"></Icon>
               </span>
-            </div>
+            </div> */}
           </div>
-          <div className="data-item" onClick={() => setModal(true)}>
+          {/* <div className="data-item" onClick={() => setModal(true)}>
             <div className="data-col">
               <span className="data-label">Display Name</span>
-              <span className="data-value">{userInfo.displayName}</span>
+              <span className="data-value">{CompanyName}</span>
             </div>
             <div className="data-col data-col-end">
               <span className="data-more">
                 <Icon name="forward-ios"></Icon>
               </span>
             </div>
-          </div>
+          </div> */}
           <div className="data-item">
             <div className="data-col">
               <span className="data-label">Email</span>
-              <span className="data-value">info@softnio.com</span>
+              <span className="data-value">{Email}</span>
             </div>
-            <div className="data-col data-col-end">
+            {/* <div className="data-col data-col-end">
               <span className="data-more disable">
                 <Icon name="lock-alt"></Icon>
               </span>
-            </div>
+            </div> */}
           </div>
-          <div className="data-item" onClick={() => setModal(true)}>
+          {/* <div className="data-item" onClick={() => setModal(true)}>
             <div className="data-col">
               <span className="data-label">Phone Number</span>
               <span className="data-value text-soft">{userInfo.phone}</span>
@@ -119,8 +124,8 @@ const UserProfileRegularPage = ({ sm, updateSm, setProfileName }) => {
                 <Icon name="forward-ios"></Icon>
               </span>
             </div>
-          </div>
-          <div className="data-item" onClick={() => setModal(true)}>
+          </div> */}
+          {/* <div className="data-item" onClick={() => setModal(true)}>
             <div className="data-col">
               <span className="data-label">Date of Birth</span>
               <span className="data-value">{userInfo.dob}</span>
@@ -130,24 +135,22 @@ const UserProfileRegularPage = ({ sm, updateSm, setProfileName }) => {
                 <Icon name="forward-ios"></Icon>
               </span>
             </div>
-          </div>
+          </div> */}
           <div className="data-item" onClick={() => setModal(true)}>
             <div className="data-col">
               <span className="data-label">Address</span>
               <span className="data-value">
-                {userInfo.address},
-                <br />
-                {userInfo.state}, {userInfo.country}
+                {Address}
               </span>
             </div>
-            <div className="data-col data-col-end">
+            {/* <div className="data-col data-col-end">
               <span className="data-more">
                 <Icon name="forward-ios"></Icon>
               </span>
-            </div>
+            </div> */}
           </div>
         </div>
-        <div className="nk-data data-list">
+        {/* <div className="nk-data data-list">
           <div className="data-head">
             <h6 className="overline-title">Preferences</h6>
           </div>
@@ -202,7 +205,7 @@ const UserProfileRegularPage = ({ sm, updateSm, setProfileName }) => {
               </a>
             </div>
           </div>
-        </div>
+        </div> */}
       </Block>
 
       <Modal isOpen={modal} className="modal-dialog-centered" size="lg" toggle={() => setModal(false)}>

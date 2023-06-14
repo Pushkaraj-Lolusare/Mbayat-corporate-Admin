@@ -328,7 +328,7 @@ const ProductList = () => {
         </BlockHead>
 
         <Block>
-          <Container fluid className="mt-4">
+          <Container fluid="true" className="mt-4">
             <Row className="row-cols-1 row-cols-sm-2 row-cols-md-4 g-4" >
               {currentItems &&
                 currentItems.map((item, index) => (
@@ -364,7 +364,7 @@ const ProductList = () => {
                         onEditClick(item.id);
                         toggle("details");
                       }}>
-                        <img src={item.img} fluid className="mb-3" style={{ height: '100%', width: "60%" }} alt="App Icon" /></div>
+                        <img src={item.img} fluid="true" className="mb-3" style={{ height: '100%', width: "60%" }} alt="App Icon" /></div>
 
                       <div onClick={(ev) => {
                         ev.preventDefault();

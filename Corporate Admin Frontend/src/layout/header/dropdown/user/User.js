@@ -9,10 +9,7 @@ const User = () => {
   const toggle = () => setOpen((prevState) => !prevState);
 
   const handleSignout = () => {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("CompanyName");
-    localStorage.removeItem("Email");
-    localStorage.removeItem("userId");
+    localStorage.clear()
   };
 
   const CompanyName = localStorage.getItem('CompanyName')
