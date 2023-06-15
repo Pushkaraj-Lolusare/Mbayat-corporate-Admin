@@ -9,5 +9,5 @@ const Icon = ({ name, id, className, style, ...props }) => {
     [`ni-${name}`]: true,
   });
   return <em className={iconClass} id={id} style={style} {...props}></em>;
-};
+}; 
 export default Icon;

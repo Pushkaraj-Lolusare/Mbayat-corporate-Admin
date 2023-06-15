@@ -22,8 +22,33 @@ const cartPage = () => {
   // Change Page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  const [count1, setCount1] = useState(1);
+  const [count2, setCount2] = useState(1);
+  const [count3, setCount3] = useState(1);
 
+  const handleAdd1 = () => {
+    setCount1(count1 + 1);
+  };
 
+  const handleAdd2 = () => {
+    setCount2(count2 + 1);
+  };
+
+  const handleAdd3 = () => {
+    setCount3(count3 + 1);
+  };
+
+  const handleSubtract1 = () => {
+    setCount1(count1 - 1);
+  };
+
+  const handleSubtract2 = () => {
+    setCount2(count2 - 1);
+  };
+
+  const handleSubtract3 = () => {
+    setCount3(count3 - 1);
+  };
 
   return (
     // <React.Fragment>
@@ -129,7 +154,7 @@ const cartPage = () => {
         <BlockHead size="sm" >
           <BlockBetween >
             <BlockHeadContent>
-              <BlockTitle >Cart</BlockTitle>
+              <BlockTitle ><Icon name="cart"></Icon> Shopping Cart</BlockTitle>
             </BlockHeadContent>
             <BlockHeadContent>
               <div className="toggle-wrap nk-block-tools-toggle">
@@ -220,7 +245,7 @@ const cartPage = () => {
       </Content>
 
 
-      <Block>
+      {/* <Block>
         <div className="nk-tb-list is-separate is-medium mb-3">
           <DataTableHead className="nk-tb-item">
             <DataTableRow className="nk-tb-col-check">
@@ -444,7 +469,69 @@ const cartPage = () => {
             </div>
           )}
         </PreviewAltCard>
-      </Block>
+      </Block> */}
+      <div style={{ width: "100%", height: "65vh" }}>
+        <div style={{ width: "60%", height: "95%", marginTop: "12px" }}>
+          <div style={{ display: "flex" }}>
+            <div style={{ display: "flex", marginLeft: "100px", backgroundColor: "white", borderRadius: "30px",  width: "60%", height: "150px", marginTop: "12px", paddingLeft:"", boxShadow:"box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px" }}>
+              <img src="App_Icon.png" style={{ marginLeft:"20px",borderRadius:"13px",marginTop:"8px",width: '30%', height: "90%",  }} />
+              <div>
+                <p style={{fontWeight:"bold", fontSize:"20px"}}>Product Name</p>
+                <p style={{fontWeight:"500"}}>Price: 999 KWD</p>
+                <div style={{display:'flex', marginTop:"30px", justifyContent:'space-between'}}>
+                  <button style={{fontWeight:"bolder", fontSize:"16px", backgroundColor:'rgb(199,205,215)',border:'none',borderRadius:"5px", width:"30px", height:"30px", boxShadow:"box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;"}} disabled={count1 === 1} onClick={handleSubtract1}>-</button>
+                  <div style={{fontSize:'20px', fontWeight:"bold"}}>{count1}</div>
+                  <button style={{fontWeight:"bolder", fontSize:"16px", backgroundColor:'rgb(199,205,215)',border:'none',borderRadius:"5px",width:"30px", height:"30px", boxShadow:"box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;"}} onClick={handleAdd1}>+</button>
+                </div>
+              </div>
+            </div>
+            <div style={{ backgroundColor: "white", marginLeft: "10px", borderRadius: "30px", width: "10%", height: "150px", marginTop: "12px" }}>
+            <img src="https://th.bing.com/th/id/OIP.WGtzC7vWEvzFlj6oDtB48gHaId?w=166&h=191&c=7&r=0&o=5&dpr=1.3&pid=1.7" style={{width:'40%', height:"24%", margin:"auto", marginTop:"60px", marginLeft:"25px"}}/>
+            </div>
+          </div>
+          <div style={{ display: "flex" }}>
+            <div style={{ display: "flex", marginLeft: "100px", backgroundColor: "white", borderRadius: "30px",  width: "60%", height: "150px", marginTop: "12px" , paddingLeft:""}}>
+              <img src="App_Icon.png" style={{ marginLeft:"20px",borderRadius:"13px",marginTop:"8px",width: '30%', height: "90%",  }} />
+              <div>
+                <p style={{fontWeight:"bold", fontSize:"20px"}}>Product Name</p>
+                <p style={{fontWeight:"500"}}>Price: 999 KWD</p>
+                <div style={{display:'flex', marginTop:"30px", justifyContent:'space-between'}}>
+                  <button style={{fontWeight:"bolder", fontSize:"16px", backgroundColor:'rgb(199,205,215)',border:'none',borderRadius:"5px", width:"30px", height:"30px", boxShadow:"box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px"}} disabled={count2 === 1} onClick={handleSubtract2}>-</button>
+                  <div style={{fontSize:'20px', fontWeight:"bold"}}>{count2}</div>
+                  <button style={{fontWeight:"bolder", fontSize:"16px", backgroundColor:'rgb(199,205,215)',border:'none',borderRadius:"5px",width:"30px", height:"30px", boxShadow:"box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px"}} onClick={handleAdd2}>+</button>
+                </div>
+              </div>
+            </div>
+            <div style={{ backgroundColor: "white", marginLeft: "10px", borderRadius: "30px",  width: "10%", height: "150px", marginTop: "12px" }}>
+              <img src="https://th.bing.com/th/id/OIP.WGtzC7vWEvzFlj6oDtB48gHaId?w=166&h=191&c=7&r=0&o=5&dpr=1.3&pid=1.7" style={{width:'40%', height:"24%", margin:"auto", marginTop:"60px", marginLeft:"25px"}}/>
+            </div>
+          </div>
+          <div style={{ display: "flex" }}>
+            <div style={{ display: "flex", marginLeft: "100px", backgroundColor: "white", borderRadius: "30px", width: "60%", height: "150px", marginTop: "12px", paddingLeft:"" }}>
+              <img src="App_Icon.png" style={{ marginLeft:"20px",borderRadius:"13px",marginTop:"8px", width: '30%', height: "90%",  }} />
+              <div>
+                <p style={{fontWeight:"bold", fontSize:"20px"}}>Product Name</p>
+                <p style={{fontWeight:"500"}}>Price: 999 KWD</p>
+                <div style={{display:'flex', marginTop:"30px", justifyContent:'space-between'}}>
+                  <button style={{fontWeight:"bolder", fontSize:"16px", backgroundColor:'rgb(199,205,215)',border:'none',borderRadius:"5px", width:"30px", height:"30px", boxShadow:"box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px", outline:"none"}} disabled={count3 === 1} onClick={handleSubtract3}>-</button>
+                  <div style={{fontSize:'20px', fontWeight:"bold"}}>{count3}</div>
+                  <button style={{fontWeight:"bolder", fontSize:"16px", backgroundColor:'rgb(199,205,215)',border:'none',borderRadius:"5px",width:"30px", height:"30px", boxShadow:"box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px" , outline:"none"}} onClick={handleAdd3}>+</button>
+                </div>
+              </div>
+            </div>
+            <div style={{ backgroundColor: "white", marginLeft: "10px", borderRadius: "30px",  width: "10%", height: "150px", marginTop: "12px" }}>
+            <img src="https://th.bing.com/th/id/OIP.WGtzC7vWEvzFlj6oDtB48gHaId?w=166&h=191&c=7&r=0&o=5&dpr=1.3&pid=1.7" style={{width:'40%', height:"24%", margin:"auto", marginTop:"60px", marginLeft:"25px"}}/>
+            </div>
+          </div>
+
+        </div>
+        <div style={{width:"2px", height:"60vh", border:"1px solid gray"}}>
+
+        </div>
+        <div>
+
+        </div>
+      </div>
 
     </>
   )
