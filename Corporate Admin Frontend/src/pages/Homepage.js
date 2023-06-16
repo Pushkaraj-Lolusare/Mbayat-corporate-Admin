@@ -156,7 +156,7 @@ const Homepage = () => {
         </div>
         <Block>
           <Row className="g-gs">
-            <Col xxl="4" sm="8"  >
+            <Col xxl="2" sm="4"  >
               <DataCard
                 title="Mystery Box Order"
                 // percentChange={"4.63"}
@@ -165,7 +165,7 @@ const Homepage = () => {
                 amount={"1975"}
               />
             </Col>
-            <Col xxl="4" sm="8" >
+            <Col xxl="2" sm="4" >
               <DataCard
                 route="subscriptions"
                 title="Subscriptions"
@@ -175,7 +175,7 @@ const Homepage = () => {
                 amount={`${2284} KWD`}
               />
             </Col>
-            <Col xxl="4" sm="8">
+            <Col xxl="2" sm="4">
               <DataCard
                 title="Orders"
                 route="order-list-default"

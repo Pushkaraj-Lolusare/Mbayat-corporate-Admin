@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { orderData, transactionData } from "./TableData";
-import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Badge } from "reactstrap";
+import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Badge, Modal, ModalBody, Form, Col } from "reactstrap";
 import Icon from "../icon/Icon";
 import Button from "../button/Button";
 import { useState } from "react";
@@ -352,11 +352,29 @@ export const LoginLogTable = () => {
       });
   };
 
+  const [deleteAll, setDeleteAll] = useState({
+    delete: false
+  })
+
+  const onFormCancel = () => {
+    setDeleteAll({ delete: false });
+  };
+
+  const handleDeleteModal =()=>{
+    handleLogHistoryDelete()
+    setDeleteAll({ delete: false });
+  }
+
   return (
     <div style={{ maxHeight: '500px', overflow: 'auto' }}>
-      <table className="table table-ulogs" >
-        <thead className="table-light" style={{position:'sticky', top:"0px"}}>
+      <table className="table table-ulogs" style={{ columnGap: "20px" }}>
+        <thead className="table-light" style={{ position: 'sticky', top: "0px" }}>
           <tr>
+            <th className="tb-col-os">
+              <span className="overline-title">
+                Sr. No. <span className="d-sm-none">/ IP</span>
+              </span>
+            </th>
             <th className="tb-col-os">
               <span className="overline-title">
                 Browser <span className="d-sm-none">/ IP</span>
@@ -382,7 +400,7 @@ export const LoginLogTable = () => {
                 onMouseOut={(e) => {
                   e.target.style.color = "red"
                 }}
-                onClick={handleLogHistoryDelete}
+                onClick={() => setDeleteAll({ delete: true })}
               >Clear All</button>
             </th>
           </tr>
@@ -391,7 +409,8 @@ export const LoginLogTable = () => {
           {loginLogData.map((item, idx) => {
             return (
               <tr key={idx}>
-                <td className="tb-col-os" style={{ width: "40%" }}>{item.browserName}</td>
+                <td className="tb-col-os" >{idx + 1}</td>
+                <td className="tb-col-os" style={{ width: "35%" }}>{item.browserName}</td>
                 <td className="tb-col-ip">
                   <span className="sub-text">{item.ipAddress}</span>
                 </td>
@@ -405,6 +424,7 @@ export const LoginLogTable = () => {
                     onClick={(ev) => {
                       ev.preventDefault();
                       handleLogItemDelete(item)
+
                     }}
                     className="link-cross me-sm-n1"
                   >
@@ -416,6 +436,39 @@ export const LoginLogTable = () => {
           })}
         </tbody>
       </table>
+      <Modal isOpen={deleteAll.delete} toggle={() => setDeleteAll({ delete: false })} className="modal-dialog-centered" size="sm"
+      >
+        <ModalBody>
+          <a
+            href="#cancel"
+            onClick={(ev) => {
+              ev.preventDefault();
+              onFormCancel();
+            }}
+            className="close"
+          >
+            <Icon name="cross-sm"></Icon>
+          </a>
+          <div className="p-2">
+            <h5 className="title">Clear all Login History?</h5>
+
+            <div className="mt-4">
+              <Button onClick={handleDeleteModal} style={{background:"red", color:"white",}} size="md" type="submit">
+                Yes
+              </Button>
+              <Button
+                onClick={(ev) => {
+                  ev.preventDefault();
+                  onFormCancel();
+                }}
+                className="link link-light"
+              >
+                Cancel
+              </Button>
+            </div>
+          </div>
+        </ModalBody>
+      </Modal>
     </div>
   );
 };
