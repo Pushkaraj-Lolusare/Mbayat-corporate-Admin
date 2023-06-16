@@ -62,7 +62,7 @@ const UserProfileRegularPage = ({ sm, updateSm, setProfileName }) => {
           <BlockHeadContent>
             <BlockTitle tag="h4">Personal Information</BlockTitle>
             <BlockDes>
-              <p>Basic info, like your name and address, that you use on Nio Platform.</p>
+              {/* <p>Basic info, like your name and address, that you use on Nio Platform.</p> */}
             </BlockDes>
           </BlockHeadContent>
           <BlockHeadContent className="align-self-start d-lg-none">

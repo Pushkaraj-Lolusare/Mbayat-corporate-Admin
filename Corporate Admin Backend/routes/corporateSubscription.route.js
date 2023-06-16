@@ -1,26 +1,8 @@
 const express = require('express');
 const subscriptionRouter = express.Router();
-const SubscriptionModel = require('../model/subscription.model');
+const SubscriptionModel = require('../model/corporateSubscription.model');
 
 // GET route to fetch subscriptions and their status
-// subscriptionRouter.get('/', async (req, res) => {
-//     try {
-//         const subscriptions = await SubscriptionModel.find();
-//         const currentDate = new Date();
-//         const subscriptionsWithStatus = subscriptions.map((subscription) => {
-//             if (subscription.subscriptionEndDate && currentDate > subscription.subscriptionEndDate) {
-//                 subscription.status = 'end';
-//             } else {
-//                 subscription.status = 'active';
-//             }
-//             return subscription;
-//         });
-//         res.json(subscriptionsWithStatus);
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).json({ message: 'Server Error' });
-//     }
-// });
 
 
 subscriptionRouter.get('/', async (req, res) => {
@@ -64,7 +46,7 @@ subscriptionRouter.post('/', async (req, res) => {
     try {
         const { subscriptionPlan, quantity, subscriptionDate, userId } = req.body;
 
-        
+
         let subscriptionEndDate;
 
         // Calculate subscription end date based on subscription plan

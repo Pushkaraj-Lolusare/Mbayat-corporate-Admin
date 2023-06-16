@@ -26,7 +26,6 @@ import {
   UncontrolledDropdown,
   Modal,
   ModalBody,
-  
   Progress,
   DropdownItem,
   Form,
@@ -349,10 +348,10 @@ const ProjectCardPage = () => {
                             days > 10
                               ? "light"
                               : days <= 10 && days >= 2
-                              ? "warning"
-                              : days === 1
-                              ? "danger"
-                              : days <= 0 && "success"
+                                ? "warning"
+                                : days === 1
+                                  ? "danger"
+                                  : days <= 0 && "success"
                           }
                         >
                           <Icon name="clock"></Icon>

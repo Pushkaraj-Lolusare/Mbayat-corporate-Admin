@@ -29,7 +29,6 @@ import { Modal, ModalBody } from "reactstrap";
 import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 
-
 const ProductList = () => {
   const [data, setData] = useState(productData);
   const [sm, updateSm] = useState(false);
@@ -313,7 +312,6 @@ const ProductList = () => {
                         style={{
                           zIndex: 1
                         }}
-
                       >
                         <Link to="/cart" style={{ color: "white" }}>
                           <Icon name="cart-fill"></Icon>
@@ -345,27 +343,13 @@ const ProductList = () => {
                         backgroundColor: 'rgb(255, 255, 255)',
                         minHeight: '270px'
                       }}
-                      
-                      // onMouseOver={(e) => {
-                      //   e.target.style.border = '1px solid red';
-                      //   e.target.style.transform = '1.2';
-                      //   setView({ details: true })
-                      // }}
-                      // onMouseOut={(e) => {
-                      //   e.target.style.border = 'none';
-                      //   e.target.style.transform = '1';
-                      //   setView({ details: false })
-                      // }}
-
                     >
-
                       <div className="text-center" style={{ height: '60%' }} onClick={(ev) => {
                         ev.preventDefault();
                         onEditClick(item.id);
                         toggle("details");
                       }}>
                         <img src={item.img} fluid="true" className="mb-3" style={{ height: '100%', width: "60%" }} alt="App Icon" /></div>
-
                       <div onClick={(ev) => {
                         ev.preventDefault();
                         onEditClick(item.id);
@@ -377,8 +361,7 @@ const ProductList = () => {
                             marginTop: '12px',
                             maxHeight: '34%',
                             overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                            // border:"1px solid red"
+                            textOverflow: 'ellipsis',                        
                           }}
                           className="mb-2 text-center">{item.name}</p>
                         <p style={{ fontWeight: "bold", }}>{`Price: ${item.price} KD`}</p>
@@ -400,7 +383,6 @@ const ProductList = () => {
                           outline: 'none',
                           marginTop: '40px',
                           color: 'rgb(64, 15, 59)',
-
                         }}
                         onClick={(ev) => {
                           ev.preventDefault();
@@ -810,123 +792,10 @@ const ProductList = () => {
             </form>
           </Block>
         </SimpleBar>
-
         {view.add && <div className="toggle-overlay" onClick={toggle}></div>}
       </Content>
     </React.Fragment>
   );
 };
-{/* <DataTableItem key={item.id}>
-                    <DataTableRow className="nk-tb-col-check">
-                      <div className="custom-control custom-control-sm custom-checkbox notext">
-                        <input
-                          type="checkbox"
-                          className="custom-control-input"
-                          defaultChecked={item.check}
-                          id={item.id + "uid1"}
-                          key={Math.random()}
-                          onChange={(e) => onSelectChange(e, item.id)}
-                        />
-                        <label className="custom-control-label" htmlFor={item.id + "uid1"}></label>
-                      </div>
-                    </DataTableRow>
-                    <DataTableRow size="sm">
-                      <span className="tb-product">
-                        <img src={item.img ? item.img : ProductH} alt="product" className="thumb" />
-                        <span className="title">{item.name}</span>
-                      </span>
-                    </DataTableRow>
-                    <DataTableRow>
-                      <span className="tb-sub">{item.sku}</span>
-                    </DataTableRow>
-                    <DataTableRow>
-                      <span className="tb-sub">$ {item.price}</span>
-                    </DataTableRow>
-                    <DataTableRow>
-                      <span className="tb-sub">{item.stock}</span>
-                    </DataTableRow>
-                    <DataTableRow size="md">
-                      <span className="tb-sub">
-                        {item.category.map((cat) => {
-                          if (item.category[cat] + 1 === null || undefined) {
-                            return cat.label;
-                          } else return cat.label + ", ";
-                        })}
-                      </span>
-                    </DataTableRow>
-                    <DataTableRow size="md">
-                      <div className="asterisk tb-asterisk">
-                        <a
-                          href="#asterisk"
-                          className={item.fav ? "active" : ""}
-                          onClick={(ev) => ev.preventDefault()}
-                        >
-                          <Icon name="star" className="asterisk-off"></Icon>
-                          <Icon name="star-fill" className="asterisk-on"></Icon>
-                        </a>
-                      </div>
-                    </DataTableRow>
-                    <DataTableRow className="nk-tb-col-tools">
-                      <ul className="nk-tb-actions gx-1 my-n1">
-                        <li className="me-n1">
-                          <UncontrolledDropdown>
-                            <DropdownToggle
-                              tag="a"
-                              href="#more"
-                              onClick={(ev) => ev.preventDefault()}
-                              className="dropdown-toggle btn btn-icon btn-trigger"
-                            >
-                              <Icon name="more-h"></Icon>
-                            </DropdownToggle>
-                            <DropdownMenu end>
-                              <ul className="link-list-opt no-bdr">
-                                <li>
-                                  <DropdownItem
-                                    tag="a"
-                                    href="#edit"
-                                    onClick={(ev) => {
-                                      ev.preventDefault();
-                                      onEditClick(item.id);
-                                      toggle("edit");
-                                    }}
-                                  >
-                                    <Icon name="edit"></Icon>
-                                    <span>Edit Product</span>
-                                  </DropdownItem>
-                                </li>
-                                <li>
-                                  <DropdownItem
-                                    tag="a"
-                                    href="#view"
-                                    onClick={(ev) => {
-                                      ev.preventDefault();
-                                      onEditClick(item.id);
-                                      toggle("details");
-                                    }}
-                                  >
-                                    <Icon name="eye"></Icon>
-                                    <span>View Product</span>
-                                  </DropdownItem>
-                                </li>
-                                <li>
-                                  <DropdownItem
-                                    tag="a"
-                                    href="#remove"
-                                    onClick={(ev) => {
-                                      ev.preventDefault();
-                                      deleteProduct(item.id);
-                                    }}
-                                  >
-                                    <Icon name="trash"></Icon>
-                                    <span>Remove Product</span>
-                                  </DropdownItem>
-                                </li>
-                              </ul>
-                            </DropdownMenu>
-                          </UncontrolledDropdown>
-                        </li>
-                      </ul>
-                    </DataTableRow>
-                  </DataTableItem> */}
 
 export default ProductList;

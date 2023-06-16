@@ -11,7 +11,6 @@ import NewsUsers from "../components/partials/sales/new-users/User";
 import Support from "../components/partials/sales/support-request/Support";
 import Notifications from "../components/partials/sales/notification/Notification";
 import { Card, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from "reactstrap";
-// import "./"
 import {
   Block,
   BlockHead,

@@ -154,17 +154,9 @@ const Pages = () => {
         <Route exact path={`${process.env.PUBLIC_URL}/analytics`} component={Analytics}></Route>
         <Route exact path={`${process.env.PUBLIC_URL}/_blank`} component={Blank}></Route>
 
-
-
             {/* Cart Routes */}
 
         <Route exact path={`${process.env.PUBLIC_URL}/cart`} component={cartPage}/>
-
-
-
-
-
-
 
         {/*Pre-built Pages*/}
         <Route exact path={`${process.env.PUBLIC_URL}/project-card`} component={ProjectCardPage}></Route>
@@ -338,6 +330,7 @@ const Pages = () => {
         ></Route>
 
         {/*Components*/}
+        
         <Route exact path={`${process.env.PUBLIC_URL}/components`} component={Component}></Route>
         <Route exact path={`${process.env.PUBLIC_URL}/components/accordions`} component={Accordian}></Route>
         <Route exact path={`${process.env.PUBLIC_URL}/components/alerts`} component={Alerts}></Route>

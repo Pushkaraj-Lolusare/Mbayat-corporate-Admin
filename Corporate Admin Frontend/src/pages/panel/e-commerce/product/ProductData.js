@@ -8,7 +8,6 @@ import ProductG from "../../../../images/product/g.png";
 import ProductH from "../../../../images/product/h.png";
 import ProductI from "../../../../images/product/i.png";
 import ProductJ from "../../../../images/product/j.png";
-
 import ProductLGA from "../../../../images/product/lg-a.jpg";
 import ProductLGB from "../../../../images/product/lg-b.jpg";
 import ProductLGC from "../../../../images/product/lg-c.jpg";

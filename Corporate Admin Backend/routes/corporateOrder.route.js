@@ -2,7 +2,7 @@
 
 const express = require('express');
 const OrderRouter = express.Router();
-const OrderModel = require('../model/order.model');
+const OrderModel = require('../model/corporateOrder.model');
 
 // POST route to create a new order
 OrderRouter.post('/', (req, res) => {
@@ -11,7 +11,7 @@ OrderRouter.post('/', (req, res) => {
         productName,
         quantity,
         totalPrice,
-        status, 
+        status,
         userId
     });
 

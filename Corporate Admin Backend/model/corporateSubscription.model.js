@@ -33,12 +33,11 @@ const subscriptionSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  userId: {
-    type: String,
-    // required: true
-  },
+  userId: String,
+}, {
+  versionKey: false
 });
 
-const SubscriptionModel = mongoose.model('Subscription', subscriptionSchema);
+const SubscriptionModel = mongoose.model('CorporateSubscription', subscriptionSchema);
 
 module.exports = SubscriptionModel;

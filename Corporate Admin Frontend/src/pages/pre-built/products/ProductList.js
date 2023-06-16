@@ -408,121 +408,121 @@ const ProductList = () => {
                   </DataTableHead>
                   {currentItems.length > 0
                     ? currentItems.map((item) => {
-                        return (
-                          <DataTableItem key={item.id}>
-                            <DataTableRow className="nk-tb-col-check">
-                              <div className="custom-control custom-control-sm custom-checkbox notext">
-                                <input
-                                  type="checkbox"
-                                  className="custom-control-input"
-                                  defaultChecked={item.check}
-                                  id={item.id + "uid1"}
-                                  key={Math.random()}
-                                  onChange={(e) => onSelectChange(e, item.id)}
-                                />
-                                <label className="custom-control-label" htmlFor={item.id + "uid1"}></label>
-                              </div>
-                            </DataTableRow>
-                            <DataTableRow size="sm">
-                              <span className="tb-product">
-                                <img src={item.img ? item.img : ProductH} alt="product" className="thumb" />
-                                <span className="title">{item.name}</span>
-                              </span>
-                            </DataTableRow>
-                            <DataTableRow>
-                              <span className="tb-sub">{item.sku}</span>
-                            </DataTableRow>
-                            <DataTableRow>
-                              <span className="tb-sub">$ {item.price}</span>
-                            </DataTableRow>
-                            <DataTableRow>
-                              <span className="tb-sub">{item.stock}</span>
-                            </DataTableRow>
-                            <DataTableRow size="md">
-                              <span className="tb-sub">
-                                {item.category.map((cat) => {
-                                  if (item.category[cat] + 1 === null || undefined) {
-                                    return cat.label;
-                                  } else return cat.label + ", ";
-                                })}
-                              </span>
-                            </DataTableRow>
-                            <DataTableRow size="md">
-                              <div className="asterisk tb-asterisk">
-                                <a
-                                  href="#asterisk"
-                                  className={item.fav ? "active" : ""}
-                                  onClick={(ev) => ev.preventDefault()}
-                                >
-                                  <Icon name="star" className="asterisk-off"></Icon>
-                                  <Icon name="star-fill" className="asterisk-on"></Icon>
-                                </a>
-                              </div>
-                            </DataTableRow>
-                            <DataTableRow className="nk-tb-col-tools">
-                              <ul className="nk-tb-actions gx-1 my-n1">
-                                <li className="me-n1">
-                                  <UncontrolledDropdown>
-                                    <DropdownToggle
-                                      tag="a"
-                                      href="#more"
-                                      onClick={(ev) => ev.preventDefault()}
-                                      className="dropdown-toggle btn btn-icon btn-trigger"
-                                    >
-                                      <Icon name="more-h"></Icon>
-                                    </DropdownToggle>
-                                    <DropdownMenu end>
-                                      <ul className="link-list-opt no-bdr">
-                                        <li>
-                                          <DropdownItem
-                                            tag="a"
-                                            href="#edit"
-                                            onClick={(ev) => {
-                                              ev.preventDefault();
-                                              onEditClick(item.id);
-                                              toggle("edit");
-                                            }}
-                                          >
-                                            <Icon name="edit"></Icon>
-                                            <span>Edit Product</span>
-                                          </DropdownItem>
-                                        </li>
-                                        <li>
-                                          <DropdownItem
-                                            tag="a"
-                                            href="#view"
-                                            onClick={(ev) => {
-                                              ev.preventDefault();
-                                              onEditClick(item.id);
-                                              toggle("details");
-                                            }}
-                                          >
-                                            <Icon name="eye"></Icon>
-                                            <span>View Product</span>
-                                          </DropdownItem>
-                                        </li>
-                                        <li>
-                                          <DropdownItem
-                                            tag="a"
-                                            href="#remove"
-                                            onClick={(ev) => {
-                                              ev.preventDefault();
-                                              deleteProduct(item.id);
-                                            }}
-                                          >
-                                            <Icon name="trash"></Icon>
-                                            <span>Remove Product</span>
-                                          </DropdownItem>
-                                        </li>
-                                      </ul>
-                                    </DropdownMenu>
-                                  </UncontrolledDropdown>
-                                </li>
-                              </ul>
-                            </DataTableRow>
-                          </DataTableItem>
-                        );
-                      })
+                      return (
+                        <DataTableItem key={item.id}>
+                          <DataTableRow className="nk-tb-col-check">
+                            <div className="custom-control custom-control-sm custom-checkbox notext">
+                              <input
+                                type="checkbox"
+                                className="custom-control-input"
+                                defaultChecked={item.check}
+                                id={item.id + "uid1"}
+                                key={Math.random()}
+                                onChange={(e) => onSelectChange(e, item.id)}
+                              />
+                              <label className="custom-control-label" htmlFor={item.id + "uid1"}></label>
+                            </div>
+                          </DataTableRow>
+                          <DataTableRow size="sm">
+                            <span className="tb-product">
+                              <img src={item.img ? item.img : ProductH} alt="product" className="thumb" />
+                              <span className="title">{item.name}</span>
+                            </span>
+                          </DataTableRow>
+                          <DataTableRow>
+                            <span className="tb-sub">{item.sku}</span>
+                          </DataTableRow>
+                          <DataTableRow>
+                            <span className="tb-sub">$ {item.price}</span>
+                          </DataTableRow>
+                          <DataTableRow>
+                            <span className="tb-sub">{item.stock}</span>
+                          </DataTableRow>
+                          <DataTableRow size="md">
+                            <span className="tb-sub">
+                              {item.category.map((cat) => {
+                                if (item.category[cat] + 1 === null || undefined) {
+                                  return cat.label;
+                                } else return cat.label + ", ";
+                              })}
+                            </span>
+                          </DataTableRow>
+                          <DataTableRow size="md">
+                            <div className="asterisk tb-asterisk">
+                              <a
+                                href="#asterisk"
+                                className={item.fav ? "active" : ""}
+                                onClick={(ev) => ev.preventDefault()}
+                              >
+                                <Icon name="star" className="asterisk-off"></Icon>
+                                <Icon name="star-fill" className="asterisk-on"></Icon>
+                              </a>
+                            </div>
+                          </DataTableRow>
+                          <DataTableRow className="nk-tb-col-tools">
+                            <ul className="nk-tb-actions gx-1 my-n1">
+                              <li className="me-n1">
+                                <UncontrolledDropdown>
+                                  <DropdownToggle
+                                    tag="a"
+                                    href="#more"
+                                    onClick={(ev) => ev.preventDefault()}
+                                    className="dropdown-toggle btn btn-icon btn-trigger"
+                                  >
+                                    <Icon name="more-h"></Icon>
+                                  </DropdownToggle>
+                                  <DropdownMenu end>
+                                    <ul className="link-list-opt no-bdr">
+                                      <li>
+                                        <DropdownItem
+                                          tag="a"
+                                          href="#edit"
+                                          onClick={(ev) => {
+                                            ev.preventDefault();
+                                            onEditClick(item.id);
+                                            toggle("edit");
+                                          }}
+                                        >
+                                          <Icon name="edit"></Icon>
+                                          <span>Edit Product</span>
+                                        </DropdownItem>
+                                      </li>
+                                      <li>
+                                        <DropdownItem
+                                          tag="a"
+                                          href="#view"
+                                          onClick={(ev) => {
+                                            ev.preventDefault();
+                                            onEditClick(item.id);
+                                            toggle("details");
+                                          }}
+                                        >
+                                          <Icon name="eye"></Icon>
+                                          <span>View Product</span>
+                                        </DropdownItem>
+                                      </li>
+                                      <li>
+                                        <DropdownItem
+                                          tag="a"
+                                          href="#remove"
+                                          onClick={(ev) => {
+                                            ev.preventDefault();
+                                            deleteProduct(item.id);
+                                          }}
+                                        >
+                                          <Icon name="trash"></Icon>
+                                          <span>Remove Product</span>
+                                        </DropdownItem>
+                                      </li>
+                                    </ul>
+                                  </DropdownMenu>
+                                </UncontrolledDropdown>
+                              </li>
+                            </ul>
+                          </DataTableRow>
+                        </DataTableItem>
+                      );
+                    })
                     : null}
                 </DataTableBody>
                 <div className="card-inner">
@@ -660,7 +660,7 @@ const ProductList = () => {
                             options={categoryOptions}
                             defaultValue={formData.category}
                             onChange={onCategoryChange}
-                            //ref={register({ required: "This is required" })}
+                          //ref={register({ required: "This is required" })}
                           />
                           {errors.category && <span className="invalid">{errors.category.message}</span>}
                         </div>
@@ -763,9 +763,8 @@ const ProductList = () => {
         </Modal>
 
         <SimpleBar
-          className={`nk-add-product toggle-slide toggle-slide-right toggle-screen-any ${
-            view.add ? "content-active" : ""
-          }`}
+          className={`nk-add-product toggle-slide toggle-slide-right toggle-screen-any ${view.add ? "content-active" : ""
+            }`}
         >
           <BlockHead>
             <BlockHeadContent>
@@ -882,7 +881,7 @@ const ProductList = () => {
                         options={categoryOptions}
                         onChange={onCategoryChange}
                         value={formData.category}
-                        //ref={register({ required: "This is required" })}
+                      //ref={register({ required: "This is required" })}
                       />
                       {errors.category && <span className="invalid">{errors.category.message}</span>}
                     </div>

@@ -80,7 +80,7 @@ const ForgotPassword = () => {
               </div>
               <div className="form-group">
                 <Button type="submit" color="primary" size="lg" className="btn-block" onClick={(ev) => console.log("submit")}>
-                  Send Reset Link
+                  Send Reset Link   
                 </Button>
               </div>
             </form>

@@ -25,8 +25,10 @@ const orderSchema = new mongoose.Schema({
   userId: {
     type: String
   }
+}, {
+  versionKey: false
 });
 
-const OrderModel = mongoose.model('order', orderSchema);
+const OrderModel = mongoose.model('CorporateOrder', orderSchema);
 
 module.exports = OrderModel;

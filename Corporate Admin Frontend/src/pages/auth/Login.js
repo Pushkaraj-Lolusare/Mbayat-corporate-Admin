@@ -17,7 +17,7 @@ import Head from "../../layout/head/Head";
 import AuthFooter from "./AuthFooter";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
@@ -50,7 +50,7 @@ const Login = () => {
       const data = await response.json();
       console.log("data", data);
 
-      if (data.token) { 
+      if (data.token) {
         toast.success('Login successful!')
         // setAlert({ type: 'success', message: 'Login successful!' });
         localStorage.setItem("accessToken", data.token);
@@ -66,6 +66,7 @@ const Login = () => {
           );
           window.location.reload();
         }, 2000);
+       
       } else {
         // console.log("Failed");
         // Login failed
@@ -78,6 +79,7 @@ const Login = () => {
       // setAlert({ type: 'danger', message: 'An error occurred. Please try again later.' });
     }
   };
+
 
 
   const dismissAlert = () => {

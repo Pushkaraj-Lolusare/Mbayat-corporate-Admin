@@ -3,9 +3,12 @@ const corporateUserRouter = express.Router()
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
 const CorporateUserModel = require("../model/corporateUser.model")
-const { sendUserCredentials } = require('../mailer/email');
+const { sendUserCredentials, sendCorporateResetPassword } = require('../mailer/email');
 const multer = require('multer');
-// const storage = require
+const { captureLoginDetails } = require("../middlewares/loggerMiddleware")
+const CorporateLoginLogModel = require('../model/corporateWebLog.model');
+const moment = require("moment")
+const useragent = require('useragent');
 
 corporateUserRouter.get("/", async (req, res) => {
     try {
@@ -30,7 +33,7 @@ corporateUserRouter.post("/register", async (req, res) => {
         password,
         confirmPassword,
     } = req.body;
-    console.log(req.body);
+    // console.log(req.body);
     try {
         bcrypt.hash(password, 5, async (err, hash) => {
             if (err) {
@@ -57,7 +60,7 @@ corporateUserRouter.post("/register", async (req, res) => {
                     const userId = newUser._id
                     const credentials = { email, password }
                     sendUserCredentials(credentials);
-                    res.status(201).send({ msg: "Registration successful", user: newUser, userId : userId })
+                    res.status(201).send({ msg: "Registration successful", user: newUser, userId: userId })
                 }
             }
         })
@@ -67,18 +70,37 @@ corporateUserRouter.post("/register", async (req, res) => {
     }
 })
 
+
 corporateUserRouter.post("/login", async (req, res) => {
     const { email, password } = req.body
     try {
         let User = await CorporateUserModel.find({ email: email })
         // console.log(User)
         if (User.length > 0) {
-            bcrypt.compare(password, User[0].password, (err, result) => {
+            bcrypt.compare(password, User[0].password, async (err, result) => {
                 if (result) {
                     // console.log(result)
-                    
                     let token = jwt.sign({ userId: User[0]._id }, process.env.key);
-                    res.status(201).send({ msg: `Welcome ${User[0].companyName} Admin`, token: token, userId: User[0]._id , CompanyName: User[0].companyName,  Email: User[0].email});
+                    const loginTime = new Date().toLocaleString(undefined, {
+                        timeZone: "Asia/Kuwait",
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit',
+                    });
+                    const agent = useragent.parse(req.headers['user-agent']);
+                    const loginActivity = new CorporateLoginLogModel({
+                        userId: User[0]._id,
+                        browserName: agent,
+                        ipAddress: req.ip,
+                        loginTime: loginTime
+                        // logoutTime: null,
+
+                    });
+                    await loginActivity.save();
+                    res.status(201).send({ msg: `Welcome ${User[0].companyName} Admin`, token: token, userId: User[0]._id, CompanyName: User[0].companyName, Email: User[0].email, Address: User[0].address });
                 } else {
                     res.send({ msg: "Wrong Password" })
                 }
@@ -91,6 +113,39 @@ corporateUserRouter.post("/login", async (req, res) => {
     }
 })
 
+const generateRandomPassword = () => {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let password = '';
+    for (let i = 0; i < 10; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        password += characters.charAt(randomIndex);
+    }
+    return password;
+};
 
+
+corporateUserRouter.post("/reset", async (req, res) => {
+    const { email } = req.body;
+    try {
+
+        const user = await CorporateUserModel.findOne({ email: email });
+        if (!user) {
+            return res.status(404).send({ msg: `Invalid email address. Enter your correct email!` })
+        }
+        const newPassword = generateRandomPassword();
+
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+        user.password = hashedPassword;
+
+        await user.save()
+
+        sendCorporateResetPassword(email, newPassword)
+        res.status(201).send({ msg: `New password sent on your email!` })
+    } catch (e) {
+        console.error('Reset password error:', e);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+})
 
 module.exports = corporateUserRouter

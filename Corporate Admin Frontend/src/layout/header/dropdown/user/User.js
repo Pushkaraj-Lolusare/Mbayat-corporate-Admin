@@ -3,21 +3,38 @@ import { DropdownToggle, DropdownMenu, Dropdown } from "reactstrap";
 import { Icon } from "../../../../components/Component";
 import { LinkList, LinkItem } from "../../../../components/links/Links";
 import UserAvatar from "../../../../components/user/UserAvatar";
+import axios from "axios";
+
 
 const User = () => {
   const [open, setOpen] = useState(false);
   const toggle = () => setOpen((prevState) => !prevState);
 
-  const handleSignout = () => {
-    localStorage.clear()
+  const handleSignout = async () => {
+    const email = localStorage.getItem('Email');
+
+    try {
+      // Make the logout request
+      await axios.put("http://localhost:5500/corporateUserLog/logout", null, {
+        headers: { "Content-Type": "application/json" },
+        params: { email },
+      });
+      localStorage.clear()
+      console.log("logout");
+      // Handle successful logout
+    } catch (error) {
+      console.error("Error:", error);
+      // Handle error
+    }
+    
   };
 
   const CompanyName = localStorage.getItem('CompanyName')
   const Email = localStorage.getItem("Email")
 
   return (
-    <Dropdown style={{zIndex:"9999"}} isOpen={open} className="user-dropdown" toggle={toggle}>
-      <DropdownToggle 
+    <Dropdown style={{ zIndex: "9999" }} isOpen={open} className="user-dropdown" toggle={toggle}>
+      <DropdownToggle
         tag="a"
         href="#toggle"
         className="dropdown-toggle"
@@ -33,7 +50,7 @@ const User = () => {
           </div>
         </div>
       </DropdownToggle>
-      <DropdownMenu end className="dropdown-menu-md dropdown-menu-s1" style={{zIndex:"inherit"}}>
+      <DropdownMenu end className="dropdown-menu-md dropdown-menu-s1" style={{ zIndex: "inherit" }}>
         <div className="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
           <div className="user-card sm">
             <div className="user-avatar">

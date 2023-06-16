@@ -7,7 +7,7 @@ import {
   DropdownMenu,
   DropdownToggle,
   Card,
-  
+
   Modal,
   ModalBody,
   DropdownItem,
@@ -302,86 +302,86 @@ const OrderSales = () => {
                   <tbody>
                     {currentItems.length > 0
                       ? currentItems.map((item) => {
-                          return (
-                            <tr key={item.id} className="tb-tnx-item">
-                              <td className="tb-tnx-id">
-                                <a
-                                  href="#ref"
-                                  onClick={(ev) => {
-                                    ev.preventDefault();
-                                  }}
+                        return (
+                          <tr key={item.id} className="tb-tnx-item">
+                            <td className="tb-tnx-id">
+                              <a
+                                href="#ref"
+                                onClick={(ev) => {
+                                  ev.preventDefault();
+                                }}
+                              >
+                                <span>{item.ref}</span>
+                              </a>
+                            </td>
+                            <td className="tb-tnx-info">
+                              <div className="tb-tnx-desc">
+                                <span className="title">{item.bill}</span>
+                              </div>
+                              <div className="tb-tnx-date">
+                                <span className="date">{item.issue}</span>
+                                <span className="date">{item.due}</span>
+                              </div>
+                            </td>
+                            <td className="tb-tnx-amount is-alt">
+                              <div className="tb-tnx-total">
+                                <span className="amount">${item.total}</span>
+                              </div>
+                              <div className="tb-tnx-status">
+                                <Badge
+                                  className="badge-dot"
+                                  color={
+                                    item.status === "Paid" ? "success" : item.status === "Due" ? "warning" : "danger"
+                                  }
                                 >
-                                  <span>{item.ref}</span>
-                                </a>
-                              </td>
-                              <td className="tb-tnx-info">
-                                <div className="tb-tnx-desc">
-                                  <span className="title">{item.bill}</span>
-                                </div>
-                                <div className="tb-tnx-date">
-                                  <span className="date">{item.issue}</span>
-                                  <span className="date">{item.due}</span>
-                                </div>
-                              </td>
-                              <td className="tb-tnx-amount is-alt">
-                                <div className="tb-tnx-total">
-                                  <span className="amount">${item.total}</span>
-                                </div>
-                                <div className="tb-tnx-status">
-                                  <Badge
-                                    className="badge-dot"
-                                    color={
-                                      item.status === "Paid" ? "success" : item.status === "Due" ? "warning" : "danger"
-                                    }
-                                  >
-                                    {item.status}
-                                  </Badge>
-                                </div>
-                              </td>
-                              <td className="tb-tnx-action">
-                                <UncontrolledDropdown>
-                                  <DropdownToggle
-                                    tag="a"
-                                    className="text-soft dropdown-toggle btn btn-icon btn-trigger"
-                                  >
-                                    <Icon name="more-h"></Icon>
-                                  </DropdownToggle>
-                                  <DropdownMenu end>
-                                    <ul className="link-list-plain">
-                                      <li
-                                        onClick={() => {
-                                          loadDetail(item.id);
-                                          setViewModal(true);
+                                  {item.status}
+                                </Badge>
+                              </div>
+                            </td>
+                            <td className="tb-tnx-action">
+                              <UncontrolledDropdown>
+                                <DropdownToggle
+                                  tag="a"
+                                  className="text-soft dropdown-toggle btn btn-icon btn-trigger"
+                                >
+                                  <Icon name="more-h"></Icon>
+                                </DropdownToggle>
+                                <DropdownMenu end>
+                                  <ul className="link-list-plain">
+                                    <li
+                                      onClick={() => {
+                                        loadDetail(item.id);
+                                        setViewModal(true);
+                                      }}
+                                    >
+                                      <DropdownItem
+                                        tag="a"
+                                        href="#view"
+                                        onClick={(ev) => {
+                                          ev.preventDefault();
                                         }}
                                       >
-                                        <DropdownItem
-                                          tag="a"
-                                          href="#view"
-                                          onClick={(ev) => {
-                                            ev.preventDefault();
-                                          }}
-                                        >
-                                          View
-                                        </DropdownItem>
-                                      </li>
-                                      <li>
-                                        <DropdownItem
-                                          tag="a"
-                                          href="#print"
-                                          onClick={(ev) => {
-                                            ev.preventDefault();
-                                          }}
-                                        >
-                                          Print
-                                        </DropdownItem>
-                                      </li>
-                                    </ul>
-                                  </DropdownMenu>
-                                </UncontrolledDropdown>
-                              </td>
-                            </tr>
-                          );
-                        })
+                                        View
+                                      </DropdownItem>
+                                    </li>
+                                    <li>
+                                      <DropdownItem
+                                        tag="a"
+                                        href="#print"
+                                        onClick={(ev) => {
+                                          ev.preventDefault();
+                                        }}
+                                      >
+                                        Print
+                                      </DropdownItem>
+                                    </li>
+                                  </ul>
+                                </DropdownMenu>
+                              </UncontrolledDropdown>
+                            </td>
+                          </tr>
+                        );
+                      })
                       : null}
                   </tbody>
                 </table>

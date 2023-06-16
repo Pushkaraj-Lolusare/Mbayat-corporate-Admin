@@ -192,21 +192,22 @@ const Homepage = () => {
 
           {/* filter by intrests */}
 
-          <div style={{
-            marginLeft: "-30px",
-            width: 'calc(100% + 60px)',
-            height: "90px",
-            borderRadius: "6px",
-            display: "flex",
-            justifyContent: "space-between",
-            position: 'sticky',
-            top: "64px",
-            backgroundColor: "white",
-            alignItems: "center",
-            zIndex: "2",
-            paddingRight: "150px",
-            paddingLeft: '30px'
-          }}>
+          <div
+            style={{
+              marginLeft: "-30px",
+              width: 'calc(100% + 60px)',
+              height: "90px",
+              borderRadius: "6px",
+              display: "flex",
+              justifyContent: "space-between",
+              position: 'sticky',
+              top: "64px",
+              backgroundColor: "white",
+              alignItems: "center",
+              zIndex: "2",
+              paddingRight: "150px",
+              paddingLeft: '30px'
+            }}>
             <BlockTitle page tag="h3" style={{ marginLeft: "-200px", border: '1px solid red' }}>
               Vendors
             </BlockTitle>

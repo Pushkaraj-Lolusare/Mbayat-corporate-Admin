@@ -22,7 +22,6 @@ const Settings = () => {
             <BlockTitle page>Settings</BlockTitle>
           </BlockHeadContent>
         </BlockHead>
-
         <Block>
           <PreviewAltCard>
             <h5 className="card-title">Web Store Setting</h5>

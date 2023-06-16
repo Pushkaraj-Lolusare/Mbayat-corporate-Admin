@@ -8,7 +8,7 @@ const auth = async (req, res, next) => {
     if (decoded) {
       const userId = decoded.userId;
       req.userDetails = decoded;
-      console.log("decoded",decoded);
+      console.log("decoded", decoded);
       req.body.userId = userId;
       console.log(req.body);
       next();

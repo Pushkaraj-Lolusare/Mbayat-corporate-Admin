@@ -1,8 +1,12 @@
-import React from "react";
-import { loginData, orderData, transactionData } from "./TableData";
+import React, { useEffect } from "react";
+import { orderData, transactionData } from "./TableData";
 import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Badge } from "reactstrap";
 import Icon from "../icon/Icon";
 import Button from "../button/Button";
+import { useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
+
 
 export const SpecialTable = ({ action, isCompact, data }) => {
   const DropdownTrans = () => {
@@ -84,97 +88,97 @@ export const SpecialTable = ({ action, isCompact, data }) => {
       <tbody>
         {data
           ? data.map((item) => {
-              return (
-                <tr key={item.id} className="tb-tnx-item">
-                  <td className="tb-tnx-id">
-                    <a
-                      href="#id"
-                      onClick={(ev) => {
-                        ev.preventDefault();
-                      }}
+            return (
+              <tr key={item.id} className="tb-tnx-item">
+                <td className="tb-tnx-id">
+                  <a
+                    href="#id"
+                    onClick={(ev) => {
+                      ev.preventDefault();
+                    }}
+                  >
+                    <span>{item.id}</span>
+                  </a>
+                </td>
+                <td className="tb-tnx-info">
+                  <div className="tb-tnx-desc">
+                    <span className="title">{item.bill}</span>
+                  </div>
+                  <div className="tb-tnx-date">
+                    <span className="date">{item.issue}</span>
+                    <span className="date">{item.due}</span>
+                  </div>
+                </td>
+                <td className="tb-tnx-amount is-alt">
+                  <div className="tb-tnx-total">
+                    <span className="amount">${item.total}</span>
+                  </div>
+                  <div className="tb-tnx-status">
+                    <Badge
+                      className="badge-dot"
+                      color={
+                        item.status === "Paid" ? "success" : item.status === "Due" ? "warning" : "danger"
+                      }
                     >
-                      <span>{item.id}</span>
-                    </a>
-                  </td>
-                  <td className="tb-tnx-info">
-                    <div className="tb-tnx-desc">
-                      <span className="title">{item.bill}</span>
-                    </div>
-                    <div className="tb-tnx-date">
-                      <span className="date">{item.issue}</span>
-                      <span className="date">{item.due}</span>
-                    </div>
-                  </td>
-                  <td className="tb-tnx-amount is-alt">
-                    <div className="tb-tnx-total">
-                      <span className="amount">${item.total}</span>
-                    </div>
-                    <div className="tb-tnx-status">
-                      <Badge
-                        className="badge-dot"
-                        color={
-                          item.status === "Paid" ? "success" : item.status === "Due" ? "warning" : "danger"
-                        }
-                      >
-                        {item.status}
-                      </Badge>
-                    </div>
-                  </td>
+                      {item.status}
+                    </Badge>
+                  </div>
+                </td>
 
-                  {action && (
-                    <td className="tb-tnx-action">
-                      <DropdownTrans />
-                    </td>
-                  )}
-                </tr>
-              );
-            })
+                {action && (
+                  <td className="tb-tnx-action">
+                    <DropdownTrans />
+                  </td>
+                )}
+              </tr>
+            );
+          })
           : transactionData.data.map((item) => {
-              return (
-                <tr key={item.id} className="tb-tnx-item">
-                  <td className="tb-tnx-id">
-                    <a
-                      href="#id"
-                      onClick={(ev) => {
-                        ev.preventDefault();
-                      }}
+            return (
+              <tr key={item.id} className="tb-tnx-item">
+                <td className="tb-tnx-id">
+                  <a
+                    href="#id"
+                    onClick={(ev) => {
+                      ev.preventDefault();
+                    }}
+                  >
+                    <span>{item.id}</span>
+                  </a>
+                </td>
+                <td className="tb-tnx-info">
+                  <div className="tb-tnx-desc">
+                    <span className="title">{item.bill}</span>
+                  </div>
+                  <div className="tb-tnx-date">
+                    <span className="date">{item.issue}</span>
+                    <span className="date">{item.due}</span>
+                  </div>
+                </td>
+                <td className="tb-tnx-amount is-alt">
+                  <div className="tb-tnx-total">
+                    <span className="amount">${item.total}</span>
+                  </div>
+                  <div className="tb-tnx-status">
+                    <Badge
+                      className="badge-dot"
+                      color={
+                        item.status === "Paid" ? "success" : item.status === "Due" ? "warning" : "danger"
+                      }
                     >
-                      <span>{item.id}</span>
-                    </a>
-                  </td>
-                  <td className="tb-tnx-info">
-                    <div className="tb-tnx-desc">
-                      <span className="title">{item.bill}</span>
-                    </div>
-                    <div className="tb-tnx-date">
-                      <span className="date">{item.issue}</span>
-                      <span className="date">{item.due}</span>
-                    </div>
-                  </td>
-                  <td className="tb-tnx-amount is-alt">
-                    <div className="tb-tnx-total">
-                      <span className="amount">${item.total}</span>
-                    </div>
-                    <div className="tb-tnx-status">
-                      <Badge
-                        className="badge-dot"
-                        color={
-                          item.status === "Paid" ? "success" : item.status === "Due" ? "warning" : "danger"
-                        }
-                      >
-                        {item.status}
-                      </Badge>
-                    </div>
-                  </td>
+                      {item.status}
+                    </Badge>
+                  </div>
+                </td>
 
-                  {action && (
-                    <td className="tb-tnx-action">
-                      <DropdownTrans />
-                    </td>
-                  )}
-                </tr>
-              );
-            })}
+                {action && (
+                  <td className="tb-tnx-action">
+                    <DropdownTrans />
+                  </td>
+                )}
+              </tr>
+            );
+          })}
       </tbody>
     </table>
   );
@@ -290,57 +294,128 @@ export const OrderTable = () => {
   );
 };
 
+
 export const LoginLogTable = () => {
+
+  const [loginLogData, setLoginLogData] = useState([])
+  console.log(loginLogData.length)
+  localStorage.setItem("loginLogData", loginLogData.length)
+
+  const getLoginLog = async () => {
+    await axios.get(`http://localhost:5500/corporateUserLog`, {
+      headers: {
+        Authorization: localStorage.getItem("accessToken")
+      }
+    })
+      .then(response => {
+        console.log(response.data);
+        setLoginLogData(response.data)
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getLoginLog();
+  }, []);
+
+  const handleLogItemDelete = (item) => {
+    fetch(`http://localhost:5500/corporateUserLog/${item._id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: localStorage.getItem("accessToken")
+      }
+    })
+      .then((response) => response.json())
+      .then(() => {
+        setLoginLogData(loginLogData.filter((logItem) => logItem._id !== item._id));
+      })
+      .catch((error) => {
+        console.error("Error deleting cart item:", error);
+      });
+  };
+
+
+  const handleLogHistoryDelete = async () => {
+    await axios.delete(`http://localhost:5500/corporateUserLog`, {
+      headers: {
+        Authorization: localStorage.getItem("accessToken")
+      }
+    })
+      .then((response) => {
+        toast.success("Deleted Browsing History")
+        getLoginLog()
+      })
+      .catch((error) => {
+        toast.error("An error occured")
+      });
+  };
+
   return (
-    <table className="table table-ulogs">
-      <thead className="table-light">
-        <tr>
-          <th className="tb-col-os">
-            <span className="overline-title">
-              Browser <span className="d-sm-none">/ IP</span>
-            </span>
-          </th>
-          <th className="tb-col-ip">
-            <span className="overline-title">IP</span>
-          </th>
-          <th className="tb-col-time">
-            <span className="overline-title">Time</span>
-          </th>
-          <th className="tb-col-action">
-            <span className="overline-title">&nbsp;</span>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {loginData.map((item, idx) => {
-          return (
-            <tr key={idx}>
-              <td className="tb-col-os">{item.browser}</td>
-              <td className="tb-col-ip">
-                <span className="sub-text">{item.ip}</span>
-              </td>
-              <td className="tb-col-time">
-                <span className="sub-text">
-                  {item.date} <span className="d-none d-sm-inline-block">{item.time}</span>
-                </span>
-              </td>
-              <td className="tb-col-action">
-                {item.action === true && (
-                  <a
-                    href="#delete"
+    <div style={{ maxHeight: '500px', overflow: 'auto' }}>
+      <table className="table table-ulogs" >
+        <thead className="table-light" style={{position:'sticky', top:"0px"}}>
+          <tr>
+            <th className="tb-col-os">
+              <span className="overline-title">
+                Browser <span className="d-sm-none">/ IP</span>
+              </span>
+            </th>
+            <th className="tb-col-ip">
+              <span className="overline-title">IP</span>
+            </th>
+            <th className="tb-col-time">
+              <span className="overline-title">Time</span>
+            </th>
+            <th className="tb-col-action">
+              <button style={{
+                border: "none",
+                color: 'red',
+                background: "none",
+
+              }}
+                className="overline-title"
+                onMouseOver={(e) => {
+                  e.target.style.color = "black"
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.color = "red"
+                }}
+                onClick={handleLogHistoryDelete}
+              >Clear All</button>
+            </th>
+          </tr>
+        </thead>
+        <tbody >
+          {loginLogData.map((item, idx) => {
+            return (
+              <tr key={idx}>
+                <td className="tb-col-os" style={{ width: "40%" }}>{item.browserName}</td>
+                <td className="tb-col-ip">
+                  <span className="sub-text">{item.ipAddress}</span>
+                </td>
+                <td className="tb-col-time">
+                  <span className="sub-text">
+                    {item.loginTime} <span className="d-none d-sm-inline-block">{item.time}</span>
+                  </span>
+                </td>
+                <td className="tb-col-action">
+                  <div
                     onClick={(ev) => {
                       ev.preventDefault();
+                      handleLogItemDelete(item)
                     }}
                     className="link-cross me-sm-n1"
                   >
                     <Icon name="cross"></Icon>
-                  </a>
-                )}
-              </td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+                  </div>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
   );
 };

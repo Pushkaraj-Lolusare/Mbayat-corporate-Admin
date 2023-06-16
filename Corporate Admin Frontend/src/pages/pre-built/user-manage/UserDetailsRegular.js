@@ -191,7 +191,7 @@ const UserDetailsPage = ({ match }) => {
                     <Block>
                       <BlockHead>
                         <BlockTitle tag="h5">Personal Information</BlockTitle>
-                        <p>Basic info, like your name and address, that you use on Nio Platform.</p>
+                        {/* <p>Basic info, like your name and address, that you use on Nio Platform.</p> */}
                       </BlockHead>
                       <div className="profile-ud-list">
                         <div className="profile-ud-item">

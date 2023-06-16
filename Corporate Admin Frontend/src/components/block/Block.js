@@ -36,8 +36,8 @@ export const BlockHead = ({ className, size, wide, ...props }) => {
     position: 'sticky',
     top: "64px",
     marginTop: "-33px",
-    width: 'calc(100% + 70px)',
-    marginLeft: "-35px",
+    width: 'calc(100% + 44px)',
+    marginLeft: "-22px",
     marginBottom:"20px",
     zIndex:2
   }} className={blockHeadClass} >{props.children}</div>;
