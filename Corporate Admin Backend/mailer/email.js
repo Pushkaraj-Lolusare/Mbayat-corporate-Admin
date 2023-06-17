@@ -28,6 +28,35 @@ async function sendUserCredentials(credentials) {
         console.error('Error sending email:', error);
     }
 }
+
+async function sendCorporateResetPassword (email, password){
+    try {
+        const transporter = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false,
+            auth: {
+                user: 'developer@trymbayat.com',
+                pass: 'waoyayqbfenmwrki',
+            },
+        })
+
+        const mailOptions = {
+            from: 'support@mbayat.com',
+            to: email,
+            subject: 'Reset Password',
+            text: `Your new password for Mbayat Corporate Admin Login is: ${password} \n\n Thank You!`,
+        }
+
+        await transporter.sendMail(mailOptions)
+    } catch (e) {
+        console.error('Failed to send email:', e);
+        
+    }
+}
+
+
 module.exports = {
     sendUserCredentials,
+    sendCorporateResetPassword,
 };

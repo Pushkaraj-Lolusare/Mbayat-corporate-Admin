@@ -26,8 +26,6 @@ const moment = require("moment");
 loginLogRouter.get('/', async (req, res) => {
     const userId = req.body.userId;
     try {
-
-
         // Fetch login activity entries for the specified user
         const loginActivity = await CorporateLoginLogModel.find({ userId: userId }).sort({ loginTime: -1 }).limit(20);
 

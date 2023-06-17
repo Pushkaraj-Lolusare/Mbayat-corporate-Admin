@@ -91,10 +91,11 @@ corporateUserRouter.post("/login", async (req, res) => {
                         second: '2-digit',
                     });
                     const agent = useragent.parse(req.headers['user-agent']);
+                    const clientIP = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
                     const loginActivity = new CorporateLoginLogModel({
                         userId: User[0]._id,
                         browserName: agent,
-                        ipAddress: req.ip,
+                        ipAddress: clientIP,
                         loginTime: loginTime
                         // logoutTime: null,
 
