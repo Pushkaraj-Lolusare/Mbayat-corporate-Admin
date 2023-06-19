@@ -480,7 +480,6 @@ export const ProjectListPage = () => {
 //           const { status } = event.data;
 //           if (status === true) {
 //             paymentWindow.close();
-//             // Make a post request for subscription only if payment is successful
 //             fetch('http://localhost:5500/subscriptions', {
 //               method: 'POST',
 //               headers: {
@@ -640,10 +639,10 @@ export const ProjectListPage = () => {
               </DataTableRow>
             </DataTableHead>
             {currentItems.length > 0
-              ? currentItems.map((item) => {
+              ? currentItems.map((item,i) => {
                 var days = setDeadlineDays(item.deadline);
                 return (
-                  <DataTableItem key={item.id}>
+                  <DataTableItem key={i}>
                     <DataTableRow>
                       <a
                         href="#title"
@@ -820,11 +819,11 @@ export const ProjectListPage = () => {
               <div className="mt-4" style={{ maxHeight: '400px', overflowY: 'auto' }}>
 
                 <Table striped bordered responsive >
-                  <thead>
+                  <thead style={{ position: 'sticky', top: "0px" }}>
                     <tr>
                       <th>Codes</th>
                       <th>Plan</th>
-                    </tr>
+                    </tr>  
                   </thead>
                   <tbody>
                     {itemList.map((item, index) => (
