@@ -111,101 +111,7 @@ const cartPage = () => {
   }
 
   return (
-    // <React.Fragment>
-    //     <Head title="Cart"></Head>
-    //     <Content>
-    //     <BlockHead size="sm" >
-    //       <BlockBetween >
-    //         <BlockHeadContent>
-    //           <BlockTitle >Cart</BlockTitle>
-    //         </BlockHeadContent>
-    //         <BlockHeadContent>
-    //           <div className="toggle-wrap nk-block-tools-toggle">
-    //             <a
-    //               href="#more"
-    //               className="btn btn-icon btn-trigger toggle-expand me-n1"
-    //               onClick={(ev) => {
-    //                 ev.preventDefault();
-    //                 updateSm(!sm);
-    //               }}
-    //             >
-    //               <Icon name="more-v"></Icon>
-    //             </a>
-    //             <div className="toggle-expand-content" style={{ display: sm ? "block" : "none" }}>
-    //               <ul className="nk-block-tools g-3">
-    //                 <li>
-    //                   <div className="form-control-wrap">
-    //                     <div className="form-icon form-icon-right">
-    //                       <Icon name="search"></Icon>
-    //                     </div>
-    //                     <input
-    //                       type="text"
-    //                       className="form-control"
-    //                       id="default-04"
-    //                       placeholder="Quick search by SKU"
-    //                       onChange={(e) => onFilterChange(e)}
-    //                     />
-    //                   </div>
-    //                 </li>
-    //                 <li>
-    //                   <UncontrolledDropdown>
-    //                     <DropdownToggle
-    //                       color="transparent"
-    //                       className="dropdown-toggle dropdown-indicator btn btn-outline-light btn-white"
-    //                     >
-    //                       Status
-    //                     </DropdownToggle>
-    //                     <DropdownMenu >
-    //                       <ul className="link-list-opt no-bdr">
-    //                         <li>
-    //                           <DropdownItem tag="a" href="#dropdownitem" onClick={(ev) => ev.preventDefault()}>
-    //                             <span>New Items</span>
-    //                           </DropdownItem>
-    //                         </li>
-    //                         <li>
-    //                           <DropdownItem tag="a" href="#dropdownitem" onClick={(ev) => ev.preventDefault()}>
-    //                             <span>Featured</span>
-    //                           </DropdownItem>
-    //                         </li>
-    //                         <li>
-    //                           <DropdownItem tag="a" href="#dropdownitem" onClick={(ev) => ev.preventDefault()}>
-    //                             <span>Out of Stock</span>
-    //                           </DropdownItem>
-    //                         </li>
-    //                       </ul>
-    //                     </DropdownMenu>
-    //                   </UncontrolledDropdown>
-    //                 </li>
-    //                 <li className="nk-block-tools-opt">
-    //                   {/* <Button
-    //                     className="toggle btn-icon d-md-none"
-    //                     color="primary"
-    //                     onClick={() => {
-    //                       toggle("add");
-    //                     }}
-    //                   >
-    //                     <Icon name="plus"></Icon>
-    //                   </Button> */}
-    //                   <Button
-    //                     className="toggle d-none d-md-inline-flex"
-    //                     color="primary"
-    //                     onClick={() => {
-
-    //                     }}
-    //                   >
-    //                     <Link to="/cart" style={{color:"white"}}>
-    //                     <Icon name="cart-fill"></Icon>
-    //                     <span>Cart</span></Link>
-    //                   </Button>
-    //                 </li>
-    //               </ul>
-    //             </div>
-    //           </div>
-    //         </BlockHeadContent>
-    //       </BlockBetween>
-    //     </BlockHead>
-    //     </Content>
-    // </React.Fragment>
+    
     <>
       <Head title="Cart"></Head>
       {/* <h1>Cart PAge</h1>
@@ -233,70 +139,20 @@ const cartPage = () => {
                 </a>
                 <div className="toggle-expand-content" style={{ display: "sm" ? "block" : "none" }}>
                   <ul className="nk-block-tools g-3">
-                    {/* <li>
-                      <div className="form-control-wrap">
-                        <div className="form-icon form-icon-right">
-                          <Icon name="search"></Icon>
-                        </div>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="default-04"
-                          placeholder="Quick search by SKU"
-                          onChange={(e) => onFilterChange(e)}
-                        />
-                      </div>
-                    </li> */}
-                    {/* <li>
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          color="transparent"
-                          className="dropdown-toggle dropdown-indicator btn btn-outline-light btn-white"
-                        >
-                          Status
-                        </DropdownToggle>
-                        <DropdownMenu end>
-                          <ul className="link-list-opt no-bdr">
-                            <li>
-                              <DropdownItem tag="a" href="#dropdownitem" onClick={(ev) => ev.preventDefault()}>
-                                <span>New Items</span>
-                              </DropdownItem>
-                            </li>
-                            <li>
-                              <DropdownItem tag="a" href="#dropdownitem" onClick={(ev) => ev.preventDefault()}>
-                                <span>Featured</span>
-                              </DropdownItem>
-                            </li>
-                            <li>
-                              <DropdownItem tag="a" href="#dropdownitem" onClick={(ev) => ev.preventDefault()}>
-                                <span>Out of Stock</span>
-                              </DropdownItem>
-                            </li>
-                          </ul>
-                        </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </li> */}
+                    
                     <li className="nk-block-tools-opt">
-                      {/* <Button
-                        className="toggle btn-icon d-md-none"
-                        color="primary"
-                        onClick={() => {
-                          toggle("add");
-                        }}
-                      >
-                        <Icon name="plus"></Icon>
-                      </Button> */}
                       <Button
                         className="toggle d-none d-md-inline-flex"
                         color="primary"
                         onClick={() => {
-                          alert("Payment Page loading......")
+                          
                         }}
+                        disabled={selectedItemIds.length === 0}
                       >
-                        {/* <Link to="/cart" style={{color:"white"}}> */}
+                        <Link to="/shipping-address" style={{color:"white"}}>
                         <Icon name="bag"></Icon>
                         <span>Purchase Selected Items</span>
-                        {/* </Link> */}
+                        </Link>
                       </Button>
                     </li>
                   </ul>
@@ -600,7 +456,7 @@ const cartPage = () => {
                           width: "100px",
                         }}>
                         {/* Reduce Quantity */}
-                        <button
+                        <button 
                           disabled={item.quantity === 1}
                           onClick={() => handleQuantityChange(item, item.quantity - 1)}
                           style={{
@@ -669,7 +525,7 @@ const cartPage = () => {
 
         </div>
         <div style={{ width: "1px", height: "65vh", border: "1px solid gray" }}></div>
-        <div>
+        <div style={{width:"44%"}}>
           <p>{
             selectedItemIds.length > 0 ? `${selectedItemIds.length} items selected` : "No items selected"
           }</p>

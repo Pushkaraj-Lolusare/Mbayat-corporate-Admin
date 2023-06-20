@@ -73,3 +73,24 @@ export const BackTo = ({ className, link, icon, ...props }) => {
     </div>
   );
 };
+
+export const BlockHeadShipping = ({ className, size, wide, ...props }) => {
+  const blockHeadClass = classNames({
+    "nk-block-head": true,
+    [`nk-block-head-${size}`]: size,
+    [`wide-${wide}`]: wide,
+    [`${className}`]: className,
+  });
+  return <div style={{
+    // border: "1px solid red",
+    padding: "20px",
+    backgroundColor: "white",
+    position: 'sticky',
+    top: "64px",
+    marginTop: "33px",
+    width: 'calc(100% + 44px)',
+    marginLeft: "-22px",
+    marginBottom:"20px",
+    zIndex:2
+  }} className={blockHeadClass} >{props.children}</div>;
+};
