@@ -98,55 +98,8 @@ const Homepage = () => {
                 <div className="toggle-expand-content" style={{ display: sm ? "block" : "none" }}>
                   <ul className="nk-block-tools g-3">
                     <li>
-                      {/* <UncontrolledDropdown>
-                        <DropdownToggle tag="a" className="dropdown-toggle btn btn-white btn-dim btn-outline-light">
-                          <Icon className="d-none d-sm-inline" name="calender-date" />
-                          <span>
-                            <span className="d-none d-md-inline">Last</span> 30 Days
-                          </span>
-                          <Icon className="dd-indc" name="chevron-right" />
-                        </DropdownToggle>
-                        <DropdownMenu end>
-                          <ul className="link-list-opt no-bdr">
-                            <li>
-                              <DropdownItem
-                                tag="a"
-                                onClick={(ev) => {
-                                  ev.preventDefault();
-                                }}
-                                href="#!"
-                              >
-                                <span>Last 30 days</span>
-                              </DropdownItem>
-                            </li>
-                            <li>
-                              <DropdownItem
-                                tag="a"
-                                onClick={(ev) => {
-                                  ev.preventDefault();
-                                }}
-                                href="#dropdownitem"
-                              >
-                                <span>Last 6 months</span>
-                              </DropdownItem>
-                            </li>
-                            <li>
-                              <DropdownItem
-                                tag="a"
-                                onClick={(ev) => {
-                                  ev.preventDefault();
-                                }}
-                                href="#dropdownitem"
-                              >
-                                <span>Last 3 weeks</span>
-                              </DropdownItem>
-                            </li>
-                          </ul>
-                        </DropdownMenu>
-                      </UncontrolledDropdown> */}
                     </li>
                     <li className="nk-block-tools-opt">
-
                     </li>
                   </ul>
                 </div>
@@ -189,9 +142,7 @@ const Homepage = () => {
           </Row>
 
           <div style={{ border: '0.5px solid rgb(199,205,215)', marginTop: "30px", marginBottom: '30px' }}></div>
-
           {/* filter by intrests */}
-
           <div
             style={{
               marginLeft: "-30px",
@@ -250,7 +201,6 @@ const Homepage = () => {
                         minHeight: '230px'
                       }}
                     >
-
                       <div className="text-center">
                         <img src="App_Icon.png" fluid="true" className="mb-3" style={{ maxHeight: '100px' }} alt="App Icon" />
                         <p
@@ -282,10 +232,6 @@ const Homepage = () => {
                             marginTop: '40px',
                             color: 'rgb(64, 15, 59)',
                             zIndex: "1",
-
-                          }}
-                          onClick={() => {
-
                           }}
                         >
                           Visit store

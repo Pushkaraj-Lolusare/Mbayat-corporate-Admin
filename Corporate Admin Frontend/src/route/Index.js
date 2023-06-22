@@ -4,11 +4,9 @@ import { CustomerProvider } from "../pages/panel/e-commerce/customer/CustomerCon
 import { ProductContextProvider } from "../pages/pre-built/products/ProductContext";
 import { UserContextProvider } from "../pages/pre-built/user-manage/UserContext";
 import { RedirectAs404 } from "../utils/Utils";
-
 import Homepage from "../pages/Homepage";
 import Sales from "../pages/Sales";
 import Analytics from "../pages/Analytics";
-
 import EcomOrder from "../pages/panel/e-commerce/order/OrderDefault";
 import EcomSupport from "../pages/panel/e-commerce/support/Messages";
 import EcomProducts from "../pages/panel/e-commerce/product/ProductList";
@@ -17,7 +15,6 @@ import EcomCustomerDetails from "../pages/panel/e-commerce/customer/CustomerDeta
 import EcomIntegration from "../pages/panel/e-commerce/integration/Integration";
 import EcomSettings from "../pages/panel/e-commerce/settings/Settings";
 import EcomDashboard from "../pages/panel/e-commerce/index";
-
 import Component from "../pages/components/Index";
 import Accordian from "../pages/components/Accordions";
 import Alerts from "../pages/components/Alerts";
@@ -67,7 +64,6 @@ import UtilOthers from "../pages/components/UtilOthers";
 import UtilSizing from "../pages/components/UtilSizing";
 import UtilSpacing from "../pages/components/UtilSpacing";
 import UtilText from "../pages/components/UtilText";
-
 import Blank from "../pages/others/Blank";
 import Faq from "../pages/others/Faq";
 import Regularv1 from "../pages/others/Regular-1";
@@ -79,7 +75,6 @@ import ChartPage from "../pages/components/charts/Charts";
 import EmailTemplate from "../pages/components/email-template/Email";
 import NioIconPage from "../pages/components/crafted-icons/NioIcon";
 import SVGIconPage from "../pages/components/crafted-icons/SvgIcons";
-
 import ProjectCardPage from "../pages/pre-built/projects/ProjectCard";
 import ProjectListPage from "../pages/pre-built/projects/ProjectList";
 import UserListDefaultPage from "../pages/pre-built/user-manage/UserListDefault";
@@ -101,7 +96,6 @@ import InvoiceDetails from "../pages/pre-built/invoice/InvoiceDetails";
 import PricingTable from "../pages/pre-built/pricing-table/PricingTable";
 import GalleryPreview from "../pages/pre-built/gallery/GalleryCardPreview";
 import ReactToastify from "../pages/components/misc/ReactToastify";
-
 import AppMessages from "../pages/app/messages/Messages";
 import Chat from "../pages/app/chat/ChatContainer";
 import Kanban from "../pages/app/kanban/Kanban";
@@ -117,6 +111,7 @@ import cartPage from "../pages/panel/e-commerce/cart/cartPage";
 import { shippingAddress } from "../pages/panel/e-commerce/shipping-address/shippingAddress";
 
 const Pages = () => {
+  
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   });
