@@ -1,8 +1,6 @@
 const nodemailer = require('nodemailer');
-
 async function sendUserCredentials(credentials) {
     try {
-
         const transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',
             port: 587,
@@ -20,7 +18,6 @@ async function sendUserCredentials(credentials) {
             subject: 'Mbayat Corporate Admin Login Credentials',
             text: `Here are your credentials:\n\nEmail: ${credentials.email}\nPassword: ${credentials.password} \n\n Thank You!`,
         };
-
         // Send the email
         await transporter.sendMail(mailOptions);
         console.log('User credentials sent successfully!');
@@ -29,7 +26,7 @@ async function sendUserCredentials(credentials) {
     }
 }
 
-async function sendCorporateResetPassword (email, password){
+async function sendCorporateResetPassword(email, password) {
     try {
         const transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',
@@ -40,7 +37,6 @@ async function sendCorporateResetPassword (email, password){
                 pass: 'waoyayqbfenmwrki',
             },
         })
-
         const mailOptions = {
             from: 'support@mbayat.com',
             to: email,
@@ -51,11 +47,8 @@ async function sendCorporateResetPassword (email, password){
         await transporter.sendMail(mailOptions)
     } catch (e) {
         console.error('Failed to send email:', e);
-        
     }
 }
-
-
 module.exports = {
     sendUserCredentials,
     sendCorporateResetPassword,
