@@ -13,7 +13,7 @@ import "./assets/assets/scss/main.scss";
 import "./assets/assets/scss/color_skins.scss";
 import "../node_modules/font-awesome/scss/font-awesome.scss";
 import store from "./store/store";
-
+// import "~font-awesome/scss/font-awesome";
 
 
 
