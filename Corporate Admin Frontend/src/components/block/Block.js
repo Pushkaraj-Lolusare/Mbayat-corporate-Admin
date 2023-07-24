@@ -43,7 +43,7 @@ export const BlockHead = ({ className, size, wide, ...props }) => {
   }} className={blockHeadClass} >{props.children}</div>;
 };
 export const BlockHeadContent = ({ className, ...props }) => {
-  return <div className={[`nk-block-head-content${className ? " " + className : ""}`]}>{props.children}</div>;
+  return <div className={[`nk-block-head-content${className ? " " + className : ""}`]} >{props.children}</div>;
 };
 export const BlockTitle = ({ className, page, ...props }) => {
   const classes = [`nk-block-title ${page ? "page-title" : "title"}${className ? " " + className : ""}`];

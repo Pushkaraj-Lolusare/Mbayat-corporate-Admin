@@ -21,6 +21,13 @@ corporateUserRouter.get("/", async (req, res) => {
 
 // const upload = multer({ storage: storage });
 
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const domainRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+
+    return emailRegex.test(email) && domainRegex.test(email);
+}
+
 
 corporateUserRouter.post("/register", async (req, res) => {
     const {
@@ -34,6 +41,11 @@ corporateUserRouter.post("/register", async (req, res) => {
         confirmPassword,
     } = req.body;
     // console.log(req.body);
+
+    const isValidEmail = validateEmail(email);
+    if (!isValidEmail) {
+        return res.status(400).json({ msg: 'Invalid email format' });
+    }
     try {
         bcrypt.hash(password, 5, async (err, hash) => {
             if (err) {

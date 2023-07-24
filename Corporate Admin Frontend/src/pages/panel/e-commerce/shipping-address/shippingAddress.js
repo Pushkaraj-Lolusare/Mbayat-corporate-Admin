@@ -102,6 +102,7 @@ export const shippingAddress = () => {
                 }
             });
             fetchAddresses();
+            toast.success("Address Updated")
             setModal({ edit: false });
         } catch (error) {
             console.log('Error:', error);
@@ -178,7 +179,7 @@ export const shippingAddress = () => {
         setAddress({ ...address, [e.target.name]: e.target.value });
     };
 
-    const handleEditToggle = (e)=>{
+    const handleEditToggle = (e) => {
         setModal({ edit: false })
         setSelectedAddress(null)
     }
@@ -186,7 +187,7 @@ export const shippingAddress = () => {
     return (
         <div>
             <Head title="Shipping Address"></Head>
-            <Content>
+            {/* <Content>
                 <BlockHeadShipping size="sm" >
                     <BlockBetween >
                         <BlockHeadContent>
@@ -225,91 +226,173 @@ export const shippingAddress = () => {
                         </BlockHeadContent>
                     </BlockBetween>
                 </BlockHeadShipping>
-            </Content>
-            {
-                addresses.length>0 ?
-                <div style={{ margin: 'auto', width: '80%', padding: '10px' }}>
-                <div style={{ width: '45%', maxHeight: "65vh", overflow: 'auto', alignItems: "center", padding: '12px' }}>
-                    {addresses.map((address) => (
-                        <div key={address._id} className="card mb-3" style={{ height: "8rem", margin: 'auto', borderRadius: "12px", boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;" }}>
-                            <div className="card-body" style={{ display: "flex", height: "100%", gap: "10px", padding: "16px", boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;" }}>
-                                <div className="form-check" style={{ paddingTop: "34px", paddingLeft: '20px' }}>
-                                    <input
-                                        className="form-check-input"
-                                        type="radio"
-                                        name="selectedAddress"
-                                        checked={selectedAddress === address}
-                                        onChange={() => handleAddressSelection(address)}
-                                        style={{ border: "2px solid gray" }}
-                                    />
-                                </div>
-
-                                <div className="address-details" style={{ width: "65%", fontWeight: "bold", lineHeight: "10px", paddingTop: "10px", paddingLeft: "10px" }}>
-                                    <div style={{ display: "flex" }}>
-                                        {
-                                            address.houseNo ? <p className="mb-2">{address.houseNo},&nbsp;</p> : " "
-                                        }
-                                        {
-                                            address.apartment ? <p className="mb-2"> {address.apartment},&nbsp;</p> : " "
-                                        }
-                                        {
-                                            address.floor ? <p className="mb-2"> {address.floor},&nbsp;</p> : " "
-                                        }
-                                        <p className="mb-2">{`${address.block} block`},&nbsp;</p>
-                                        {
-                                            address.floor ? <p className="mb-2">{address.avenue},&nbsp;</p> : " "
-                                        }
-                                    </div>
-                                    <div style={{ display: "flex" }}>
-                                        {
-                                            address.direction ? <p className="mb-2">{address.direction},&nbsp;</p> : " "
-                                        }
-                                        <p className="mb-2">{address.street},&nbsp;</p>
-
-                                    </div>
-                                    <p className="mb-2">{address.area},&nbsp;</p>
-                                    <div style={{ display: "flex" }}>
-                                        <p className="mb-2">{address.state},&nbsp;</p>
-                                        <p className="mb-2">{`    ${address.country} -`}&nbsp; </p>
-                                        <p className="mb-2">{address.pincode}.</p>
-                                    </div>
-                                </div>
-                                <div style={{ paddingLeft: '30px', width: '17%', marginLeft: "5%", }}>
-                                    <button
-                                        className="btn btn-primary me-2"
-                                        onClick={() => handleEditAddress(address)}
-                                        style={{
-                                            color: 'rgb(10,210,210)',
-                                            backgroundColor: "white",
-                                            border: "none",
-
-                                        }}
-                                    >
-                                        <Icon name="edit"></Icon>
-                                    </button>
-                                    <button
-                                        className="btn btn-danger"
-                                        onClick={() => handleDeleteAddress(address)}
-                                        style={{
-                                            color: 'red',
-                                            backgroundColor: "white",
-                                            border: "none",
-                                            marginTop: "30px"
-                                        }}
-                                    >
-                                        <Icon name="trash" ></Icon>
-                                    </button>
-                                </div>
+            </Content> */}
+            {/* <Content>
+                <BlockHeadShipping size="sm">
+                    <BlockBetween>
+                        <BlockHeadContent className="d-flex flex-wrap align-items-center ">
+                            <BlockTitle className="me-3 ">
+                                <Icon name="truck"></Icon>&nbsp; Shipping Address
+                            </BlockTitle>
+                            <Button
+                                className="toggle d-inline-flex ms-auto"
+                                color="primary"
+                                onClick={() => setModal({ add: true })}
+                            >
+                                <Icon name="plus"></Icon>
+                                <span className="d-none d-lg-inline">Add Address</span>
+                            </Button>
+                        </BlockHeadContent>
+                        <BlockHeadContent className="toggle-wrap nk-block-tools-toggle ">
+                            <div className="toggle-expand-content">
+                                <ul className="nk-block-tools g-3">
+                                    <li className="nk-block-tools-opt">
+                                        <Button
+                                            className="toggle d-inline-flex"
+                                            color="primary"
+                                            disabled={selectedAddress === null}
+                                            onClick={() => {
+                                                alert("Payment Page loading...");
+                                            }}
+                                        >
+                                            <Icon name="sign-dollar"></Icon>
+                                            <span className="d-none d-lg-inline">Move to Payment</span>
+                                        </Button>
+                                    </li>
+                                </ul>
                             </div>
-                        </div>
-                    ))}
-                </div></div>:
-                <div style={{ margin: 'auto', width: '80%', padding: '10px' }}>
-                    <Button onClick={()=>setModal({add:true})}>Add shipping address</Button>
-                </div>
+                        </BlockHeadContent>
+                    </BlockBetween>
+                </BlockHeadShipping>
+            </Content> */}
+            <Content>
+                <BlockHeadShipping size="sm">
+                    <BlockBetween>
+                        <BlockHeadContent className="d-flex flex-wrap align-items-center" >
+                            <BlockTitle className="me-3 col-32 col-sm-17 col-md-25 col-lg-26 ">
+                                <Icon name="truck"></Icon>&nbsp; Shipping Address
+                            </BlockTitle>
+
+                        </BlockHeadContent>
+                        {/* <BlockHeadContent className="toggle-wrap nk-block-tools-toggle">
+                            <div className="toggle-expand-content">
+                                <ul className="nk-block-tools g-3">
+                                    <li className="nk-block-tools-opt">
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </BlockHeadContent> */}
+                        <Button
+                            className="toggle d-inline-flex ms-auto"
+                            color="primary"
+                            onClick={() => setModal({ add: true })}
+                        >
+                            <Icon name="plus"></Icon>
+                            <span className="d-none d-sm-inline">Add Address</span>
+                        </Button>
+                        <Button
+                            className="toggle d-inline-flex ms-auto "
+                            color="primary"
+                            disabled={selectedAddress === null}
+                            onClick={() => {
+                                alert("Payment Page loading...");
+                            }}
+                            style={{ marginLeft: '100px' }}
+                        >
+                            <Icon name="sign-dollar"></Icon>
+                            <span className="d-none d-sm-inline">Payment</span>
+                        </Button>
+                    </BlockBetween>
+                </BlockHeadShipping>
+            </Content>
+
+            {
+                addresses.length > 0 ?
+                    <div style={{ marginTop: "-40px" }}>
+                        <div className="col-12 col-sm-11 col-md-9 col-lg-12" style={{ maxHeight: "70vh", overflow: 'auto', alignItems: "center", padding: '12px' }}>
+                            {addresses.map((address) => (
+                                <div key={address._id} className="card mb-3 col-12 col-sm-11 col-md-9 col-lg-6" style={{ height: "8rem", borderRadius: "12px", boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;" }}>
+                                    <div className="card-body " style={{ borderRadius: "12px", width: "100%", display: "flex", height: "100%", gap: "10px", padding: "16px", boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;" }}>
+                                        <div className="form-check" style={{ paddingTop: "34px", paddingLeft: '20px', }}>
+                                            <input
+                                                className="form-check-input"
+                                                type="radio"
+                                                name="selectedAddress"
+                                                checked={selectedAddress === address}
+                                                onChange={() => handleAddressSelection(address)}
+                                                style={{ border: "2px solid gray" }}
+                                            />
+                                        </div>
+                                        <div className="address-details fs-8 fs-sm-1 fs-md-2 fs-lg-8" style={{ width: "90%", fontWeight: "bold", lineHeight: "10px", paddingTop: "10px", paddingLeft: "10px" }}>
+                                            <div style={{ display: "flex", flexWrap: 'wrap' }} >
+                                                {
+                                                    address.houseNo ? <p className="mb-2">{address.houseNo},&nbsp;</p> : " "
+                                                }
+                                                {
+                                                    address.apartment ? <p className="mb-2"> {address.apartment},&nbsp;</p> : " "
+                                                }
+                                                {
+                                                    address.floor ? <p className="mb-2"> {address.floor},&nbsp;</p> : " "
+                                                }
+                                                <p className="mb-2">{`${address.block} block`},&nbsp;</p>
+                                                {
+                                                    address.floor ? <p className="mb-2">{address.avenue},&nbsp;</p> : " "
+                                                }
+                                            </div>
+                                            <div style={{ display: "flex", flexWrap: 'wrap' }}>
+                                                {
+                                                    address.direction ? <p className="mb-2">{address.direction},&nbsp;</p> : " "
+                                                }
+                                                <p className="mb-2">{address.street},&nbsp;</p>
+
+                                            </div>
+                                            <p className="mb-2">{address.area},&nbsp;</p>
+                                            <div style={{ display: "flex" }}>
+                                                <p className="mb-2">{address.state},&nbsp;</p>
+                                                <p className="mb-2">{`    ${address.country} `}&nbsp; </p> -&nbsp;
+                                                <p className="mb-2">{address.pincode}.</p>
+                                            </div>
+                                        </div>
+                                        <div style={{ width: "10%", display: 'flex', justifyContent: 'space-between', flexDirection: "column", }}>
+                                            <button
+                                                className="btn btn-primary me-2"
+                                                onClick={() => handleEditAddress(address)}
+                                                style={{
+                                                    // border:"1px solid red" ,
+                                                    color: 'rgb(10,210,210)',
+                                                    backgroundColor: "white",
+                                                    border: "none",
+                                                    // width:"4%"
+                                                }}
+                                            >
+                                                <Icon name="edit" ></Icon>
+                                            </button>
+                                            <button
+                                                className="btn btn-danger"
+                                                onClick={() => handleDeleteAddress(address)}
+                                                style={{
+                                                    // border:"1px solid red" ,
+                                                    color: 'red',
+                                                    backgroundColor: "white",
+                                                    border: "none",
+                                                    marginTop: "30px",
+                                                    // width:"4%"
+                                                }}
+                                            >
+                                                <Icon name="trash"  ></Icon>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div></div> :
+                    <div style={{ margin: 'auto', width: '80%', padding: '10px' }}>
+                        <Button onClick={() => setModal({ add: true })}>Add shipping address</Button>
+                    </div>
             }
 
-          
+
 
             <Modal isOpen={modal.add} toggle={() => setModal({ add: false })} className="modal-dialog-centered" size="lg">
                 <ModalBody>
@@ -513,7 +596,7 @@ export const shippingAddress = () => {
                                                     setModal({ add: false })
                                                 }}
                                                 className="link link-light"
-                                                style={{padding:'11px'}}
+                                                style={{ padding: '11px' }}
                                             >
                                                 Cancel
                                             </Button>
@@ -746,7 +829,7 @@ export const shippingAddress = () => {
                                                 }}
                                                 className="link link-light"
                                                 // size="md"
-                                                style={{padding:'11px'}}
+                                                style={{ padding: '11px' }}
                                             >
                                                 Cancel
                                             </Button>
@@ -759,8 +842,8 @@ export const shippingAddress = () => {
                 </ModalBody>
             </Modal>
 
-            
-            
+
+
         </div>
     )
 }

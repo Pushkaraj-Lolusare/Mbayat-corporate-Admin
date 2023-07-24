@@ -1,5 +1,5 @@
 {
-  "name": "DashliteReact-Demo2",
+  "name": "Mbayat Corporate Admin",
   "homepage": "https://react..net/",
   "version": "1.5.0",
   "private": true,
@@ -19,6 +19,7 @@
     "@testing-library/user-event": "^12.8.3",
     "@tinymce/tinymce-react": "^3.9.0",
     "@yaireo/tagify": "^4.17.3",
+    "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
     "chart.js": "^2.9.4",
     "chartjs": "^0.3.24",

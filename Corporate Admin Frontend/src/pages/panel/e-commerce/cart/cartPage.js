@@ -162,235 +162,8 @@ const cartPage = () => {
           </BlockBetween>
         </BlockHead>
       </Content>
-
-
-      {/* <Block>
-        <div className="nk-tb-list is-separate is-medium mb-3">
-          <DataTableHead className="nk-tb-item">
-            <DataTableRow className="nk-tb-col-check">
-              <div className="custom-control custom-control-sm custom-checkbox notext">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="pid-all"
-                  onChange={(e) => selectorCheck(e)}
-                />
-                <label className="custom-control-label" htmlFor="pid-all"></label>
-              </div>
-            </DataTableRow>
-            <DataTableRow>
-              <span className="sub-text">Order</span>
-            </DataTableRow>
-            <DataTableRow size="sm">
-              <span className="sub-text">Customer</span>
-            </DataTableRow>
-            <DataTableRow size="md">
-              <span className="sub-text">Date</span>
-            </DataTableRow>
-            <DataTableRow>
-              <span className="sub-text">Status</span>
-            </DataTableRow>
-            <DataTableRow size="md">
-              <span className="sub-text">Purchased</span>
-            </DataTableRow>
-            <DataTableRow>
-              <span className="sub-text">Total</span>
-            </DataTableRow>
-            <DataTableRow className="nk-tb-col-tools">
-              <ul className="nk-tb-actions gx-1 my-n1">
-                <li>
-                  <UncontrolledDropdown>
-                    <DropdownToggle tag="a" className="btn btn-trigger dropdown-toggle btn-icon me-n1">
-                      <Icon name="more-h"></Icon>
-                    </DropdownToggle>
-                    <DropdownMenu end>
-                      <ul className="link-list-opt no-bdr">
-                        <li>
-                          <DropdownItem
-                            tag="a"
-                            href="#markasdone"
-                            onClick={(ev) => {
-                              ev.preventDefault();
-                              selectorMarkAsDelivered();
-                            }}
-                          >
-                            <Icon name="truck"></Icon>
-                            <span>Mark As Delivered</span>
-                          </DropdownItem>
-                        </li>
-                        <li>
-                          <DropdownItem
-                            tag="a"
-                            href="#remove"
-                            onClick={(ev) => {
-                              ev.preventDefault();
-                              selectorDeleteOrder();
-                            }}
-                          >
-                            <Icon name="trash"></Icon>
-                            <span>Remove Orders</span>
-                          </DropdownItem>
-                        </li>
-                      </ul>
-                    </DropdownMenu>
-                  </UncontrolledDropdown>
-                </li>
-              </ul>
-            </DataTableRow>
-          </DataTableHead>
-
-          {currentItems.length > 0
-            ? currentItems.map((item) => (
-              <DataTableItem key={item.id}>
-                <DataTableRow className="nk-tb-col-check">
-                  <div className="custom-control custom-control-sm custom-checkbox notext">
-                    <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      defaultChecked={item.check}
-                      id={item.id + "oId-all"}
-                      key={Math.random()}
-                      onChange={(e) => onSelectChange(e, item.id)}
-                    />
-                    <label className="custom-control-label" htmlFor={item.id + "oId-all"}></label>
-                  </div>
-                </DataTableRow>
-                <DataTableRow>
-                  <a href="#id" onClick={(ev) => ev.preventDefault()}>
-                    #{item.orderId}
-                  </a>
-                </DataTableRow>
-                <DataTableRow size="sm">
-                  <span className="tb-sub">{item.customer}</span>
-                </DataTableRow>
-                <DataTableRow size="md">
-                  <span>{item.date}</span>
-                </DataTableRow>
-                <DataTableRow>
-                  <span
-                    className={`dot bg-${item.status === "Delivered" ? "success" : "warning"} d-sm-none`}
-                  ></span>
-                  <Badge
-                    className="badge-sm badge-dot has-bg d-none d-sm-inline-flex"
-                    color={
-                      item.status === "Delivered" ? "success" : "warning"
-                    }
-                  >
-                    {item.status}
-                  </Badge>
-                </DataTableRow>
-                <DataTableRow size="md">
-                  <span className="tb-sub text-primary">{item.purchased}</span>
-                </DataTableRow>
-                <DataTableRow>
-                  <span className="tb-lead">$ {item.total}</span>
-                </DataTableRow>
-                <DataTableRow className="nk-tb-col-tools">
-                  <ul className="nk-tb-actions gx-1">
-                    {item.status !== "Delivered" && (
-                      <li className="nk-tb-action-hidden" onClick={() => markAsDelivered(item.id)}>
-                        <TooltipComponent
-                          tag="a"
-                          containerClassName="btn btn-trigger btn-icon"
-                          id={"delivery" + item.id}
-                          icon="truck"
-                          direction="top"
-                          text="Mark as Delivered"
-                        />
-                      </li>
-                    )}
-                    <li
-                      className="nk-tb-action-hidden"
-                      onClick={() => {
-                        loadDetail(item.id);
-                        toggle("details");
-                      }}
-                    >
-                      <TooltipComponent
-                        tag="a"
-                        containerClassName="btn btn-trigger btn-icon"
-                        id={"view" + item.id}
-                        icon="eye"
-                        direction="top"
-                        text="View Details"
-                      />
-                    </li>
-                    <li>
-                      <UncontrolledDropdown>
-                        <DropdownToggle tag="a" className="btn btn-icon dropdown-toggle btn-trigger">
-                          <Icon name="more-h"></Icon>
-                        </DropdownToggle>
-                        <DropdownMenu end>
-                          <ul className="link-list-opt no-bdr">
-                            <li>
-                              <DropdownItem
-                                tag="a"
-                                href="#dropdown"
-                                onClick={(ev) => {
-                                  ev.preventDefault();
-                                  loadDetail(item.id);
-                                  toggle("details");
-                                }}
-                              >
-                                <Icon name="eye"></Icon>
-                                <span>Order Details</span>
-                              </DropdownItem>
-                            </li>
-                            {item.status !== "Delivered" && (
-                              <li>
-                                <DropdownItem
-                                  tag="a"
-                                  href="#dropdown"
-                                  onClick={(ev) => {
-                                    ev.preventDefault();
-                                    markAsDelivered(item.id);
-                                  }}
-                                >
-                                  <Icon name="truck"></Icon>
-                                  <span>Mark as Delivered</span>
-                                </DropdownItem>
-                              </li>
-                            )}
-                            <li>
-                              <DropdownItem
-                                tag="a"
-                                href="#dropdown"
-                                onClick={(ev) => {
-                                  ev.preventDefault();
-                                  deleteOrder(item.id);
-                                }}
-                              >
-                                <Icon name="trash"></Icon>
-                                <span>Remove Order</span>
-                              </DropdownItem>
-                            </li>
-                          </ul>
-                        </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </li>
-                  </ul>
-                </DataTableRow>
-              </DataTableItem>
-            ))
-            : null}
-        </div>
-        <PreviewAltCard>
-          {data.length > 0 ? (
-            <PaginationComponent
-              itemPerPage={itemPerPage}
-              totalItems={data.length}
-              paginate={paginate}
-              currentPage={currentPage}
-            />
-          ) : (
-            <div className="text-center">
-              <span className="text-silent">No orders found</span>
-            </div>
-          )}
-        </PreviewAltCard>
-      </Block> */}
-      <div style={{ width: "100%", height: "65vh", display: 'flex', gap: "40px", }}>
-        <div style={{ width: "60%", height: "95%", maxHeight: "70vh", overflow: "auto", }}>
+      <div style={{ width: "100%", height: "65vh", display: 'flex', gap: "10px", }}>
+        <div style={{ width: "70%", height: "95%", maxHeight: "70vh", overflow: "auto", }}>
           {
             cartItems.length > 0 ?
               cartItems.map((item, i) => (
@@ -525,14 +298,17 @@ const cartPage = () => {
 
         </div>
         <div style={{ width: "1px", height: "65vh", border: "1px solid gray" }}></div>
-        <div style={{width:"44%"}}>
+        <div style={{width:"34%"}}>
           <p>{
             selectedItemIds.length > 0 ? `${selectedItemIds.length} items selected` : "No items selected"
           }</p>
 
-          <h2>{
-            selectedItemIds.length > 0 ? `Total Amount: ${totalPrice} KWD` : ""
-          }</h2>        </div>
+          <p style={{
+            fontWeight:'bolder',
+            fontSize:"30px"
+          }}>{
+            selectedItemIds.length > 0 ? `Total Amount:  ${totalPrice} KWD` : ""
+          }</p>        </div>
       </div>
 
     </>

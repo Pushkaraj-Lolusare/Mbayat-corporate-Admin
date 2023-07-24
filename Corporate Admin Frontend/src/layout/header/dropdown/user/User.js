@@ -11,22 +11,10 @@ const User = () => {
   const toggle = () => setOpen((prevState) => !prevState);
 
   const handleSignout = async () => {
-    const email = localStorage.getItem('Email');
+    localStorage.clear()
+    console.log("logout")
+    window.location.href = `${process.env.PUBLIC_URL}/auth-login`
 
-    try {
-      // Make the logout request
-      await axios.put("http://localhost:5500/corporateUserLog/logout", null, {
-        headers: { "Content-Type": "application/json" },
-        params: { email },
-      });
-      localStorage.clear()
-      console.log("logout");
-      // Handle successful logout
-    } catch (error) {
-      console.error("Error:", error);
-      // Handle error
-    }
-    
   };
 
   const CompanyName = localStorage.getItem('CompanyName')
@@ -77,7 +65,7 @@ const User = () => {
         </div>
         <div className="dropdown-inner">
           <LinkList>
-            <a href={`${process.env.PUBLIC_URL}/auth-login`} onClick={handleSignout}>
+            <a onClick={handleSignout}>
               <Icon name="signout"></Icon>
               <span>Sign Out</span>
             </a>

@@ -395,7 +395,7 @@ const OrderDefault = () => {
                     <span className="tb-sub text-primary">{item.purchased}</span>
                   </DataTableRow>
                   <DataTableRow>
-                    <span className="tb-lead">$ {item.total}</span>
+                    <span className="tb-lead">{item.total} KWD</span>
                   </DataTableRow>
                   <DataTableRow className="nk-tb-col-tools">
                     <ul className="nk-tb-actions gx-1">
