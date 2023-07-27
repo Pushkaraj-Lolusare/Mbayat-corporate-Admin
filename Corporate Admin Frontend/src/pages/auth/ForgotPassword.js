@@ -11,7 +11,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
-  const [message, setMessage] = useState("")
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -35,12 +34,12 @@ const ForgotPassword = () => {
       } else {
         toast.error(data.msg)
       }
-
     } catch (e) {
       toast.error(e)
       console.log("Error: ", e)
     }
   }
+
   return (
     <React.Fragment>
       <Head title="Forgot-Password" />
@@ -57,7 +56,7 @@ const ForgotPassword = () => {
               <BlockContent>
                 <BlockTitle tag="h5">Reset password</BlockTitle>
                 <BlockDes>
-                  <p>If you forgot your password, well, then we’ll email you instructions to reset your password.</p>
+                  <p>If you forgot your password, well, then we’ll email you new password.</p>
                 </BlockDes>
               </BlockContent>
             </BlockHead>
@@ -79,8 +78,8 @@ const ForgotPassword = () => {
                 />
               </div>
               <div className="form-group">
-                <Button type="submit" color="primary" size="lg" className="btn-block" onClick={(ev) => console.log("submit")}>
-                  Send Reset Link   
+                <Button type="submit" color="primary" size="lg" className="btn-block">
+                  Send new password
                 </Button>
               </div>
             </form>
