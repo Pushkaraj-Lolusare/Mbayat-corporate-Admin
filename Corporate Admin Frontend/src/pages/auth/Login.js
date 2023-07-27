@@ -27,7 +27,6 @@ const Login = () => {
 
   const { errors, register, handleSubmit } = useForm();
 
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setErrorLogin] = useState('');
@@ -38,7 +37,7 @@ const Login = () => {
 
     try {
 
-      const response = await fetch('http://localhost:5500/corporateUser/login', {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/corporateUser/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -79,8 +78,6 @@ const Login = () => {
       // setAlert({ type: 'danger', message: 'An error occurred. Please try again later.' });
     }
   };
-
-
 
   const dismissAlert = () => {
     setAlert(null);

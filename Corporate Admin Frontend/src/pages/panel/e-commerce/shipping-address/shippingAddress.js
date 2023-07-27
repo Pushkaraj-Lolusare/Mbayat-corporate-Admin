@@ -53,7 +53,7 @@ export const shippingAddress = () => {
 
     const fetchAddresses = async () => {
         try {
-            const response = await axios.get('http://localhost:5500/corporate-shipping', {
+            const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/corporate-shipping`, {
                 headers: {
                     Authorization: localStorage.getItem("accessToken")
                 }
@@ -96,7 +96,7 @@ export const shippingAddress = () => {
     const handleEditFormSubmit = async (e) => {
         e.preventDefault()
         try {
-            await axios.put(`http://localhost:5500/corporate-shipping/${selectedAddress._id}`, editForm, {
+            await axios.put(`${process.env.REACT_APP_BASE_URL}/corporate-shipping/${selectedAddress._id}`, editForm, {
                 headers: {
                     Authorization: localStorage.getItem("accessToken")
                 }
@@ -114,7 +114,7 @@ export const shippingAddress = () => {
 
     const handleDeleteAddress = async (address) => {
         try {
-            await axios.delete(`http://localhost:5500/corporate-shipping/${address._id}`, {
+            await axios.delete(`${process.env.REACT_APP_BASE_URL}/corporate-shipping/${address._id}`, {
                 headers: {
                     Authorization: localStorage.getItem("accessToken")
                 }
@@ -144,7 +144,7 @@ export const shippingAddress = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post(`http://localhost:5500/corporate-shipping/`, address, {
+            const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/corporate-shipping/`, address, {
                 headers: {
                     Authorization: localStorage.getItem("accessToken")
                 }

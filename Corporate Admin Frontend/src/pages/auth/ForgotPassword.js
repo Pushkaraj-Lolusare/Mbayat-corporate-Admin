@@ -20,7 +20,7 @@ const ForgotPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:5500/corporateUser/reset", {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/corporateUser/reset`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',

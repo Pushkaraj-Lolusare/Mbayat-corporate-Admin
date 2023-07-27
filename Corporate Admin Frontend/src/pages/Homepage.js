@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 import Head from "../layout/head/Head";
 import Content from "../layout/content/Content";
-import SalesStatistics from "../components/partials/default/SalesStatistics";
-import OrderStatistics from "../components/partials/default/OrderStatistics";
-import StoreStatistics from "../components/partials/default/StoreStatistics";
-import RecentOrders from "../components/partials/default/recent-orders/RecentOrders";
-import TopProducts from "../components/partials/default/top-products/TopProducts";
 import DataCard from "../components/partials/default/DataCard";
 import { DropdownToggle, DropdownMenu, UncontrolledDropdown, DropdownItem, Container } from "reactstrap";
 import { projectData } from "./pre-built/projects/ProjectData";
@@ -13,7 +8,6 @@ import { FaCaretDown } from "react-icons/fa";
 import { useHistory } from 'react-router-dom';
 import {
   Block,
-  BlockHead,
   BlockHeadContent,
   BlockTitle,
   Icon,
@@ -22,12 +16,6 @@ import {
   Col,
   BlockBetween,
 } from "../components/Component";
-import {
-  DefaultCustomerChart,
-  DefaultOrderChart,
-  DefaultRevenueChart,
-  DefaultVisitorChart,
-} from "../components/partials/charts/default/DefaultCharts";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -52,8 +40,6 @@ const Homepage = () => {
     const value = event.target.value;
     console.log(value);
   };
-
-  // new code :-
 
   const [data, setData] = useState(projectData)
 
@@ -97,54 +83,8 @@ const Homepage = () => {
                 </Button>
                 <div className="toggle-expand-content" style={{ display: sm ? "block" : "none" }}>
                   <ul className="nk-block-tools g-3">
-                    <li>
-                      {/* <UncontrolledDropdown>
-                        <DropdownToggle tag="a" className="dropdown-toggle btn btn-white btn-dim btn-outline-light">
-                          <Icon className="d-none d-sm-inline" name="calender-date" />
-                          <span>
-                            <span className="d-none d-md-inline">Last</span> 30 Days
-                          </span>
-                          <Icon className="dd-indc" name="chevron-right" />
-                        </DropdownToggle>
-                        <DropdownMenu end>
-                          <ul className="link-list-opt no-bdr">
-                            <li>
-                              <DropdownItem
-                                tag="a"
-                                onClick={(ev) => {
-                                  ev.preventDefault();
-                                }}
-                                href="#!"
-                              >
-                                <span>Last 30 days</span>
-                              </DropdownItem>
-                            </li>
-                            <li>
-                              <DropdownItem
-                                tag="a"
-                                onClick={(ev) => {
-                                  ev.preventDefault();
-                                }}
-                                href="#dropdownitem"
-                              >
-                                <span>Last 6 months</span>
-                              </DropdownItem>
-                            </li>
-                            <li>
-                              <DropdownItem
-                                tag="a"
-                                onClick={(ev) => {
-                                  ev.preventDefault();
-                                }}
-                                href="#dropdownitem"
-                              >
-                                <span>Last 3 weeks</span>
-                              </DropdownItem>
-                            </li>
-                          </ul>
-                        </DropdownMenu>
-                      </UncontrolledDropdown> */}
-                    </li>
+                    
+                    
                     <li className="nk-block-tools-opt">
 
                     </li>

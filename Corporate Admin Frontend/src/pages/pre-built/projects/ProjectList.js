@@ -72,7 +72,7 @@ export const ProjectListPage = () => {
 
   const fetchSubscriptionData = async () => {
     try {
-      const response = await fetch('http://localhost:5500/corporateSubscription', {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/corporateSubscription`, {
         method: 'GET',
         headers: {
           "Authorization": token
@@ -332,7 +332,7 @@ export const ProjectListPage = () => {
 
   const handlePurchase = async () => {
     try {
-      const response = await fetch(`http://localhost:5500/corporateSubscription`, {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/corporateSubscription`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -31,7 +31,7 @@ const cartPage = () => {
   const [selectedItemIds, setSelectedItemIds] = useState([]);
 
   const getCartData = () => {
-    fetch("http://localhost:5500/corporateCart", {
+    fetch(`${process.env.REACT_APP_BASE_URL}/corporateCart`, {
       method:"GET",
       headers: {
         Authorization: token
@@ -76,7 +76,7 @@ const cartPage = () => {
 
   const handleItemDelete = (item) => {
     // Send delete request to remove item from the cart API
-    fetch(`http://localhost:5500/corporateCart/${item._id}`, {
+    fetch(`${process.env.REACT_APP_BASE_URL}/corporateCart/${item._id}`, {
       method: "DELETE",
       headers: {
         Authorization: token
