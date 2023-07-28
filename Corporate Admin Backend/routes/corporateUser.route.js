@@ -48,6 +48,13 @@ corporateUserRouter.post("/register", async (req, res) => {
     }
     try {
         bcrypt.hash(password, 5, async (err, hash) => {
+            if(companyType === ""){
+                return res.status(400).json({ msg: 'Select company type' });
+            }if(industry === ""){
+                return res.status(400).json({ msg: 'Select industry type' });
+            }if (password !== confirmPassword) {
+                return res.status(400).json({ msg: 'Password and confirm password do not match' });
+            } 
             if (err) {
                 console.log(err);
             } else {
@@ -55,9 +62,7 @@ corporateUserRouter.post("/register", async (req, res) => {
                 if (ExistingUser) {
                     return res.status(400).send({ msg: "User Already Exists, Try Login!" })
                 }
-                else if (password !== confirmPassword) {
-                    return res.status(400).json({ message: 'Passwords do not match' });
-                } else {
+                {
                     const newUser = new CorporateUserModel({
                         companyName,
                         companyType,
