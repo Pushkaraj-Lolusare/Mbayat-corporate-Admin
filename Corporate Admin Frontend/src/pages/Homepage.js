@@ -52,6 +52,27 @@ const Homepage = () => {
 
   const history = useHistory()
 
+  const [vendors, setVendors] = useState([]);
+  console.log("vendors", vendors);
+
+
+  const fetchVendorsData = () => {
+    // Fetch the data from the API
+    const accessToken = localStorage.getItem('accessToken');
+    fetch('https://15.185.57.60/api/v1/vendor-home/get-all-vendors?role=vendor&status=active')
+      .then(response => response.json())
+      .then(data => {
+        console.log("data", data.results)
+        setVendors(data.results)
+      })
+      .catch(error => console.error('Error fetching data:', error));
+  };
+
+  useEffect(() => {
+    fetchVendorsData();
+  }, []);
+
+
   return (
     <React.Fragment>
       <Head title="Homepage"></Head>
@@ -83,8 +104,8 @@ const Homepage = () => {
                 </Button>
                 <div className="toggle-expand-content" style={{ display: sm ? "block" : "none" }}>
                   <ul className="nk-block-tools g-3">
-                    
-                    
+
+
                     <li className="nk-block-tools-opt">
 
                     </li>
@@ -98,7 +119,7 @@ const Homepage = () => {
           <Row className="g-gs" >
             <Col xxl="3" sm="6"   >
               <DataCard
-             
+
                 title="Mystery Box Order"
                 // percentChange={"4.63"}
                 up={true}
@@ -175,8 +196,8 @@ const Homepage = () => {
           </div>
           <Container fluid='true' className="mt-4">
             <Row className="row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-              {data &&
-                data.map((item, index) => (
+              {vendors &&
+                vendors.map((item, index) => (
                   <Col key={index} >
                     <div
                       className="p-3 bg-white rounded shadow-sm d-flex flex-column justify-content-between h-100"
@@ -202,7 +223,8 @@ const Homepage = () => {
                             overflow: 'hidden',
                             textOverflow: 'ellipsis'
                           }}
-                          className="mb-2 text-center">{`Mbayat Vendor ${index+1}`}</p>
+                          className="mb-2 text-center">{` ${item.first_name} ${item.last_name}`}</p>
+
                       </div>
                       <Link to="/ecommerce/products">
                         <Button
