@@ -72,6 +72,10 @@ const Homepage = () => {
     fetchVendorsData();
   }, []);
 
+  const handleVisitStore = (vendorId) => {
+    localStorage.setItem("vendorId", vendorId)
+    // history.push("/ecommerce/products");
+  };
 
   return (
     <React.Fragment>
@@ -247,9 +251,7 @@ const Homepage = () => {
                             zIndex: "1",
 
                           }}
-                          onClick={() => {
-
-                          }}
+                          onClick={() =>  handleVisitStore(item.id)}
                         >
                           Visit store
                         </Button></Link>

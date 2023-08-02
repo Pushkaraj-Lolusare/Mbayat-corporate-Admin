@@ -254,7 +254,7 @@ const OrderDefault = () => {
                       >
                         <Icon name="plus"></Icon>
                       </Button>
-                      <Button
+                      {/* <Button
                         className="toggle d-none d-md-inline-flex"
                         color="primary"
                         onClick={() => {
@@ -263,7 +263,7 @@ const OrderDefault = () => {
                       >
                         <Icon name="plus"></Icon>
                         <span>Add Order</span>
-                      </Button>
+                      </Button> */}
                     </li>
                   </ul>
                 </div>

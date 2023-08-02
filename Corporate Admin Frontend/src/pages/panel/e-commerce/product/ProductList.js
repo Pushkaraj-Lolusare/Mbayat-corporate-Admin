@@ -228,6 +228,36 @@ const ProductList = () => {
 
   const { errors, register, handleSubmit, reset } = useForm();
 
+  const [products, setProducts] = useState([]);
+
+  const selectedVendorId = localStorage.getItem('vendorId');
+
+  const token = localStorage.getItem("accessToken")
+
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch(`https://15.185.57.60/api/v1/product/product-by-vendor/${selectedVendorId}ad?fetchType=all`,{
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      const data = await response.json();
+      // setProducts(data);
+      console.log("data pro",data)
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  };
+
+  // Fetch the products data when the component mounts
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+
   return (
     <React.Fragment>
       <Head title="Products"></Head>
