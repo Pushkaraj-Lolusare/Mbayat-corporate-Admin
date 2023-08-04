@@ -28,11 +28,12 @@ const cartPage = () => {
 
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  console.log(totalPrice);
   const [selectedItemIds, setSelectedItemIds] = useState([]);
 
   const getCartData = () => {
     fetch(`${process.env.REACT_APP_BASE_URL}/corporateCart`, {
-      method:"GET",
+      method: "GET",
       headers: {
         Authorization: token
       }
@@ -51,6 +52,10 @@ const cartPage = () => {
 
   useEffect(() => {
     getCartData()
+    const storedSelectedIds = localStorage.getItem('selectedItemIds');
+    if (storedSelectedIds) {
+      setSelectedItemIds(JSON.parse(storedSelectedIds));
+    }
   }, []);
 
   useEffect(() => {
@@ -62,6 +67,7 @@ const cartPage = () => {
       }
     });
     setTotalPrice(total);
+    localStorage.setItem("total_cart_price", total)
   }, [selectedItemIds, cartItems]);
 
   const handleQuantityChange = (item, quantity) => {
@@ -102,6 +108,7 @@ const cartPage = () => {
       selectedIds.push(item._id); // Add item ID to the array
     }
     setSelectedItemIds(selectedIds);
+    localStorage.setItem('selectedItemIds', JSON.stringify(selectedIds));
   };
 
   const handleDeleteAndLoad = (item) => {
@@ -111,7 +118,7 @@ const cartPage = () => {
   }
 
   return (
-    
+
     <>
       <Head title="Cart"></Head>
       {/* <h1>Cart PAge</h1>
@@ -139,19 +146,23 @@ const cartPage = () => {
                 </a>
                 <div className="toggle-expand-content" style={{ display: "sm" ? "block" : "none" }}>
                   <ul className="nk-block-tools g-3">
-                    
+
                     <li className="nk-block-tools-opt">
                       <Button
                         className="toggle d-none d-md-inline-flex"
-                        color="primary"
+                        // color="primary" 
                         onClick={() => {
-                          
+
+                        }}
+                        style={{
+                          backgroundColor:"#df8331",
+                          border:"1px "
                         }}
                         disabled={selectedItemIds.length === 0}
                       >
-                        <Link to="/shipping-address" style={{color:"white"}}>
-                        <Icon name="bag"></Icon>
-                        <span>Purchase Selected Items</span>
+                        <Link to="/shipping-address" style={{ color: "white" }}>
+                          <Icon name="bag"></Icon>
+                          <span>Purchase Selected Items</span>
                         </Link>
                       </Button>
                     </li>
@@ -213,7 +224,7 @@ const cartPage = () => {
                       fontWeight: "500"
                     }}
                     >
-                      Price: {item.price * item.quantity} KWD
+                      Price: {item.price * item.quantity} KD
                     </p>
 
                     <div
@@ -229,7 +240,7 @@ const cartPage = () => {
                           width: "100px",
                         }}>
                         {/* Reduce Quantity */}
-                        <button 
+                        <button
                           disabled={item.quantity === 1}
                           onClick={() => handleQuantityChange(item, item.quantity - 1)}
                           style={{
@@ -298,17 +309,17 @@ const cartPage = () => {
 
         </div>
         <div style={{ width: "1px", height: "65vh", border: "1px solid gray" }}></div>
-        <div style={{width:"34%"}}>
+        <div style={{ width: "34%" }}>
           <p>{
             selectedItemIds.length > 0 ? `${selectedItemIds.length} items selected` : "No items selected"
           }</p>
 
           <p style={{
-            fontWeight:'bolder',
-            fontSize:"30px"
+            fontWeight: 'bolder',
+            fontSize: "30px"
           }}>{
-            selectedItemIds.length > 0 ? `Total Amount:  ${totalPrice} KWD` : ""
-          }</p>        </div>
+              selectedItemIds.length > 0 ? `Total Amount:  ${totalPrice} KD` : ""
+            }</p>        </div>
       </div>
 
     </>

@@ -184,87 +184,90 @@ export const shippingAddress = () => {
         setSelectedAddress(null)
     }
 
+    // const handlePurchase = async () => {
+    //     try {
+    //         const totalAmount = localStorage.getItem("total_cart_price")
+    //         const userID = localStorage.getItem("userId");
+    //         const paymentResponse = await fetch('https://development.payzah.net/ws/paymentgateway/index', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //                 "Authorization": "Y2ZmNWM5OTIxYjhiOTY3OWI1OGNhNGE4OTY3MjE2ZTQyNTYyYjY2ZQ=="
+    //             },
+    //             body: JSON.stringify({
+    //                 trackid: new Date().getTime(),
+    //                 amount: totalAmount,
+    //                 currency: 414,
+    //                 payment_type: 1,
+    //                 success_url: `http://localhost:3000/v1/payment/paymentSuccess?userId=${userID}&amount=${totalAmount}`,
+    //                 error_url: `http://localhost:3000/v1/payment/paymentError?userId=${userID}&amount=${totalAmount}`,
+    //                 language: 'ENG',
+    //             }),
+    //         });
+
+    //         const payres = await paymentResponse.json();
+    //         console.log("payres", payres);
+
+    //         if (paymentResponse.ok) {
+    //             const payres = await paymentResponse.json();
+    //             console.log("payres2", payres);
+    //             const paymentData = payres.data;
+    //             const { PaymentUrl, PaymentID } = paymentData;
+    //             const paymentUrl = `${PaymentUrl}?PaymentID=${PaymentID}`;
+
+    //             setPaymentUrl(paymentUrl);
+    //             const paymentWindow = window.open(paymentUrl, '_blank');
+    //             window.addEventListener('message', (event) => {
+    //                 if (event.origin === 'https://development.payzah.net') {
+    //                     const { status } = event.data;
+    //                     if (status === true) {
+    //                         paymentWindow.close();
+    //                         fetch('http://localhost:5500/subscriptions', {
+    //                             method: 'POST',
+    //                             headers: {
+    //                                 'Content-Type': 'application/json',
+    //                             },
+    //                             body: JSON.stringify({
+    //                                 subscriptionPlan,
+    //                                 quantity,
+    //                                 subscriptionDate,
+    //                                 totalAmount,
+    //                             }),
+    //                         })
+    //                             .then((response) => {
+    //                                 if (response.ok) {
+    //                                     return response.json();
+    //                                 } else {
+    //                                     throw new Error('Subscription creation failed');
+    //                                 }
+    //                             })
+    //                             .then((data) => {
+    //                                 console.log('Subscription created:', data);
+    //                                 toast.success('Subscription purchased successfully!');
+    //                             })
+    //                             .catch((error) => {
+    //                                 console.error('Subscription creation failed:', error)
+    //                                 toast.error('Failed to purchase subscription. Please try again.');
+    //                             });
+    //                     } else {
+    //                         console.error('Payment failed:', event.data);
+    //                         toast.error('An error occurred. Please try again later.');
+    //                     }
+    //                 }
+    //             });
+    //         } else {
+    //             console.error('Payment failed:', payres.message);
+    //             toast.error('Failed to fetch payment gateway URL');
+    //         }
+    //     } catch (error) {
+    //         console.error('Error:', error);
+    //         toast.error('An error occurred. Please try again later.');
+    //     }
+    // };
+
     return (
         <div>
             <Head title="Shipping Address"></Head>
-            {/* <Content>
-                <BlockHeadShipping size="sm" >
-                    <BlockBetween >
-                        <BlockHeadContent>
-                            <BlockTitle ><Icon name="truck"></Icon>&nbsp; Shipping Address</BlockTitle>
-                        </BlockHeadContent>
-                        <BlockHeadContent>
-                            <Button
-                                className="toggle d-none d-md-inline-flex"
-                                color="primary"
-                                onClick={() => setModal({ add: true })}
-                            >
-                                <Icon name="plus"></Icon>
-                                <span>Add Address</span>
-                            </Button>
-                        </BlockHeadContent>
-                        <BlockHeadContent>
-                            <div className="toggle-wrap nk-block-tools-toggle">
-                                <div className="toggle-expand-content" style={{ display: "sm" ? "block" : "none" }}>
-                                    <ul className="nk-block-tools g-3">
-                                        <li className="nk-block-tools-opt">
-                                            <Button
-                                                className="toggle d-none d-md-inline-flex"
-                                                color="primary"
-                                                disabled={selectedAddress===null}
-                                                onClick={() => {
-                                                    alert("Payment Page loading......")
-                                                }}
-                                            >
-                                                <Icon name="sign-dollar"></Icon>
-                                                <span>Move to Payment</span>
-                                            </Button>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </BlockHeadContent>
-                    </BlockBetween>
-                </BlockHeadShipping>
-            </Content> */}
-            {/* <Content>
-                <BlockHeadShipping size="sm">
-                    <BlockBetween>
-                        <BlockHeadContent className="d-flex flex-wrap align-items-center ">
-                            <BlockTitle className="me-3 ">
-                                <Icon name="truck"></Icon>&nbsp; Shipping Address
-                            </BlockTitle>
-                            <Button
-                                className="toggle d-inline-flex ms-auto"
-                                color="primary"
-                                onClick={() => setModal({ add: true })}
-                            >
-                                <Icon name="plus"></Icon>
-                                <span className="d-none d-lg-inline">Add Address</span>
-                            </Button>
-                        </BlockHeadContent>
-                        <BlockHeadContent className="toggle-wrap nk-block-tools-toggle ">
-                            <div className="toggle-expand-content">
-                                <ul className="nk-block-tools g-3">
-                                    <li className="nk-block-tools-opt">
-                                        <Button
-                                            className="toggle d-inline-flex"
-                                            color="primary"
-                                            disabled={selectedAddress === null}
-                                            onClick={() => {
-                                                alert("Payment Page loading...");
-                                            }}
-                                        >
-                                            <Icon name="sign-dollar"></Icon>
-                                            <span className="d-none d-lg-inline">Move to Payment</span>
-                                        </Button>
-                                    </li>
-                                </ul>
-                            </div>
-                        </BlockHeadContent>
-                    </BlockBetween>
-                </BlockHeadShipping>
-            </Content> */}
             <Content>
                 <BlockHeadShipping size="sm">
                     <BlockBetween>
@@ -274,19 +277,14 @@ export const shippingAddress = () => {
                             </BlockTitle>
 
                         </BlockHeadContent>
-                        {/* <BlockHeadContent className="toggle-wrap nk-block-tools-toggle">
-                            <div className="toggle-expand-content">
-                                <ul className="nk-block-tools g-3">
-                                    <li className="nk-block-tools-opt">
-
-                                    </li>
-                                </ul>
-                            </div>
-                        </BlockHeadContent> */}
                         <Button
                             className="toggle d-inline-flex ms-auto"
-                            color="primary"
+                            // color="primary"
                             onClick={() => setModal({ add: true })}
+                            style={{
+                                backgroundColor: "#df8331",
+                                border: "1px "
+                            }}
                         >
                             <Icon name="plus"></Icon>
                             <span className="d-none d-sm-inline">Add Address</span>
@@ -297,8 +295,12 @@ export const shippingAddress = () => {
                             disabled={selectedAddress === null}
                             onClick={() => {
                                 alert("Payment Page loading...");
+                                // handlePurchase()
                             }}
-                            style={{ marginLeft: '100px' }}
+                            style={{
+                                marginLeft: '100px', backgroundColor: "#df8331",
+                                border: "1px "
+                            }}
                         >
                             <Icon name="sign-dollar"></Icon>
                             <span className="d-none d-sm-inline">Payment</span>
@@ -407,7 +409,7 @@ export const shippingAddress = () => {
                         <Icon name="cross-sm"></Icon>
                     </a>
                     <div className="p-2">
-                        <h5 className="title">Add Subscriptions</h5>
+                        <h5 className="title">Add new shipping address</h5>
                         <div className="mt-4">
                             <Form className="row gy-4" onSubmit={handleSubmit} >
                                 <div>

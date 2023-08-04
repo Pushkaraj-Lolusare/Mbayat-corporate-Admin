@@ -330,198 +330,198 @@ export const ProjectListPage = () => {
   //   setQuantity(parseInt(e.target.value));
   // };
 
-  const handlePurchase = async () => {
-    try {
-      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/corporateSubscription`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          "Authorization": token
-        },
-        body: JSON.stringify({
-          subscriptionPlan,
-          quantity,
-          subscriptionDate,
-          totalAmount,
-          userId,
-        }),
-      });
+  // const handlePurchase = async () => {
+  //   try {
+  //     const response = await fetch(`${process.env.REACT_APP_BASE_URL}/corporateSubscription`, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         "Authorization": token
+  //       },
+  //       body: JSON.stringify({
+  //         subscriptionPlan,
+  //         quantity,
+  //         subscriptionDate,
+  //         totalAmount,
+  //         userId,
+  //       }),
+  //     });
 
-      // console.log(response)
-      if (response.ok) {
-        const res = await response.json()        
-        console.log("res",res)
+  //     // console.log(response)
+  //     if (response.ok) {
+  //       const res = await response.json()        
+  //       console.log("res",res)
 
-        // const userID=localStorage.getItem("userId")  
-        // const paymentResponse = await fetch('http://localhost:5500/paymentgateway', {
-        //   method: 'POST',
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //     "Authorization":"Y2ZmNWM5OTIxYjhiOTY3OWI1OGNhNGE4OTY3MjE2ZTQyNTYyYjY2ZQ=="
-        //   },
-        //   body: JSON.stringify({
-        //     trackid: new Date().getTime(),
-        //     amount: quantity,
-        //     currency: totalAmount,
-        //     payment_type: 1,
-        //     success_url: `http://15.185.57.60:3000/v1/payment/paymentSuccess?userId=${userID}&amount=${totalAmount}`,
-        //     error_url: `http://15.185.57.60:3000/v1/payment/paymentError?userId=${userID}&amount=${totalAmount}`,
-        //     language: 'ENG',
-        //   }),
-        // });
+  //       // const userID=localStorage.getItem("userId")  
+  //       // const paymentResponse = await fetch('http://localhost:5500/paymentgateway', {
+  //       //   method: 'POST',
+  //       //   headers: {
+  //       //     'Content-Type': 'application/json',
+  //       //     "Authorization":"Y2ZmNWM5OTIxYjhiOTY3OWI1OGNhNGE4OTY3MjE2ZTQyNTYyYjY2ZQ=="
+  //       //   },
+  //       //   body: JSON.stringify({
+  //       //     trackid: new Date().getTime(),
+  //       //     amount: quantity,
+  //       //     currency: totalAmount,
+  //       //     payment_type: 1,
+  //       //     success_url: `http://15.185.57.60:3000/v1/payment/paymentSuccess?userId=${userID}&amount=${totalAmount}`,
+  //       //     error_url: `http://15.185.57.60:3000/v1/payment/paymentError?userId=${userID}&amount=${totalAmount}`,
+  //       //     language: 'ENG',
+  //       //   }),
+  //       // });
 
-        // const payres =  JSON.parse(paymentResponse)
-        // console.log("payres",payres)
+  //       // const payres =  JSON.parse(paymentResponse)
+  //       // console.log("payres",payres)
 
-        // if (payres.status) {
-        //   if (payres.status === true) {
-        //     const paymentData = payres.data;
-        //     const { PaymentUrl, PaymentID } = paymentData;
-        //     const paymentUrl = `${PaymentUrl}?PaymentID=${PaymentID}`;
+  //       // if (payres.status) {
+  //       //   if (payres.status === true) {
+  //       //     const paymentData = payres.data;
+  //       //     const { PaymentUrl, PaymentID } = paymentData;
+  //       //     const paymentUrl = `${PaymentUrl}?PaymentID=${PaymentID}`;
   
-        //     setPaymentUrl(paymentUrl);
-        //     const paymentWindow = window.open(paymentUrl, '_blank');
-        //     window.addEventListener('message', (event) => {
-        //       if (event.origin === 'https://development.payzah.net') {
-        //         const { status } = event.data;
-        //         if (status === true) {
-        //           paymentWindow.close();
-        //           // Make a post request for subscription only if payment is successful
-        //           fetch('http://localhost:5500/subscriptions', {
-        //             method: 'POST',
-        //             headers: {
-        //               'Content-Type': 'application/json',
-        //             },
-        //             body: JSON.stringify({
-        //               subscriptionPlan,
-        //               quantity,
-        //               totalAmount,
-        //             }),
-        //           })
-        //             .then((response) => {
-        //               if (response.ok) {
-        //                 return response.json();
-        //               } else {
-        //                 throw new Error('Subscription creation failed');
-        //               }
-        //             })
-        //             .then((data) => {
-        //               console.log('Subscription created:', data);
-        //               // Perform any necessary actions after successful subscription
-        //               // e.g., show success message, update UI, etc.
-        //             })
-        //             .catch((error) => {
-        //               console.error('Subscription creation failed:', error);
-        //               // Handle error condition
-        //             });
-        //         } else {
-        //           // Handle payment failure condition
-        //           console.error('Payment failed:', event.data);
-        //         }
-        //       }
-        //     });
-        //   } else {
-        //     console.error('Payment failed:', payres.message);
-        //   }
-        // } else {
-        //   console.error('Failed to fetch payment gateway URL');
-        // }
+  //       //     setPaymentUrl(paymentUrl);
+  //       //     const paymentWindow = window.open(paymentUrl, '_blank');
+  //       //     window.addEventListener('message', (event) => {
+  //       //       if (event.origin === 'https://development.payzah.net') {
+  //       //         const { status } = event.data;
+  //       //         if (status === true) {
+  //       //           paymentWindow.close();
+  //       //           // Make a post request for subscription only if payment is successful
+  //       //           fetch('http://localhost:5500/subscriptions', {
+  //       //             method: 'POST',
+  //       //             headers: {
+  //       //               'Content-Type': 'application/json',
+  //       //             },
+  //       //             body: JSON.stringify({
+  //       //               subscriptionPlan,
+  //       //               quantity,
+  //       //               totalAmount,
+  //       //             }),
+  //       //           })
+  //       //             .then((response) => {
+  //       //               if (response.ok) {
+  //       //                 return response.json();
+  //       //               } else {
+  //       //                 throw new Error('Subscription creation failed');
+  //       //               }
+  //       //             })
+  //       //             .then((data) => {
+  //       //               console.log('Subscription created:', data);
+  //       //               // Perform any necessary actions after successful subscription
+  //       //               // e.g., show success message, update UI, etc.
+  //       //             })
+  //       //             .catch((error) => {
+  //       //               console.error('Subscription creation failed:', error);
+  //       //               // Handle error condition
+  //       //             });
+  //       //         } else {
+  //       //           // Handle payment failure condition
+  //       //           console.error('Payment failed:', event.data);
+  //       //         }
+  //       //       }
+  //       //     });
+  //       //   } else {
+  //       //     console.error('Payment failed:', payres.message);
+  //       //   }
+  //       // } else {
+  //       //   console.error('Failed to fetch payment gateway URL');
+  //       // }
 
-        fetchSubscriptionData(); 
+  //       fetchSubscriptionData(); 
         
-        // Handle successful response, e.g., show a success message
-        toast.success('Subscription purchased successfully!');
-      } else {
-        console.error('Error:', response.status);
-        // Handle error response, e.g., show an error message
-        toast.error( 'Failed to purchase subscription. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      // Handle network or other errors
-      toast.error('An error occurred. Please try again later.');
+  //       // Handle successful response, e.g., show a success message
+  //       toast.success('Subscription purchased successfully!');
+  //     } else {
+  //       console.error('Error:', response.status);
+  //       // Handle error response, e.g., show an error message
+  //       toast.error( 'Failed to purchase subscription. Please try again.');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //     // Handle network or other errors
+  //     toast.error('An error occurred. Please try again later.');
+  //   }
+  // };
+
+  const handlePurchase = async () => {
+  try {
+    const userID = localStorage.getItem("userId");
+    const paymentResponse = await fetch('https://development.payzah.net/ws/paymentgateway/index', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": "Y2ZmNWM5OTIxYjhiOTY3OWI1OGNhNGE4OTY3MjE2ZTQyNTYyYjY2ZQ=="
+      },
+      body: JSON.stringify({
+        trackid: new Date().getTime(),
+        amount: totalAmount,
+        currency: 414,
+        payment_type: 1,
+        success_url: `http://localhost:3000/v1/payment/paymentSuccess?userId=${userID}&amount=${totalAmount}`,
+        error_url: `http://localhost:3000/v1/payment/paymentError?userId=${userID}&amount=${totalAmount}`,
+        language: 'ENG',
+      }),
+    });
+
+    const payres = await paymentResponse.json();
+    console.log("payres", payres);
+
+    if (paymentResponse.ok) {
+      const payres = await paymentResponse.json();
+      console.log("payres2", payres);
+      const paymentData = payres.data;
+      const { PaymentUrl, PaymentID } = paymentData;
+      const paymentUrl = `${PaymentUrl}?PaymentID=${PaymentID}`;
+
+      setPaymentUrl(paymentUrl);
+      const paymentWindow = window.open(paymentUrl, '_blank');
+      window.addEventListener('message', (event) => {
+        if (event.origin === 'https://development.payzah.net') {
+          const { status } = event.data;
+          if (status === true) {
+            paymentWindow.close();
+            fetch('http://localhost:5500/subscriptions', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                subscriptionPlan,
+                quantity,
+                subscriptionDate,
+                totalAmount,
+              }),
+            })
+              .then((response) => {
+                if (response.ok) {
+                  return response.json();
+                } else {
+                  throw new Error('Subscription creation failed');
+                }
+              })
+              .then((data) => {
+                console.log('Subscription created:', data);
+                toast.success('Subscription purchased successfully!');
+              })
+              .catch((error) => {
+                console.error('Subscription creation failed:', error)
+                toast.error( 'Failed to purchase subscription. Please try again.');
+              });
+          } else {
+            console.error('Payment failed:', event.data);
+            toast.error('An error occurred. Please try again later.');
+          }
+        }
+      });
+    } else {
+      console.error('Payment failed:', payres.message);
+      toast.error('Failed to fetch payment gateway URL');
     }
-  };
-
-//   const handlePurchase = async () => {
-//   try {
-//     const userID = localStorage.getItem("userId");
-//     const paymentResponse = await fetch('http://localhost:5500/paymentgateway', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         "Authorization": "Y2ZmNWM5OTIxYjhiOTY3OWI1OGNhNGE4OTY3MjE2ZTQyNTYyYjY2ZQ=="
-//       },
-//       body: JSON.stringify({
-//         trackid: new Date().getTime(),
-//         amount: quantity,
-//         currency: totalAmount,
-//         payment_type: 1,
-//         success_url: `http://localhost:3000/v1/payment/paymentSuccess?userId=${userID}&amount=${totalAmount}`,
-//         error_url: `http://localhost:3000/v1/payment/paymentError?userId=${userID}&amount=${totalAmount}`,
-//         language: 'ENG',
-//       }),
-//     });
-
-//     // const payres = await paymentResponse.json();
-//     // console.log("payres", payres);
-
-//     if (paymentResponse.ok) {
-//       const payres = await paymentResponse.json();
-//       console.log("payres22", payres);
-//       const paymentData = payres.data;
-//       const { PaymentUrl, PaymentID } = paymentData;
-//       const paymentUrl = `${PaymentUrl}?PaymentID=${PaymentID}`;
-
-//       setPaymentUrl(paymentUrl);
-//       const paymentWindow = window.open(paymentUrl, '_blank');
-//       window.addEventListener('message', (event) => {
-//         if (event.origin === 'https://development.payzah.net') {
-//           const { status } = event.data;
-//           if (status === true) {
-//             paymentWindow.close();
-//             fetch('http://localhost:5500/subscriptions', {
-//               method: 'POST',
-//               headers: {
-//                 'Content-Type': 'application/json',
-//               },
-//               body: JSON.stringify({
-//                 subscriptionPlan,
-//                 quantity,
-//                 subscriptionDate,
-//                 totalAmount,
-//               }),
-//             })
-//               .then((response) => {
-//                 if (response.ok) {
-//                   return response.json();
-//                 } else {
-//                   throw new Error('Subscription creation failed');
-//                 }
-//               })
-//               .then((data) => {
-//                 console.log('Subscription created:', data);
-//                 toast.success('Subscription purchased successfully!');
-//               })
-//               .catch((error) => {
-//                 console.error('Subscription creation failed:', error)
-//                 toast.error( 'Failed to purchase subscription. Please try again.');
-//               });
-//           } else {
-//             console.error('Payment failed:', event.data);
-//             toast.error('An error occurred. Please try again later.');
-//           }
-//         }
-//       });
-//     } else {
-//       console.error('Payment failed:', payres.message);
-//       toast.error('Failed to fetch payment gateway URL');
-//     }
-//   } catch (error) {
-//     console.error('Error:', error);
-//     toast.error('An error occurred. Please try again later.');
-//   }
-// };
+  } catch (error) {
+    console.error('Error:', error);
+    toast.error('An error occurred. Please try again later.');
+  }
+};
 
 
   // const showAlert = (title, message, type) => {
@@ -608,7 +608,11 @@ export const ProjectListPage = () => {
                       </UncontrolledDropdown>
                     </li>
                     <li className="nk-block-tools-opt" onClick={() => setModal({ add: true })}>
-                      <Button color="primary">
+                      <Button  style={{
+                          backgroundColor:"#df8331",
+                          border:"1px ",
+                          color: "white"
+                        }}>
                         <Icon name="plus"></Icon>
                         <span>Add Subscriptions</span>
                       </Button>
@@ -739,9 +743,9 @@ export const ProjectListPage = () => {
                       <label className="form-label">Subscriptions</label>
                       <select required id="subscriptionPlan" className="form-select" value={subscriptionPlan} onChange={handleSubscriptionPlanPriceChange}>
                         <option value=""></option>
-                        <option value='1 month'>1 month&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 15KWD</option>
-                        <option value='2 months'>2 months&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 30KWD</option>
-                        <option value='3 months'>3 months&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 45KWD</option>
+                        <option value='1 month'>1 month&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 15KD</option>
+                        <option value='2 months'>2 months&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 30KD</option>
+                        <option value='3 months'>3 months&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 45KD</option>
                       </select>
                     </div>
                   </Col>
@@ -765,21 +769,25 @@ export const ProjectListPage = () => {
                   </Col>
                   <Col md="6">
                     <div className="form-group">
-                      <label className="form-label">Subscription Start Date</label>
+                      <label className="form-label">Subscription Purchase Date</label>
                       <input type="date" id="subscriptionDate" className="form-control" value={subscriptionDate} disabled />
                     </div>
                   </Col>
                   <Col md="6">
 
                     <div className="form-group">
-                      <label className="form-label">Total Amount in KWD</label>
+                      <label className="form-label">Total Amount in KD</label>
                       <input type="number" id="totalAmount" className="form-control" value={totalAmount} disabled />
                     </div>
                   </Col>
                   <Col size="12">
                     <ul className="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
                       <li>
-                        <Button onClick={handlePurchase} color="primary" size="md" type="submit">
+                        <Button onClick={handlePurchase} style={{
+                          backgroundColor:"#df8331",
+                          border:"1px ",
+                          color: "white"
+                        }} size="md" type="submit">
                           Purchase
                         </Button>
                       </li>

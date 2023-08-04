@@ -77,7 +77,7 @@ const UserProfileSettingPage = ({ sm, updateSm }) => {
                 </div>
               </div>
             </div>
-            <div className="card-body">
+            {/* <div className="card-body">
               <div className="between-center flex-wrap flex-md-nowrap g-3">
                 <div className="nk-block-text">
                   <h6>
@@ -92,7 +92,7 @@ const UserProfileSettingPage = ({ sm, updateSm }) => {
                   <Button color="primary">Disable</Button>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </Card>
       </Block>

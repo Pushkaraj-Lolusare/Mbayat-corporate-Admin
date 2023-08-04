@@ -67,7 +67,7 @@ const PaginationComponent = ({ itemPerPage, totalItems, paginate, currentPage })
       </PaginationItem>
       {paginationItms.map((item) => {
         return (
-          <PaginationItem  disabled={isNaN(item)} className={`d-none d-sm-block ${currentPage === item ? "active" : ""}`} key={item}>
+          <PaginationItem  disabled={isNaN(item)}  className={`d-none d-sm-block ${currentPage === item ? "active" : ""}`} key={item}>
             <PaginationLink
                   tag="a"
                   href="#pageitem"
@@ -75,6 +75,7 @@ const PaginationComponent = ({ itemPerPage, totalItems, paginate, currentPage })
                 ev.preventDefault();
                     paginate(item);
               }}
+              
             >
                   {item}
             </PaginationLink>

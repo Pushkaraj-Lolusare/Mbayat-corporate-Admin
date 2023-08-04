@@ -290,7 +290,7 @@ const ProductList = () => {
                           type="text"
                           className="form-control"
                           id="default-04"
-                          placeholder="Quick search by SKU"
+                          placeholder="Quick search "
                           onChange={(e) => onFilterChange(e)}
                         />
                       </div>
@@ -338,9 +338,11 @@ const ProductList = () => {
                       </Button> */}
                       <Button
                         className="toggle d-none d-md-inline-flex"
-                        color="primary"
+                        // color="primary"
                         style={{
-                          zIndex: 1
+                          zIndex: 1,
+                          backgroundColor:"#df8331"
+                          
                         }}
                       >
                         <Link to="/cart" style={{ color: "white" }}>
