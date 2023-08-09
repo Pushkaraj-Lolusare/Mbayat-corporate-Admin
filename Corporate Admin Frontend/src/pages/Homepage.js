@@ -22,6 +22,7 @@ import { Link } from "react-router-dom";
 const Homepage = () => {
   const [sm, updateSm] = useState(false);
   const [list, setLists] = useState([])
+  console.log(list);
   const fetchVendorData = async () => {
     try {
       const response = await fetch('https://15.185.57.60/api/v1/interest/interest-lists?fetchType=all');
@@ -50,19 +51,14 @@ const Homepage = () => {
     setSelectedOption(option);
   };
 
-  const history = useHistory()
-
   const [vendors, setVendors] = useState([]);
   console.log("vendors", vendors);
 
-
   const fetchVendorsData = () => {
-    // Fetch the data from the API
     const accessToken = localStorage.getItem('accessToken');
     fetch('https://15.185.57.60/api/v1/vendor-home/get-all-vendors?role=vendor&status=active')
       .then(response => response.json())
       .then(data => {
-        console.log("data", data.results)
         setVendors(data.results)
       })
       .catch(error => console.error('Error fetching data:', error));
@@ -74,8 +70,15 @@ const Homepage = () => {
 
   const handleVisitStore = (vendorId) => {
     localStorage.setItem("vendorId", vendorId)
-    // history.push("/ecommerce/products");
   };
+
+  const filteredVendors = vendors.filter((vendor) => {
+    if (!selectedOption || selectedOption.name === "ALL") {
+      return true;
+    }
+
+    return vendor.interests.includes(selectedOption.id);
+  });
 
   return (
     <React.Fragment>
@@ -185,14 +188,13 @@ const Homepage = () => {
                     {selectedOption ? selectedOption.name : "Interest"}<FaCaretDown />
                   </DropdownToggle>
 
-                  <DropdownMenu onChange={handleSelectChange} style={{ width: "140px", maxHeight: "200px", overflow: "auto", }}>
-
+                  <DropdownMenu style={{ width: "140px", maxHeight: "200px", overflow: "auto" }}>
                     <DropdownItem onClick={() => handleOptionSelect({ name: "ALL" })}>ALL</DropdownItem>
-                    {
-                      list.map((item, index) => (
-                        <DropdownItem onClick={() => handleOptionSelect(item)} value={item.name} key={index} >{item.name}</DropdownItem>
-                      ))
-                    }
+                    {list.map((item, index) => (
+                      <DropdownItem onClick={() => handleOptionSelect(item)} key={index}>
+                        {item.name}
+                      </DropdownItem>
+                    ))}
                   </DropdownMenu>
                 </UncontrolledDropdown>
               </Container>
@@ -200,8 +202,8 @@ const Homepage = () => {
           </div>
           <Container fluid='true' className="mt-4">
             <Row className="row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-              {vendors &&
-                vendors.map((item, index) => (
+              {filteredVendors &&
+                filteredVendors.map((item, index) => (
                   <Col key={index} >
                     <div
                       className="p-3 bg-white rounded shadow-sm d-flex flex-column justify-content-between h-100"
@@ -251,7 +253,7 @@ const Homepage = () => {
                             zIndex: "1",
 
                           }}
-                          onClick={() =>  handleVisitStore(item.id)}
+                          onClick={() => handleVisitStore(item.id)}
                         >
                           Visit store
                         </Button></Link>

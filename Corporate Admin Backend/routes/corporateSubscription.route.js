@@ -2,9 +2,6 @@ const express = require('express');
 const subscriptionRouter = express.Router();
 const SubscriptionModel = require('../model/corporateSubscription.model');
 
-// GET route to fetch subscriptions and their status
-
-
 subscriptionRouter.get('/', async (req, res) => {
     const userId = req.body.userId;
     try {
@@ -25,7 +22,6 @@ subscriptionRouter.get('/', async (req, res) => {
     }
 });
 
-// Function to generate a unique promo code
 function generatePromoCode() {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const codeLength = 20;
@@ -36,20 +32,15 @@ function generatePromoCode() {
         promoCode += characters.charAt(randomIndex);
     }
 
-    return promoCode;
+    return { code: promoCode, status: 'active' };
 }
 
-
-
-// POST route to create a new subscription
 subscriptionRouter.post('/', async (req, res) => {
     try {
         const { subscriptionPlan, quantity, subscriptionDate, userId } = req.body;
 
-
         let subscriptionEndDate;
 
-        // Calculate subscription end date based on subscription plan
         if (subscriptionPlan === '1 month') {
             subscriptionEndDate = new Date(subscriptionDate);
             subscriptionEndDate.setMonth(subscriptionEndDate.getMonth() + 1);
@@ -90,6 +81,11 @@ subscriptionRouter.post('/', async (req, res) => {
             userId
         });
 
+        await SubscriptionModel.updateMany(
+            { 'promoCodes.code': { $in: promoCodes.map(code => code.code) } },
+            { $set: { 'promoCodes.$.status': 'used' } }
+        );
+
         const savedSubscription = await newSubscription.save();
         res.status(201).json(savedSubscription);
     } catch (err) {
@@ -97,6 +93,43 @@ subscriptionRouter.post('/', async (req, res) => {
         res.status(500).json({ message: 'Server Error' });
     }
 });
+
+subscriptionRouter.put('/toggle-promo', async (req, res) => {
+    try {
+        
+        const { userId, promoCode, name, email } = req.body;
+
+        const subscription = await SubscriptionModel.findOne({
+            'promoCodes.code': promoCode,
+            $or: [
+                { userId: null },  
+                { userId: userId }  
+            ]
+        });
+
+        if (!subscription) {
+            return res.status(404).json({ message: 'Invalid promo code or already used by someone else' });
+        }
+
+        const promoCodeIndex = subscription.promoCodes.findIndex(code => code.code === promoCode);
+
+        if (subscription.promoCodes[promoCodeIndex].status === 'deactive') {
+            return res.status(400).json({ message: 'Promo code is already deactivated' });
+        }
+
+        subscription.promoCodes[promoCodeIndex].status = 'deactive';
+        subscription.promoCodes[promoCodeIndex].name = name;
+        subscription.promoCodes[promoCodeIndex].email = email;
+
+        await subscription.save();
+
+        res.status(200).json({ message: 'Promo code status toggled to deactive' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server Error' });
+    }
+});
+
 
 subscriptionRouter.get('/:id', async (req, res) => {
     try {
@@ -110,6 +143,5 @@ subscriptionRouter.get('/:id', async (req, res) => {
         res.status(500).json({ message: 'Server Error' });
     }
 });
-
 
 module.exports = subscriptionRouter;

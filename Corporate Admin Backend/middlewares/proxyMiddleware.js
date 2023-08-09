@@ -5,7 +5,9 @@ const paymentGatewayProxy = createProxyMiddleware({
   changeOrigin: true,
   pathRewrite: {
     '/paymentgateway': '',
+    
   },
 });
+
 
 module.exports = paymentGatewayProxy

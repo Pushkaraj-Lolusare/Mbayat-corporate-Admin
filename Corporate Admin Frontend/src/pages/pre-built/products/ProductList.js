@@ -51,7 +51,6 @@ const ProductList = () => {
   const [itemPerPage] = useState(7);
   const [files, setFiles] = useState([]);
 
-  // Changing state value when searching name
   useEffect(() => {
     if (onSearchText !== "") {
       const filteredObject = productData.filter((item) => {
@@ -63,17 +62,14 @@ const ProductList = () => {
     }
   }, [onSearchText]);
 
-  // OnChange function to get the input data
   const onInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // category change
   const onCategoryChange = (value) => {
     setFormData({ ...formData, category: value });
   };
 
-  // function to close the form modal
   const onFormCancel = () => {
     setView({ edit: false, add: false, details: false });
     resetForm();
@@ -138,7 +134,6 @@ const ProductList = () => {
     setView({ edit: false, add: false });
   };
 
-  // function that loads the want to editted data
   const onEditClick = (id) => {
     data.forEach((item) => {
       if (item.id === id) {
@@ -159,7 +154,6 @@ const ProductList = () => {
     setView({ add: false, edit: true });
   };
 
-  // selects all the products
   const selectorCheck = (e) => {
     let newData;
     newData = data.map((item) => {
@@ -169,7 +163,6 @@ const ProductList = () => {
     setData([...newData]);
   };
 
-  // selects one product
   const onSelectChange = (e, id) => {
     let newData = data;
     let index = newData.findIndex((item) => item.id === id);
@@ -177,26 +170,22 @@ const ProductList = () => {
     setData([...newData]);
   };
 
-  // onChange function for searching name
   const onFilterChange = (e) => {
     setSearchText(e.target.value);
   };
 
-  // function to delete a product
   const deleteProduct = (id) => {
     let defaultData = data;
     defaultData = defaultData.filter((item) => item.id !== id);
     setData([...defaultData]);
   };
 
-  // function to delete the seletected item
   const selectorDeleteProduct = () => {
     let newData;
     newData = data.filter((item) => item.check !== true);
     setData([...newData]);
   };
 
-  // toggle function to view product details
   const toggle = (type) => {
     setView({
       edit: type === "edit" ? true : false,
@@ -205,7 +194,6 @@ const ProductList = () => {
     });
   };
 
-  // handles ondrop function of dropzone
   const handleDropChange = (acceptedFiles) => {
     setFiles(
       acceptedFiles.map((file) =>
@@ -216,12 +204,10 @@ const ProductList = () => {
     );
   };
 
-  // Get current list, pagination
   const indexOfLastItem = currentPage * itemPerPage;
   const indexOfFirstItem = indexOfLastItem - itemPerPage;
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
-  // Change Page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const { errors, register, handleSubmit, reset } = useForm();
@@ -292,6 +278,9 @@ const ProductList = () => {
                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </li>
+
+
+
                     <li className="nk-block-tools-opt">
                       <Button
                         className="toggle btn-icon d-md-none"

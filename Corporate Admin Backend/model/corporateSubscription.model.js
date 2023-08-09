@@ -25,15 +25,22 @@ const subscriptionSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  promoCodes: {
-    type: [String],
-    required: true,
-  },
+
   createdAt: {
     type: Date,
     default: Date.now,
   },
   userId: String,
+  promoCodes: [
+    {
+        code: String,
+        status: { type: String, enum: ['active', 'used', 'deactive'], default: 'active' },
+        
+            name: String,
+            email: String
+      
+    }
+],
 }, {
   versionKey: false
 });

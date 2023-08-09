@@ -236,17 +236,17 @@ const ProductList = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch(`https://15.185.57.60/api/v1/product/product-by-vendor/${selectedVendorId}ad?fetchType=all`,{
+      const response = await fetch(`https://15.185.57.60/api/v1/product/product-by-vendor/${selectedVendorId}ad?fetchType=all`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       });
-      
+
       const data = await response.json();
       // setProducts(data);
-      console.log("data pro",data)
+      console.log("data pro", data)
     } catch (error) {
       console.error('Error fetching products:', error);
     }
@@ -341,8 +341,8 @@ const ProductList = () => {
                         // color="primary"
                         style={{
                           zIndex: 1,
-                          backgroundColor:"#df8331"
-                          
+                          backgroundColor: "#df8331"
+
                         }}
                       >
                         <Link to="/cart" style={{ color: "white" }}>
@@ -393,7 +393,7 @@ const ProductList = () => {
                             marginTop: '12px',
                             maxHeight: '34%',
                             overflow: 'hidden',
-                            textOverflow: 'ellipsis',                        
+                            textOverflow: 'ellipsis',
                           }}
                           className="mb-2 text-center">{item.name}</p>
                         <p style={{ fontWeight: "bold", }}>{`Price: ${item.price} KD`}</p>

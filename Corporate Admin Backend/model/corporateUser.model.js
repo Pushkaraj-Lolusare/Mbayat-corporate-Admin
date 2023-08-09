@@ -32,7 +32,6 @@ const CorporateUserSchema = new mongoose.Schema({
     },
     confirmPassword: {
         type: String,
-        // required: true
     }
 }, {
     versionKey: false

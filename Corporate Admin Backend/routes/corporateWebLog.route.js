@@ -26,20 +26,16 @@ const moment = require("moment");
 loginLogRouter.get('/', async (req, res) => {
     const userId = req.body.userId;
     try {
-        // Fetch login activity entries for the specified user
         const loginActivity = await CorporateLoginLogModel.find({ userId: userId }).sort({ loginTime: -1 }).limit(20);
 
-        // Send the login activity data as a response
         res.status(200).json(loginActivity);
     } catch (error) {
-        // Handle errors
         res.status(500).json({ error: 'Internal server error' });
     }
 });
 
 loginLogRouter.delete("/:id", async (req, res) => {
     const productId = req.params.id;
-    //   console.log("productid", productId);
 
     try {
         let cart = await CorporateLoginLogModel.findOneAndDelete({ _id: productId });
