@@ -9,13 +9,11 @@ import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
 const cartPage = () => {
   const [data, setData] = useState(orderData);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemPerPage] = useState(7);
-
 
   const indexOfLastItem = currentPage * itemPerPage;
   const indexOfFirstItem = indexOfLastItem - itemPerPage;
@@ -40,10 +38,8 @@ const cartPage = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.log("data", data)
         const newData = data.map(item => ({ ...item, quantity: 1 }))
-        // console.log("New Data", newData)
-        setCartItems(newData);
+        setCartItems(newData.reverse());
       })
       .catch((error) => {
         console.error("Error fetching cart data:", error);
@@ -59,7 +55,6 @@ const cartPage = () => {
   }, []);
 
   useEffect(() => {
-    // Calculate total price based on selected items
     let total = 0;
     cartItems.forEach((item) => {
       if (selectedItemIds.includes(item._id)) {
@@ -81,7 +76,6 @@ const cartPage = () => {
   };
 
   const handleItemDelete = (item) => {
-    // Send delete request to remove item from the cart API
     fetch(`${process.env.REACT_APP_BASE_URL}/corporateCart/${item._id}`, {
       method: "DELETE",
       headers: {
@@ -91,38 +85,36 @@ const cartPage = () => {
       .then((response) => response.json())
       .then(() => {
         setCartItems(cartItems.filter((cartItem) => cartItem._id !== item._id));
-        console.log(cartItems.length)
-
       })
       .catch((error) => {
         console.error("Error deleting cart item:", error);
       });
-    // console.log(item)
   };
 
   const handleItemCheckboxChange = (item) => {
     const selectedIds = [...selectedItemIds];
     if (selectedIds.includes(item._id)) {
-      selectedIds.splice(selectedIds.indexOf(item._id), 1); // Remove item ID from the array
+      selectedIds.splice(selectedIds.indexOf(item._id), 1); 
     } else {
-      selectedIds.push(item._id); // Add item ID to the array
+      selectedIds.push(item._id); 
     }
     setSelectedItemIds(selectedIds);
     localStorage.setItem('selectedItemIds', JSON.stringify(selectedIds));
   };
 
   const handleDeleteAndLoad = (item) => {
-    handleItemDelete(item)
-    getCartData()
-    toast.success("Cart item deleted")
-  }
-
+    if (selectedItemIds.includes(item._id)) {
+      toast.error("Please uncheck the item before deleting");
+    } else {
+      handleItemDelete(item);
+      getCartData();
+      toast.success("Cart item deleted");
+    }
+  };
+  
   return (
-
     <>
       <Head title="Cart"></Head>
-      {/* <h1>Cart PAge</h1>
-         */}
       <Content>
         <BlockHead size="sm" >
           <BlockBetween >
@@ -146,11 +138,9 @@ const cartPage = () => {
                 </a>
                 <div className="toggle-expand-content" style={{ display: "sm" ? "block" : "none" }}>
                   <ul className="nk-block-tools g-3">
-
                     <li className="nk-block-tools-opt">
                       <Button
                         className="toggle d-none d-md-inline-flex"
-                        // color="primary" 
                         onClick={() => {
 
                         }}
@@ -197,7 +187,7 @@ const cartPage = () => {
                         marginLeft: "20px",
                         borderRadius: "13px",
                         marginTop: "8px",
-                        width: '80%',
+                        width: 'auto',
                         height: "180px",
                         // border:"1px solid red"
                       }} />

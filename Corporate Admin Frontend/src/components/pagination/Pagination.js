@@ -75,7 +75,7 @@ const PaginationComponent = ({ itemPerPage, totalItems, paginate, currentPage })
                 ev.preventDefault();
                     paginate(item);
               }}
-              
+              // style={{border:"1px solid black"}}
             >
                   {item}
             </PaginationLink>

@@ -365,6 +365,17 @@ export const LoginLogTable = () => {
     setDeleteAll({ delete: false });
   }
 
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1; 
+    const year = date.getFullYear();
+    
+    const formattedDate = `${day < 10 ? '0' : ''}${day}/${month < 10 ? '0' : ''}${month}/${year}`;
+    
+    return formattedDate;
+  }
+
   return (
     <div style={{ maxHeight: '500px', overflow: 'auto' }}>
       <table className="table table-ulogs" style={{ columnGap: "20px" }}>
@@ -391,7 +402,6 @@ export const LoginLogTable = () => {
                 border: "none",
                 color: 'red',
                 background: "none",
-
               }}
                 className="overline-title"
                 onMouseOver={(e) => {
@@ -416,7 +426,7 @@ export const LoginLogTable = () => {
                 </td>
                 <td className="tb-col-time">
                   <span className="sub-text">
-                    {item.loginTime} <span className="d-none d-sm-inline-block">{item.time}</span>
+                    {formatDate(item.loginTime)}
                   </span>
                 </td>
                 <td className="tb-col-action">

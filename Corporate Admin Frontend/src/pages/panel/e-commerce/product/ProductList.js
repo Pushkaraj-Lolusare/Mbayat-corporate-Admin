@@ -31,6 +31,9 @@ import { toast } from 'react-toastify';
 
 const ProductList = () => {
   const [data, setData] = useState(productData);
+
+  const [products, setProducts] = useState([]);
+  console.log("data", products);
   const [sm, updateSm] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -114,45 +117,44 @@ const ProductList = () => {
     resetForm();
   };
 
-  const onEditSubmit = () => {
-    let submittedData;
-    let newItems = data;
-    let index = newItems.findIndex((item) => item.id === editId);
+  // const onEditSubmit = () => {
+  //   let submittedData;
+  //   let newItems = data;
+  //   let index = newItems.findIndex((item) => item.id === editId);
 
-    newItems.forEach((item) => {
-      if (item.id === editId) {
-        submittedData = {
-          id: editId,
-          name: formData.name,
-          img: files.length > 0 ? files[0].preview : item.img,
-          sku: formData.sku,
-          price: formData.price,
-          stock: formData.stock,
-          category: formData.category,
-          fav: false,
-          check: false,
-        };
-      }
-    });
-    newItems[index] = submittedData;
-    //setData(newItems);
-    resetForm();
-    setView({ edit: false, add: false });
-  };
+  //   newItems.forEach((item) => {
+  //     if (item.id === editId) {
+  //       submittedData = {
+  //         id: editId,
+  //         name: formData.name,
+  //         img: files.length > 0 ? files[0].preview : item.img,
+  //         sku: formData.sku,
+  //         price: formData.price,
+  //         stock: formData.stock,
+  //         category: formData.category,
+  //         fav: false,
+  //         check: false,
+  //       };
+  //     }
+  //   });
+  //   newItems[index] = submittedData;
+  //   //setData(newItems);
+  //   resetForm();
+  //   setView({ edit: false, add: false });
+  // };
 
   // function that loads the want to editted data
+
   const onEditClick = (id) => {
-    data.forEach((item) => {
+    products.forEach((item) => {
       if (item.id === id) {
         setFormData({
           name: item.name,
-          img: item.img,
-          sku: item.sku,
-          price: item.price,
-          stock: item.stock,
+          img: item.productImages[1],
+          price: item.sellingPrice,
+          stock: item.totalQuantity,
           category: item.category,
-          fav: false,
-          check: false,
+          description: item.description,
         });
       }
     });
@@ -161,42 +163,13 @@ const ProductList = () => {
     setView({ add: false, edit: true });
   };
 
-  // selects all the products
-  const selectorCheck = (e) => {
-    let newData;
-    newData = data.map((item) => {
-      item.check = e.currentTarget.checked;
-      return item;
-    });
-    setData([...newData]);
-  };
-
-  // selects one product
-  const onSelectChange = (e, id) => {
-    let newData = data;
-    let index = newData.findIndex((item) => item.id === id);
-    newData[index].check = e.currentTarget.checked;
-    setData([...newData]);
-  };
 
   // onChange function for searching name
   const onFilterChange = (e) => {
     setSearchText(e.target.value);
   };
 
-  // function to delete a product
-  const deleteProduct = (id) => {
-    let defaultData = data;
-    defaultData = defaultData.filter((item) => item.id !== id);
-    setData([...defaultData]);
-  };
 
-  // function to delete the seletected item
-  const selectorDeleteProduct = () => {
-    let newData;
-    newData = data.filter((item) => item.check !== true);
-    setData([...newData]);
-  };
 
   // toggle function to view product details
   const toggle = (type) => {
@@ -221,34 +194,55 @@ const ProductList = () => {
   // Get current list, pagination
   const indexOfLastItem = currentPage * itemPerPage;
   const indexOfFirstItem = indexOfLastItem - itemPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = products.slice(indexOfFirstItem, indexOfLastItem);
 
   // Change Page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const { errors, register, handleSubmit, reset } = useForm();
 
-  const [products, setProducts] = useState([]);
-
   const selectedVendorId = localStorage.getItem('vendorId');
-
-  const token = localStorage.getItem("accessToken")
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch(`https://15.185.57.60/api/v1/product/product-by-vendor/${selectedVendorId}ad?fetchType=all`, {
+      const response = await fetch(`https://15.185.57.60/api/v1/product/product-by-vendor/${selectedVendorId}?fetchType=all`, {
         method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      });
+      })
 
       const data = await response.json();
-      // setProducts(data);
-      console.log("data pro", data)
+      setProducts(data.data);
     } catch (error) {
       console.error('Error fetching products:', error);
+    }
+  };
+
+  const addToCart = async (product) => {
+    const userId = localStorage.getItem("userId")
+    const accessToken = localStorage.getItem("accessToken")
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/corporateCart`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          "Authorization": `${accessToken}`
+        },
+        body: JSON.stringify({
+          imageLink: product.productImages[0],
+          brand: product.name,
+          description: product.description,
+          price: product.sellingPrice,
+          userId: userId,
+        }),
+      });
+
+      if (response.ok) {
+        toast.success('Added to cart');
+      } else {
+        toast.error('Failed to add to cart');
+      }
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      toast.error('An error occurred');
     }
   };
 
@@ -256,7 +250,6 @@ const ProductList = () => {
   useEffect(() => {
     fetchProducts();
   }, []);
-
 
   return (
     <React.Fragment>
@@ -299,12 +292,12 @@ const ProductList = () => {
                       <UncontrolledDropdown style={{
                         zIndex: 1
                       }}>
-                        <DropdownToggle
+                        {/* <DropdownToggle
                           color="transparent"
                           className="dropdown-toggle dropdown-indicator btn btn-outline-light btn-white"
                         >
                           Status
-                        </DropdownToggle>
+                        </DropdownToggle> */}
                         <DropdownMenu end>
                           <ul className="link-list-opt no-bdr">
                             <li>
@@ -373,15 +366,17 @@ const ProductList = () => {
                         boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 12px',
                         borderRadius: '10px',
                         backgroundColor: 'rgb(255, 255, 255)',
-                        minHeight: '270px'
+                        // minHeight: '270px',
+                        height: "400px"
                       }}
                     >
-                      <div className="text-center" style={{ height: '60%' }} onClick={(ev) => {
+                      <div className="text-center" style={{ height: '200px', }} onClick={(ev) => {
                         ev.preventDefault();
                         onEditClick(item.id);
                         toggle("details");
                       }}>
-                        <img src={item.img} fluid="true" className="mb-3" style={{ height: '100%', width: "60%" }} alt="App Icon" /></div>
+                        <img src={item.productImages[0]} fluid="true" className="mb-3" style={{ height: '100%', width: "auto", }} alt="App Icon" />
+                      </div>
                       <div onClick={(ev) => {
                         ev.preventDefault();
                         onEditClick(item.id);
@@ -396,7 +391,7 @@ const ProductList = () => {
                             textOverflow: 'ellipsis',
                           }}
                           className="mb-2 text-center">{item.name}</p>
-                        <p style={{ fontWeight: "bold", }}>{`Price: ${item.price} KD`}</p>
+                        <p style={{ fontWeight: "bold", }}>{`Price: ${item.sellingPrice} KD`}</p>
                       </div>
                       <Button
                         variant="primary"
@@ -418,7 +413,8 @@ const ProductList = () => {
                         }}
                         onClick={(ev) => {
                           ev.preventDefault();
-                          toast.success("Added to cart")
+                          // toast.success("Added to cart")
+                          addToCart(item)
                         }}
                       >
                         Add to cart
@@ -427,6 +423,8 @@ const ProductList = () => {
                   </Col>
                 ))}
             </Row>
+
+
           </Container>
           <PreviewAltCard >
             {data.length > 0 ? (
@@ -444,7 +442,7 @@ const ProductList = () => {
           </PreviewAltCard>
         </Block>
 
-        <Modal isOpen={view.edit} toggle={() => onFormCancel()} className="modal-dialog-centered" size="lg">
+        {/* <Modal isOpen={view.edit} toggle={() => onFormCancel()} className="modal-dialog-centered" size="lg">
           <ModalBody>
             <a href="#cancel" className="close">
               {" "}
@@ -617,7 +615,7 @@ const ProductList = () => {
               </div>
             </div>
           </ModalBody>
-        </Modal>
+        </Modal> */}
 
         <Modal isOpen={view.details} toggle={() => onFormCancel()} className="modal-dialog-centered" size="lg">
           <ModalBody>
@@ -635,7 +633,7 @@ const ProductList = () => {
               <h4 className="nk-modal-title title">
                 Product <small className="text-primary">#{formData.sku}</small>
               </h4>
-              <img src={formData.img} alt="" />
+              <img src={formData.img} alt="" style={{ height: "200px", width: 'auto' }} />
             </div>
             <div className="nk-tnx-details mt-sm-3">
               <Row className="gy-3">
@@ -645,21 +643,16 @@ const ProductList = () => {
                 </Col>
                 <Col lg={6}>
                   <span className="sub-text">Product Price</span>
-                  <span className="caption-text">$ {formData.price}</span>
+                  <span className="caption-text">{formData.price} KD</span>
                 </Col>
-                <Col lg={6}>
-                  <span className="sub-text">Product Category</span>
-                  <span className="caption-text">
-                    {formData.category.map((item, index) => (
-                      <Badge key={index} className="me-1" color="secondary">
-                        {item.value}
-                      </Badge>
-                    ))}
-                  </span>
-                </Col>
+
                 <Col lg={6}>
                   <span className="sub-text">Stock</span>
                   <span className="caption-text"> {formData.stock}</span>
+                </Col>
+                <Col lg={6}>
+                  <span className="sub-text">Description</span>
+                  <span className="caption-text"> {formData.description}</span>
                 </Col>
               </Row>
             </div>

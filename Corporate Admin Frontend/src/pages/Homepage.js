@@ -183,12 +183,12 @@ const Homepage = () => {
             <div style={{ width: "12%", marginLeft: "-180px" }}>
               <p style={{ width: "100px" }}>Filter By</p>
               <Container style={{ paddingLeft: "0px", marginTop: "-15px", width: "100%" }}>
-                <UncontrolledDropdown style={{ width: "140px" }}>
-                  <DropdownToggle caret style={{ width: "140px", display: 'flex', justifyContent: "space-between" }} >
-                    {selectedOption ? selectedOption.name : "Interest"}<FaCaretDown />
+                <UncontrolledDropdown style={{ width: "auto" }}>
+                  <DropdownToggle caret style={{ width: "auto", display: 'flex', justifyContent: "space-between" }} >
+                    {selectedOption ? selectedOption.name : "Interest"}<FaCaretDown style={{marginLeft:"10px"}} />
                   </DropdownToggle>
 
-                  <DropdownMenu style={{ width: "140px", maxHeight: "200px", overflow: "auto" }}>
+                  <DropdownMenu style={{ width: "auto", maxHeight: "200px", overflow: "auto" }}>
                     <DropdownItem onClick={() => handleOptionSelect({ name: "ALL" })}>ALL</DropdownItem>
                     {list.map((item, index) => (
                       <DropdownItem onClick={() => handleOptionSelect(item)} key={index}>
@@ -201,7 +201,7 @@ const Homepage = () => {
             </div>
           </div>
           <Container fluid='true' className="mt-4">
-            <Row className="row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+            <Row className="row-cols-1 row-cols-sm-2 row-cols-md-4 g-4"> 
               {filteredVendors &&
                 filteredVendors.map((item, index) => (
                   <Col key={index} >

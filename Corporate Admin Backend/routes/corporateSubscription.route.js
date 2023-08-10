@@ -44,17 +44,17 @@ subscriptionRouter.post('/', async (req, res) => {
         if (subscriptionPlan === '1 month') {
             subscriptionEndDate = new Date(subscriptionDate);
             subscriptionEndDate.setMonth(subscriptionEndDate.getMonth() + 1);
-        } else if (subscriptionPlan === '2 months') {
-            subscriptionEndDate = new Date(subscriptionDate);
-            subscriptionEndDate.setMonth(subscriptionEndDate.getMonth() + 2);
         } else if (subscriptionPlan === '3 months') {
             subscriptionEndDate = new Date(subscriptionDate);
             subscriptionEndDate.setMonth(subscriptionEndDate.getMonth() + 3);
+        } else if (subscriptionPlan === '6 months') {
+            subscriptionEndDate = new Date(subscriptionDate);
+            subscriptionEndDate.setMonth(subscriptionEndDate.getMonth() + 6);
         }
 
         const promoCodes = [];
         for (let i = 0; i < quantity; i++) {
-            const promoCode = generatePromoCode(); // Replace with your logic to generate promo codes
+            const promoCode = generatePromoCode(); 
             promoCodes.push(promoCode);
         }
 
@@ -62,10 +62,10 @@ subscriptionRouter.post('/', async (req, res) => {
 
         if (subscriptionPlan === '1 month') {
             price = 15;
-        } else if (subscriptionPlan === '2 months') {
-            price = 30;
         } else if (subscriptionPlan === '3 months') {
             price = 45;
+        } else if (subscriptionPlan === '6 months') {
+            price = 75;
         }
 
         const totalAmount = price * quantity;
@@ -96,7 +96,6 @@ subscriptionRouter.post('/', async (req, res) => {
 
 subscriptionRouter.put('/toggle-promo', async (req, res) => {
     try {
-        
         const { userId, promoCode, name, email } = req.body;
 
         const subscription = await SubscriptionModel.findOne({
@@ -117,19 +116,32 @@ subscriptionRouter.put('/toggle-promo', async (req, res) => {
             return res.status(400).json({ message: 'Promo code is already deactivated' });
         }
 
+        const subscriptionPlan = subscription.subscriptionPlan; 
+
+        let subscriptionDuration;
+        if (subscriptionPlan === '1 month') {
+            subscriptionDuration = 1;
+        } else if (subscriptionPlan === '3 months') {
+            subscriptionDuration = 3;
+        } else if (subscriptionPlan === '6 months') {
+            subscriptionDuration = 6;
+        }
+
         subscription.promoCodes[promoCodeIndex].status = 'deactive';
         subscription.promoCodes[promoCodeIndex].name = name;
         subscription.promoCodes[promoCodeIndex].email = email;
 
         await subscription.save();
 
-        res.status(200).json({ message: 'Promo code status toggled to deactive' });
+        res.status(200).json({ 
+            message: 'Promo code status toggled to deactive', 
+            subscriptionDuration: subscriptionDuration 
+        });
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: 'Server Error' });
     }
 });
-
 
 subscriptionRouter.get('/:id', async (req, res) => {
     try {

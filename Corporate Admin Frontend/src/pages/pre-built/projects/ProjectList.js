@@ -41,10 +41,6 @@ export const ProjectListPage = () => {
   });
   const [data, setData] = useState(projectData);
   const [formData, setFormData] = useState({
-    // title: "",
-    // subtitle: "",
-    // description: "",
-    // lead: "",
     tasks: 0,
     team: [],
     totalTask: null,
@@ -151,14 +147,13 @@ export const ProjectListPage = () => {
   };
 
   const handleDownload = () => {
-    const headers = ['Promo Codes', "Plan", "Status", "Name", "Email"]; // Add more headers as per your item data
-    const data = [headers, ...itemList.map((item) => [item, subscriptionPlan1, "active", "", ""])];
+    const headers = ['Promo Codes', "Plan", "Status", "Name", "Email"];
+    const data = [headers, ...itemList.map((item) => [item.code, subscriptionPlan1, item.status, item.name, item.email])];
 
     const sheetName = 'Item List';
     const workbook = XLSX.utils.book_new();
     const worksheet = XLSX.utils.aoa_to_sheet(data);
     XLSX.utils.book_append_sheet(workbook, worksheet, sheetName);
-
     const excelBuffer = XLSX.write(workbook, {
       bookType: 'xlsx',
       type: 'array',
@@ -184,7 +179,6 @@ export const ProjectListPage = () => {
     const selectedPlan = event.target.value;
     setPostSubscriptionPlan(selectedPlan);
 
-    // Calculate total amount based on selected plan and quantity
     const price = calculatePrice(selectedPlan);
     const calculatedTotalAmount = price * quantity;
     setTotalAmount(calculatedTotalAmount);
@@ -194,7 +188,6 @@ export const ProjectListPage = () => {
     const selectedQuantity = event.target.value;
     setQuantity(selectedQuantity);
 
-    // Calculate total amount based on selected plan and quantity
     const price = calculatePrice(subscriptionPlan);
     const calculatedTotalAmount = price * selectedQuantity;
     setTotalAmount(calculatedTotalAmount);
@@ -204,10 +197,10 @@ export const ProjectListPage = () => {
     switch (selectedPlan) {
       case '1 month':
         return 15;
-      case '2 months':
-        return 30;
       case '3 months':
-        return 45;
+        return 35;
+      case '6 months':
+        return 75;
       default:
         return 0;
     }
@@ -311,17 +304,14 @@ export const ProjectListPage = () => {
         // }
 
         fetchSubscriptionData();
-
-        // Handle successful response, e.g., show a success message
+        
         toast.success('Subscription purchased successfully!');
       } else {
         console.error('Error:', response.status);
-        // Handle error response, e.g., show an error message
         toast.error('Failed to purchase subscription. Please try again.');
       }
     } catch (error) {
       console.error('Error:', error);
-      // Handle network or other errors
       toast.error('An error occurred. Please try again later.');
     }
   };
@@ -436,7 +426,16 @@ export const ProjectListPage = () => {
     return item.subscriptionPlan === selectedPlan;
   });
 
-
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1; 
+    const year = date.getFullYear();
+    
+    const formattedDate = `${day < 10 ? '0' : ''}${day}/${month < 10 ? '0' : ''}${month}/${year}`;
+    
+    return formattedDate;
+  }
   console.log("curr", currentItems)
   return (
     <React.Fragment>
@@ -498,10 +497,10 @@ export const ProjectListPage = () => {
                                 href="#dropdownitem"
                                 onClick={(ev) => {
                                   ev.preventDefault();
-                                  handlePlanChange("2 months")
+                                  handlePlanChange("3 months")
                                 }}
                               >
-                                <span>2 months</span>
+                                <span>3 months</span>
                               </DropdownItem>
                             </li>
                             <li>
@@ -510,10 +509,10 @@ export const ProjectListPage = () => {
                                 href="#dropdownitem"
                                 onClick={(ev) => {
                                   ev.preventDefault();
-                                  handlePlanChange("3 months")
+                                  handlePlanChange("6 months")
                                 }}
                               >
-                                <span>3 months</span>
+                                <span>6 months</span>
                               </DropdownItem>
                             </li>
                           </ul>
@@ -543,14 +542,14 @@ export const ProjectListPage = () => {
                 <span className="sub-text" style={{ fontWeight: "bold" }}>Plans</span>
               </DataTableRow>
               <DataTableRow size="lg">
-                <span className="sub-text" style={{ fontWeight: "bold" }}>Date</span>
+                <span className="sub-text" style={{ fontWeight: "bold" }}> Purchase Date</span>
               </DataTableRow>
               <DataTableRow size="lg">
                 <span className="sub-text" style={{ fontWeight: "bold" }}>Quantity</span>
               </DataTableRow>
-              <DataTableRow size="xxl">
+              {/* <DataTableRow size="xxl">
                 <span className="sub-text" style={{ fontWeight: "bold" }} >Status</span>
-              </DataTableRow>
+              </DataTableRow> */}
               <DataTableRow size="md">
                 <span className="sub-text" style={{ fontWeight: "bold" }}>Action</span>
               </DataTableRow>
@@ -576,32 +575,15 @@ export const ProjectListPage = () => {
                       </a>
                     </DataTableRow>
                     <DataTableRow size="lg">
-                      <span>{item.subscriptionDate}</span>
+                    <span>{formatDate(item.subscriptionDate)}</span>
                     </DataTableRow>
                     <DataTableRow size="lg">
                       <span style={{ margin: "auto", marginLeft: "20px" }}>{item.quantity}</span>
                     </DataTableRow>
-                    <DataTableRow size="xxl">
+                    {/* <DataTableRow size="xxl">
                       <span>{days === 0 ? "Closed" : "Open"}</span>
                     </DataTableRow>
-                    {/* <DataTableRow size="mb">
-
-                      <Badge
-                        className="badge-dim"
-                        color={
-                          days > 10
-                            ? "light"
-                            : days <= 10 && days >= 2
-                              ? "warning"
-                              : days === 1
-                                ? "danger"
-                                : days <= 0 && "success"
-                        }
-                      >
-                        <Icon name="clock"></Icon>
-                        <span>{days <= 0 ? "Done" : days === 1 ? "Due Tomorrow" : days + " Days Left"}</span>
-                      </Badge>
-                    </DataTableRow> */}
+                     */}
                     <DataTableRow size="md">
                       <div className="project-list-progress">
                         <Button onClick={() => handleViewPromoCodes(item.promoCodes, item.subscriptionPlan)} className="sub-text" style={{ color: "rgb(112,127,154)", }} onMouseOver={(e) => {
@@ -629,7 +611,7 @@ export const ProjectListPage = () => {
                 currentPage={currentPage}
               />
             ) : (
-              <div className="text-center">
+              <div className="text-center" >
                 <span className="text-silent">No Subscriptions found</span>
               </div>
             )}
@@ -658,8 +640,8 @@ export const ProjectListPage = () => {
                       <select required id="subscriptionPlan" className="form-select" value={subscriptionPlan} onChange={handleSubscriptionPlanPriceChange}>
                         <option value=""></option>
                         <option value='1 month'>1 month&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 15KD</option>
-                        <option value='2 months'>2 months&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 30KD</option>
-                        <option value='3 months'>3 months&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 45KD</option>
+                        <option value='3 months'>3 months&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 35KD</option>
+                        <option value='6 months'>6 months&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 75KD</option>
                       </select>
                     </div>
                   </Col>
@@ -769,7 +751,11 @@ export const ProjectListPage = () => {
             </div>
           </ModalBody>
           <div style={{ width: "90%", margin: "auto", paddingTop: "20px", paddingBottom: "20px" }}>
-            <Button color="primary" size="md" variant="primary" onClick={handleDownload}>
+            <Button style={{
+                          backgroundColor: "#df8331",
+                          border: "1px ",
+                          color: "white"
+                        }}  size="md" variant="primary" onClick={handleDownload}>
               Download
             </Button>
             <Button style={{}} variant="secondary" onClick={handleCloseModal}>
